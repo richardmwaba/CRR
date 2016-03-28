@@ -18,3 +18,13 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 });
+
+Route::put('/update', 'UserController@update');
+Route::delete('/delete', 'UserController@destroy');
+
+Route::group(['middleware' => 'web'], function () {
+
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});

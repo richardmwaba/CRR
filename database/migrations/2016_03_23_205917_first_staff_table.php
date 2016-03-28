@@ -13,18 +13,13 @@ class FirstTable extends Migration
     public function up()
     {
         Schema::create('staff_info', function (Blueprint $table) {
-            $table->increments('id');
-            $table->primary('man_number')->unique();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->stirng('other_names');
-            $table->string('email')->unique();
-            $table->enum('position', array('sdf',lecturer,'seniorLecturer', 'headOfDepartment', 'dean', 'superuser'));
+            $table->foreign('man-number')->references('man-number')->on('users')->onDelete('cascade');
+            $table->string('other-names')->nullable();
+            $table->string('nationality');
             $table->string('department');
-            $table->date('renewedAt');
-            $table->enum('contractStatus', array('active', 'pending', 'toExpire', 'expired'));
-            $table->enum('applicationStage', array('contractsOffice', 'deansOffice', 'unsubmitted'));
-            $table->timestamps();
+            $table->integer('contractStatus');
+            $table->integer('applicationStage');
+            $table->timestamps('renewedAt');
         });
     }
 
