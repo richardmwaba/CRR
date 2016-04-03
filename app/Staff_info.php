@@ -17,4 +17,11 @@ class Staff_info extends Model
      *
      * @var array
      */
+
+    public function user(){
+
+        return $this->belongsTo('App\User');
+
+    }
+
 }

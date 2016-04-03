@@ -24,4 +24,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //user has one tuple of information
+
+   public function staff_info(){
+
+        return $this->hasOne('App\Staff_info');
+
+    }
 }

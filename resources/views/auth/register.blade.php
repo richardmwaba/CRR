@@ -37,7 +37,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('Position') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Position</label>
 
                             <div class="col-md-6">

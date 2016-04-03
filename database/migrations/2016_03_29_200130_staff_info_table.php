@@ -14,13 +14,13 @@ class StaffInfoTable extends Migration
     {
         //
             Schema::create('staff_info_table', function (Blueprint $table) {
-            $table->integer('man-number')->foreign('man-number')->references('man-number')->on('users')->onDelete('cascade');
+            $table->integer('man-number')->unsigned()->unique();
             $table->string('other-names')->nullable();
             $table->string('nationality');
             $table->string('department');
-            $table->integer('contractStatus');
-            $table->integer('applicationStage');
             $table->timestamps('renewedAt');
+                $table->foreign('man-number')->references('man-number')->on('users')->onDelete('cascade');
+
         });
 
     }
