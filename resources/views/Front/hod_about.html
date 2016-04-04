@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Profile | Edit Profile</title>
+<title>About</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/datepicker3.css" rel="stylesheet">
@@ -34,9 +34,9 @@
 					<li class="dropdown pull-right">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> User <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li class="active"><a href="hod_profile.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+							<li><a href="hod_profile.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
 							<li><a href="#"><svg class="glyph stroked hourglass"><use xlink:href="#stroked-hourglass"></use></svg> Help</a></li>
-							<li><a href="#"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+							<li><a href="login.html"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -56,7 +56,7 @@
 			<!--<li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>-->
 			<li class="parent">
 				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg></span> Staff
+					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Staff
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					<li>
@@ -77,7 +77,7 @@
 			<!--<li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>-->
 
 			<li role="presentation" class="divider"></li>
-			<li><a href="#"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"></use></svg> About</a></li>
+			<li  class="active"><a href="hod_about.html"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"></use></svg> About</a></li>
 			<li><a href="login.html"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Logout</a></li>
 		</ul>
 
@@ -91,114 +91,79 @@
 			</ol>
 		</div><!--/.row-->
 		
-		<!--<div class="row">
+		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Forms</h1>
+				<h3 class="page-header">Meet the developers</h3>
 			</div>
 		</div><!--/.row-->
-				
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-blue panel-widget ">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">120</div>
+							<div class="text-muted">New Orders</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-orange panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked empty-message"><use xlink:href="#stroked-empty-message"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">52</div>
+							<div class="text-muted">Comments</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-teal panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">24</div>
+							<div class="text-muted">New Users</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-6 col-lg-3">
+				<div class="panel panel-red panel-widget">
+					<div class="row no-padding">
+						<div class="col-sm-3 col-lg-5 widget-left">
+							<svg class="glyph stroked app-window-with-content"><use xlink:href="#stroked-app-window-with-content"></use></svg>
+						</div>
+						<div class="col-sm-9 col-lg-7 widget-right">
+							<div class="large">25.2k</div>
+							<div class="text-muted">Page Views</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+		
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Zing</div>
+					<div class="panel-heading">About Contracts Renewal Reminder</div>
 					<div class="panel-body">
-						<div class="col-md-6">
-							<form role="form">
-							
-								<div class="form-group">
-									<label>First Name</label>
-									<input class="form-control" placeholder="Table">
-								</div>
-
-								<div class="form-group">
-									<label>Middle Name</label>
-									<input class="form-control" placeholder="Tobias">
-								</div>
-
-								<div class="form-group">
-									<label>Last Name</label>
-									<input class="form-control" placeholder="Nzelu">
-								</div>
-
-								<div class="form-group">
-									<label>User Name</label>
-									<input class="form-control" placeholder="Zing">
-								</div>
-
-								
-								<div class="form-group">
-									<label>Position</label>
-									<select class="form-control">
-										<option>Lecturer</option>
-										<option>HoD</option>
-										<option>Dean of School</option>
-										<option>Other</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label>E-mail Address</label>
-									<input class="form-control" placeholder="ttobias@unza.zm">
-								</div>
-
-								<div class="form-group">
-									<label>Nationality</label>
-									<select class="form-control">
-										<option>Zambian</option>
-										<option>South African</option>
-										<option>American</option>
-										<option>Egyptian</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label>Residential Address</label>
-									<input class="form-control" placeholder="37HC, Ibex Hill, off Twin Palm road, Lusaka">
-								</div>
-
-								<div class="form-group">
-									<label>Phone Number</label>
-									<input class="form-control" placeholder="+260 0987654321">
-								</div>
-
-								<div class="form-group">
-									<label>Old Password</label>
-									<input class="form-control" placeholder="Password" name="password" type="password" value="">
-								</div>
-
-								<div class="form-group">
-									<a href="#" class="btn btn-link" role="button" data-toggle="collapse" data-target="#demo">Change password?</a>
-									<div id="demo" class="collapse">
-										<div class="form-group">
-											<label>Enter New Password</label>
-											<input class="form-control" placeholder="Password" name="password" type="password" value="">
-										</div>
-
-										<div class="form-group">
-											<label>Confirm New Password</label>
-											<input class="form-control" placeholder="Password" name="password" type="password" value="">
-										</div>
-
-										<!--Research on how to compare passwords entered in these fields-->
-
-									</div>
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
-									<button type="submit" class="btn btn-primary">Save</button>
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
-									<button type="reset" class="btn btn-default">Cancel</button>
-								</div>
-								
-							</form>
-						</div>	
-						
+						<p>Content coming soon...</p>
 					</div>
 				</div>
-			</div><!-- /.col-->
-		</div><!-- /.row -->
+			</div>
+		</div><!--/.row-->
 		
-	</div><!--/.main-->
+	</div>	<!--/.main-->
 
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -208,11 +173,14 @@
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script>
+		$('#calendar').datepicker({
+		});
+
 		!function ($) {
-			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
-				$(this).find('em:first').toggleClass("glyphicon-minus");	  
-			}); 
-			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
+		        $(this).find('em:first').toggleClass("glyphicon-minus");      
+		    }); 
+		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
 		}(window.jQuery);
 
 		$(window).on('resize', function () {
