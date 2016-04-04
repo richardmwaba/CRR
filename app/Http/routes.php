@@ -19,7 +19,9 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::put('/update', 'UserController@update');
+Route::get('/edit', 'UserController@edit');
+#Route::get('/edit', ['middleware'=>'auth' 'uses'=>'UserController@edit');
+Route::post('/store', 'UserController@store');
 Route::delete('/delete', 'UserController@destroy');
 
 Route::group(['middleware' => 'web'], function () {

@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/store') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('first-name') ? ' has-error' : '' }}">
@@ -37,32 +37,33 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Position</label>
+
+                        <div class="form-group{{ $errors->has('other-names') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                        <input type="radio" name="position" value="HOD"> HOD<br>
-                                <input type="radio" name="position" value="Senior Lecturer"> Senior Lecturer<br>
-                        <input type="radio" name="position" value="Lecturer"> Lecturer<br>
-                        <input type="radio" name="position" value="General Woker">General Woker<br>
+                                <input type="text" class="form-control" name="other-names" value="{{ old('other-names') }}">
 
-                                @if ($errors->has('position'))
+                                @if ($errors->has('other-names'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('position') }}</strong>
+                                        <strong>{{ $errors->first('other-names') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('man-number') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Man number</label>
+                        <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Position</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="man-number" value="{{ old('man-number') }}">
+                        <input type="radio" name="nationality" value="HOD"> HOD<br>
+                                <input type="radio" name="nationality" value="Zambia"> Zambia<br>
+                        <input type="radio" name="nationality" value="Namibia"> Namibia<br>
+                        <input type="radio" name="nationality" value="Botswana">Botswana<br>
 
-                                @if ($errors->has('man-number'))
+                                @if ($errors->has('nationality'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('man-number') }}</strong>
+                                        <strong>{{ $errors->first('nationality') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -83,7 +84,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Temporal Password</label>
+                            <label class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
@@ -94,6 +95,35 @@
                                     </span>
                                 @endif
                             </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Confirm Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password_confirmation">
+
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Position</label>
+
+                                <div class="col-md-6">
+                                    <input type="radio" name="department" value="Computer Science"> Computer Science<br>
+                                    <input type="radio" name="department" value="Biology"> Biology<br>
+                                    <input type="radio" name="department" value="Chemistry"> Chemistry<br>
+                                    <input type="radio" name="department" value="Physics">Physics<br>
+
+                                    @if ($errors->has('department'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('department') }}</strong>
+                                    </span>
+                                    @endif
                         </div>
 
                         <div class="form-group">
