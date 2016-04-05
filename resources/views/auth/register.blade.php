@@ -10,29 +10,29 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('first-name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="first-name" value="{{ old('first-name') }}">
+                                <input type="text" class="form-control" name="first_name" value="{{ old('first_name') }}">
 
-                                @if ($errors->has('first-name'))
+                                @if ($errors->has('first_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('first-name') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('last-name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="last-name" value="{{ old('last-name') }}">
+                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}">
 
-                                @if ($errors->has('last-name'))
+                                @if ($errors->has('last_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('last-name') }}</strong>
+                                        <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -54,15 +54,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('man-number') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('man_number') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Man number</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="man-number" value="{{ old('man-number') }}">
+                                <input type="text" class="form-control" name="man_number" value="{{ old('man_number') }}">
 
-                                @if ($errors->has('man-number'))
+                                @if ($errors->has('man_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('man-number') }}</strong>
+                                        <strong>{{ $errors->first('man_number') }}</strong>
                                     </span>
                                 @endif
                             </div>

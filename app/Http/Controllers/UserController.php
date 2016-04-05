@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Staff_info;
 use Illuminate\Http\Request;
+use App\User;
 
 use App\Http\Requests;
 use Auth;
@@ -12,7 +13,7 @@ class UserController extends Controller
 {
     //
 
-    public function _construct(){
+    public function __construct(){
 
         $this->middleware('auth');
         #$this->middleware('auth', ['only'=>'edit']); altanative for specific method
@@ -22,7 +23,8 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('profile.edit', compact($user));
+        #$user = User::findOrFail(1);
+        return view('profile.edit')->with('user', $user);
 
 
     }

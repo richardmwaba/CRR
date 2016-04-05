@@ -14,12 +14,12 @@ class StaffInfoTable extends Migration
     {
         //
             Schema::create('staff_info_table', function (Blueprint $table) {
-            $table->integer('man-number')->unsigned()->unique();
-            $table->string('other-names')->nullable();
+            $table->integer('man_number')->unsigned()->unique();
+            $table->string('other_names')->nullable();
             $table->string('nationality');
             $table->string('department');
             $table->timestamps('renewedAt');
-                $table->foreign('man-number')->references('man-number')->on('users')->onDelete('cascade');
+                $table->foreign('man_number')->references('man_number')->on('users')->onDelete('cascade');
 
         });
 

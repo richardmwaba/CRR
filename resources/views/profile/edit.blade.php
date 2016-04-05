@@ -10,43 +10,43 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/store') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('first-name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">First Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="first-name" value="{{ old('first-name') }}">
+                                <input type="text" class="form-control" name="first_name"  value="{{old('first_name', $user->first_name) }}">
 
-                                @if ($errors->has('first-name'))
+                                @if ($errors->has('first_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('first-name') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('last-name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="last-name" value="{{ old('last-name') }}">
+                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name', $user->last_name) }}" >
 
-                                @if ($errors->has('last-name'))
+                                @if ($errors->has('last_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('last-name') }}</strong>
+                                        <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('other-names') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('other_names') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="other-names" value="{{ old('other-names') }}">
+                                <input type="text" class="form-control" name="other-names" value="{{ old('other_names', $user->other_names) }}">
 
-                                @if ($errors->has('other-names'))
+                                @if ($errors->has('other_names'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('other-names') }}</strong>
+                                        <strong>{{ $errors->first('other_names') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -73,7 +73,7 @@
                             <label class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input type="email" class="form-control" name="email" value="{{ old('email' , $user->email)}}">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">

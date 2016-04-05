@@ -25,7 +25,7 @@ class UserRequest extends Request
     {
         return [
             //
-            'first-name' => 'required', 'last-name' => 'required', 'email'=>'required|email', 'password'=>'required|min:8', 'man-number'=>'required|unique:user|man:8|min:8'
+            'first_name' => 'required', 'last_name' => 'required', 'email'=>'required|email', 'password'=>'required|min:8', 'man_number'=>'required|unique:user|man:8|min:8'
 
         ];
     }

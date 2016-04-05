@@ -19,14 +19,15 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::get('/edit', 'UserController@edit');
+
 #Route::get('/edit', ['middleware'=>'auth' 'uses'=>'UserController@edit');
-Route::post('/store', 'UserController@store');
 Route::delete('/delete', 'UserController@destroy');
 
 Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
-
     Route::get('/home', 'HomeController@index');
+    Route::get('/edit', 'UserController@edit');//use with constructor
+    Route::post('/store', 'UserController@store');
+   #Route::get('/edit', ['middleware'=>'auth', 'uses'=>'UserController@edit']);
 });

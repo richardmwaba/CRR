@@ -9,7 +9,7 @@ class Staff_info extends Model
     //
     protected $fillable = [
 
-        'other-names', 'nationality', 'department', 'email', 'password',
+        'other_names', 'nationality', 'department', 'email', 'password',
     ];
 
     /**
