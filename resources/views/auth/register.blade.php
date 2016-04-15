@@ -41,9 +41,9 @@
                             <label class="col-md-4 control-label">Position</label>
 
                             <div class="col-md-6">
-                        <input type="radio" name="position" value="HOD"> HOD<br>
-                                <input type="radio" name="position" value="Senior Lecturer"> Senior Lecturer<br>
-                        <input type="radio" name="position" value="Lecturer"> Lecturer<br>
+                        <input type="radio" name="position" value="HOD"> HOD
+                                <input type="radio" name="position" value="Senior Lecturer"> Senior Lecturer
+                        <input type="radio" name="position" value="Lecturer"> Lecturer
                         <input type="radio" name="position" value="General Woker">General Woker<br>
 
                                 @if ($errors->has('position'))

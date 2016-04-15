@@ -42,28 +42,11 @@
                             <label class="col-md-4 control-label">Last Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="other-names" value="{{ old('other_names', $user->other_names) }}">
+                                <input type="text" class="form-control" name="other_names" value="{{ old('other_names', $user->other_names) }}">
 
                                 @if ($errors->has('other_names'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('other_names') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Position</label>
-
-                            <div class="col-md-6">
-                        <input type="radio" name="nationality" value="HOD"> HOD<br>
-                                <input type="radio" name="nationality" value="Zambia"> Zambia<br>
-                        <input type="radio" name="nationality" value="Namibia"> Namibia<br>
-                        <input type="radio" name="nationality" value="Botswana">Botswana<br>
-
-                                @if ($errors->has('nationality'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nationality') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -78,6 +61,53 @@
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Nationality</label>
+
+                            <div class="col-md-6">
+                                <input type="radio" name="nationality" value="Zambia"> Zambia
+                        <input type="radio" name="nationality" value="Namibia"> Namibia
+                        <input type="radio" name="nationality" value="Botswana">Botswana<br>
+
+                                @if ($errors->has('nationality'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nationality') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Department</label>
+
+                            <div class="col-md-6">
+                                <input type="radio" name="department" value="Computer Science"> Computer Science
+                                <input type="radio" name="department" value="Biology"> Biology
+                                <input type="radio" name="department" value="Chemistry"> Chemistry
+                                <input type="radio" name="department" value="Physics">Physics<br>
+
+                                @if ($errors->has('department'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('department') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            </div>
+
+                        <div class="form-group{{ $errors->has('passwordCheck') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Old Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="passwordCheck">
+
+                                @if ($errors->has('passwordCheck'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('passwordCheck') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -109,22 +139,6 @@
                                     </span>
                                 @endif
                             </div>
-
-                            <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Position</label>
-
-                                <div class="col-md-6">
-                                    <input type="radio" name="department" value="Computer Science"> Computer Science<br>
-                                    <input type="radio" name="department" value="Biology"> Biology<br>
-                                    <input type="radio" name="department" value="Chemistry"> Chemistry<br>
-                                    <input type="radio" name="department" value="Physics">Physics<br>
-
-                                    @if ($errors->has('department'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('department') }}</strong>
-                                    </span>
-                                    @endif
-                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

@@ -13,7 +13,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
 
-        'first_name', 'last_name', 'man_number', 'email', 'password',
+        'first_name', 'last_name', 'man_number', 'email', 'password', 'position','other_names', 'nationality', 'department','man_number'
     ];
 
     /**
@@ -23,14 +23,22 @@ class User extends Authenticatable
      */
 
     protected $hidden = [
+
         'password', 'remember_token',
+
     ];
 
     //user has one tuple of information
 
-   public function staff_info(){
+  /* public function staff_info(){
 
         return $this->hasOne('App\Staff_info');
 
     }
+
+    /*public function update($new){
+
+        $this->save($new);
+
+    }*/
 }
