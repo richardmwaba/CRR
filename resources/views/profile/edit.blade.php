@@ -99,15 +99,15 @@
                             </div>
                             </div>
 
-                        <div class="form-group{{ $errors->has('passwordCheck') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('password_old') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Old Password</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="passwordCheck">
+                                <input type="password" class="form-control" name="password_old">
 
-                                @if ($errors->has('passwordCheck'))
+                                @if ($errors->has('password_old'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('passwordCheck') }}</strong>
+                                        <strong>{{ $errors->first('password_old') }}</strong>
                                     </span>
                                 @endif
                             </div>

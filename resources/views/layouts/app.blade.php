@@ -5,15 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Contracts Renewal Reminder</title>
 
-    <!-- Fonts -->
+    <link href="Front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="Front/css/datepicker3.css" rel="stylesheet">
+    <link href="Front/bootstrap-table.css" rel="stylesheet">
+    <link href="Front/styles.css" rel="stylesheet">
+
+    <!-- Fonts
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    -->
 
-    <!-- Styles -->
+    <!--Icons-->
+    <script src="Front/js/lumino.glyphs.js"></script>
+
+    <!-- Styles
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+            -->
+
+    <!--[if lt IE 9]>
+    <script src="Front/js/html5shiv.js"></script>
+    <script src="Front/js/respond.min.js"></script>
+    <![endif]-->
 
     <style>
         body {
@@ -75,8 +90,34 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-table.js"></script>
+
+        function ($) {
+            $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+
+    <!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+        -->
+
 </body>
 </html>

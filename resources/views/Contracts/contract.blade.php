@@ -7,38 +7,32 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Contract</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateContract') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('contractStatus') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Position</label>
-
+                        <div class="form-group{{ $errors->has('renewed_on') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Renewed on</label>
                             <div class="col-md-6">
-                        <input type="radio" name="contractStatus" value="HOD"> HOD
-                                <input type="radio" name="contractStatus" value="Senior Lecturer"> Senior Lecturer
-                        <input type="radio" name="contractStatus" value="Lecturer"> Lecturer
-                        <input type="radio" name="contractStatus" value="General Worker">General Worker<br>
+                        <input type="date" name="renewed_on" value="{{ old('renewed_on' , $contract->renewed_on)}}">
 
-                                @if ($errors->has('contractStatus'))
+                                @if ($errors->has('renewed_on'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('contractStatus') }}</strong>
+                                        <strong>{{ $errors->first('renewed_on') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('applicationStage') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Position</label>
+                        <div class="form-group{{ $errors->has('expires_on') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Expires on</label>
 
                             <div class="col-md-6">
-                                <input type="radio" name="applicationStage" value="HOD"> HOD
-                                <input type="radio" name="applicationStage" value="Senior Lecturer"> Senior Lecturer
-                                <input type="radio" name="applicationStage" value="Lecturer"> Lecturer
-                                <input type="radio" name="applicationStage" value="General Worker">General Worker<br>
 
-                                @if ($errors->has('applicationStage'))
+                                <input type="date" name="expires_on" value="{{ old('expires_on' , $contract->expires_on)}}">
+
+                                @if ($errors->has('expires_on'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('applicationStage') }}</strong>
+                                        <strong>{{ $errors->first('expires_on') }}</strong>
                                     </span>
                                 @endif
                             </div>

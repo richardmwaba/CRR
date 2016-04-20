@@ -14,11 +14,13 @@ class StaffContracts extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
 
-            $table->string('contractStatus');
-            $table->string('applicationStage');
-            $table->dateTime('contractDuration');
+            $table->string('last_modified_by');
+            $table->date('renewed_on');
+            $table->date('expires_on');
             $table->increments('id');
             $table->timestamps();
+            $table->integer('man_number')->unsigned();
+            $table->foreign('man_number')->references('man_number')->on('users')->onDelete('cascade');
         });
     }
 
