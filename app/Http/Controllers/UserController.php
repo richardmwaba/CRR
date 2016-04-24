@@ -46,13 +46,18 @@ class UserController extends Controller
                 'first_name'=>$request->first_name, 'last_name'=>$request->last_name, 'other_names'=>$request->other_names, 'nationality'=>$request->nationality, 'department'=>$request->department]);
 
             $user1->save();
-            #return 'success!';
+            return 'success!';
 
         }else {
 
             return view('profile.edit')->with('user', $user);
             #$user1->department = $request->department;
         }
+
+    }
+
+    public function register(){
+        
 
     }
 }

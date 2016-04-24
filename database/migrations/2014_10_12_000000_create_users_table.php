@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
                 $table->string('nationality')->nulluable();
                 $table->string('department')->nulluable();
                 $table->string('password');
-                 $table->rememberToken();
+                $table->rememberToken();
                 $table->timestamps();
 
         });

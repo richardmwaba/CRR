@@ -29,14 +29,17 @@ Route::group(['middleware' => ['web']], function () {
 
          Route::get('/home', 'HomeController@index');
          Route::get('/edit', 'UserController@edit');//use with constructor
-         Route::post('/store', 'UserController@store');
+        Route::post('/store', 'UserController@store');
 
     //these pages can only be accessed by the HOD
     Route::group(['middleware' => 'userAccess'], function() {
-        Route::get('/contract', 'ContractController@showContract');
-        Route::post('/updateContract', 'ContractController@updateContract');
+
+        Route::get('/contract/{id}', 'ContractController@showContract');
+        Route::get('/staff', 'Staff@viewStaff');
+        Route::post('/updateContract', 'ContractController@store');
         Route::delete('/delete', 'UserController@destroy');
         Route::get('/staff_view', 'UserController@staff_view');
+        Route::get('/register', 'UserController@register');
     });
 
 });

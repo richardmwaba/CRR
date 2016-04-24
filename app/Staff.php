@@ -18,7 +18,8 @@ class Staff extends Model
     public $timestamps = false;
     protected $fillable = [
 
-        'first_name', 'password','last_name', 'man_number', 'email', 'password', 'position','other_names', 'nationality', 'department','man_number'
+        'first_name', 'password','last_name', 'man_number', 'email', 'password',
+        'position','other_names', 'nationality', 'department','man_number'
     ];
 
     /**

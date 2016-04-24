@@ -7,25 +7,29 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
 use App\Contract;
+use Illuminate\Support\Facades\Redirect;
 
 class ContractController extends Controller
 {
     //
 
-    public function updateContract(ContractRequest $request, $user){
+    public function store(Request $request){
 
-        $modified_by = Auth::user;
-        $contract = Contract::firstOrCreate($user->man_number);
-        $contract->fill(['man_number'=>$user->man_number, 'renewed_on' => $request->renewed_at,
+        $modified_by = Auth::user();
+        $contract = Contract::firstOrNew(array('man_number' =>$request->man_number));
+        $contract->fill(['man_number'=>$request->man_number, 'renewed_on' => $request->renewed_on,
             'expires_on' => $request->expires_on, 'last_modified_by' => $modified_by->first_name]);
+        $contract->save();
+
+        return Redirect::action('Staff@viewStaff');
 
     }
 
-    public function showContract($user){
+    public function showContract($userMan){
 
-        $contract = Contract::findOrFail($user->man_number);
+        $contract = Contract::firstOrNew(array('man_number' =>$userMan));
 
-        return view('Contracts.contract')->with($contract);
+        return view('Contracts.contract')->with(array('man_number'=> $userMan, 'contract' => $contract));
 
     }
 

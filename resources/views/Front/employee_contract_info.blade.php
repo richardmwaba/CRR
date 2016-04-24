@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Employee | Contract Information</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/datepicker3.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
+<link href="{{URL::asset('css/bootstrap.min.css')}}"  rel="stylesheet">
+<link href="{{URL::asset(css/datepicker3.css')}}" rel="stylesheet">
+<link href="{{URL::asset('css/styles.css')}}" rel="stylesheet">
 
 <!--Icons-->
 <script src="js/lumino.glyphs.js"></script>
 
 <!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
+<script src="{{URL::asset('js/html5shiv.js')}}"></script>
+<script src="{{URL::asset('js/respond.min.js')}}"></script>
 <![endif]-->
 
 </head>
@@ -55,7 +55,7 @@
 			<li><a href="employee_home.html"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg> Home</a></li>
 			<!--<li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>-->
 			
-			<li class="active"><a href="employee_contract_info.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Contract Information</a></li>
+			<li class="active"><a href="employee_contract_info.blade.php"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Contract Information</a></li>
 			<li><a href="#"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Calendar</a></li>
 			<!--<li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>-->
 			<!--<li><a href="icons.html"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>-->
@@ -138,13 +138,13 @@
 		
 	</div><!--/.main-->
 
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="{{URL::asset('js/jquery-1.11.1.min.js')}}"></script>
+	<script src="{URL::asset('js/bootstrap.min.js')}}"></script>
+	<script src="{{URL::asset('js/chart.min.js')}}"></script>
+	<script src="{{URL::asset('js/chart-data.js')}}"></script>
+	<script src="{{URL::asset('js/easypiechart.js')}}"></script>
+	<script src="{{URL::asset('js/easypiechart-data.js')}}"></script>
+	<script src="{{URL::asset('js/bootstrap-datepicker.js')}}"></script>
 	<script>
 		!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
