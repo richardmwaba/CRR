@@ -14,7 +14,7 @@ class Staff extends Controller
 
     public function viewStaff(){
         $currentUser = Auth::user();
-        $user = User::where('department', '=', $currentUser->department);
+        $user = User::where('department', '=', $currentUser->department)->get();
         return view('Staff.staff')->with('user', $user);
     }
 }

@@ -39,7 +39,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/updateContract', 'ContractController@store');
         Route::delete('/delete', 'UserController@destroy');
         Route::get('/staff_view', 'UserController@staff_view');
-        Route::get('/register', 'UserController@register');
+        #Route::get('/register', 'UserController@register');
     });
 
 });

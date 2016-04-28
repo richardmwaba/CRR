@@ -8,6 +8,7 @@
                 <div class="panel-heading">Contract</div>
                 <div class="panel-body">
                         {!! csrf_field() !!}
+
                         <div>
 
                             @foreach($user as $staff)
@@ -16,13 +17,11 @@
                                         {{$staff->other_names}} {{$staff->last_name}}</a></li>
 
                                 @endforeach
-
+                                <li><a href="{{ url('/register') }}">Register</a></li>
                         </div>
-
-                    </form>
-                </div>
             </div>
         </div>
     </div>
 </div>
+    </div>
 @endsection

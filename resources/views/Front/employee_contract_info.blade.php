@@ -6,7 +6,7 @@
 <title>Employee | Contract Information</title>
 
 <link href="{{URL::asset('css/bootstrap.min.css')}}"  rel="stylesheet">
-<link href="{{URL::asset(css/datepicker3.css')}}" rel="stylesheet">
+<link href="{{URL::asset('css/datepicker3.css')}}" rel="stylesheet">
 <link href="{{URL::asset('css/styles.css')}}" rel="stylesheet">
 
 <!--Icons-->
@@ -139,7 +139,7 @@
 	</div><!--/.main-->
 
 	<script src="{{URL::asset('js/jquery-1.11.1.min.js')}}"></script>
-	<script src="{URL::asset('js/bootstrap.min.js')}}"></script>
+	<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 	<script src="{{URL::asset('js/chart.min.js')}}"></script>
 	<script src="{{URL::asset('js/chart-data.js')}}"></script>
 	<script src="{{URL::asset('js/easypiechart.js')}}"></script>

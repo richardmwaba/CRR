@@ -35,10 +35,11 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+   /*public function __construct()
     {
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
+   */
 
     /**
      * Get a validator for an incoming registration request.
