@@ -15,15 +15,12 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
+    Route::get('/about', 'HomeController@about');
     Route::get('/', function () {
         return view('welcome');
     });
 
-
-
-
-#Route::get('/edit', ['middleware'=>'auth' 'uses'=>'UserController@edit');
-
+    //these pages are accessible only to authenticated users
 
     Route::group(['middleware' => 'auth'], function () {
 
@@ -35,11 +32,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'userAccess'], function() {
 
         Route::get('/contract/{id}', 'ContractController@showContract');
-        Route::get('/staff', 'Staff@viewStaff');
         Route::post('/updateContract', 'ContractController@store');
         Route::delete('/delete', 'UserController@destroy');
         Route::get('/staff_view', 'UserController@staff_view');
-        #Route::get('/register', 'UserController@register');
+        Route::get('/add_new', 'UserController@add_new_form');
+        Route::post('/store_new_user', 'UserController@store_new_user');
     });
 
 });
