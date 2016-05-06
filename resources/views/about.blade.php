@@ -1,4 +1,4 @@
-@extends('layouts.guest_template')
+@extends('layouts.hod_template')
 @section('content')
 
     <div id="page-wrapper">
@@ -33,4 +33,4 @@
     </div>
     <!-- /#page-wrapper -->
 
-    @endsection
+@endsection
