@@ -17,6 +17,7 @@ class StaffContracts extends Migration
             $table->string('last_modified_by');
             $table->date('renewed_on');
             $table->date('expires_on');
+            $table->text('applicationStage')->nullable();
             $table->increments('id');
             $table->timestamps();
             $table->integer('man_number')->unsigned();

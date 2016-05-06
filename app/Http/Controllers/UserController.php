@@ -58,7 +58,10 @@ class UserController extends Controller
                 'department'=>$request->department]);
 
             $user1->save();
-            return Redirect::action('Staff@staff_view');
+            if(Auth::user()->position!='HOD')
+            return Redirect('/home');
+            else
+                Return Redirect::action('UserController@staff_view');
 
         }else {
 
@@ -83,7 +86,7 @@ class UserController extends Controller
         User::create(['first_name' => $data->first_name, 'last_name'=> $data->last_name,
             'email'=>$data->email, 'password' => bcrypt($data->password), 'man_number'=>$data->man_number, 'position'=> $data->position]);
 
-        return Redirect::action('Staff@staff_view');
+        return Redirect::action('UserController@staff_view');
 
     }
 }

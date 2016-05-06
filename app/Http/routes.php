@@ -11,11 +11,13 @@
 |
 */
 
-//these pages can be accessed by anyone
+//these pages can be accessed by guests
 Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
-    Route::get('/about', 'HomeController@about');
+    Route::get('/about', function(){
+        return view ('about');
+    });
     Route::get('/', function () {
         return view('welcome');
     });
@@ -25,7 +27,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => 'auth'], function () {
 
          Route::get('/home', 'HomeController@index');
-         Route::get('/edit', 'UserController@edit');//use with constructor
+         Route::get('/edit', 'UserController@edit');
         Route::post('/store', 'UserController@store');
 
     //these pages can only be accessed by the HOD

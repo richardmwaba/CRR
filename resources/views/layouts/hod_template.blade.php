@@ -114,6 +114,17 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
+                @if (Auth::guest())
+                    <ul class="dropdown-menu dropdown-user">
+
+                        <li><a href="{{url('/register')}}"><i class="fa fa-user fa-fw"></i>Register</a>
+                        </li>
+                        <li><a href="{{url('/login')}}"><i class="fa fa-user-md fa-fw"></i>Login</a>
+                        </li>
+                        <li class="divider"></li>
+
+                    </ul>
+                @else
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                     </li>
@@ -123,6 +134,7 @@
                     <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
+                @endif
                 <!-- /.dropdown-user -->
             </li>
             <!-- /.dropdown -->
@@ -135,6 +147,13 @@
                     <li class="sidebar-search">
 
                     </li>
+                    @if (Auth::guest())
+
+                        <li>
+                            <a href="{{URL::asset('/about')}}"><i class="fa fa-files-o fa-fw"></i> About</a>
+                        </li>
+
+                        @else
                     <li>
                         <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i> Home</a>
                     </li>
@@ -164,6 +183,7 @@
                     <li>
                         <a href="{{URL::asset('/about')}}"><i class="fa fa-files-o fa-fw"></i> About</a>
                     </li>
+                        @endif
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

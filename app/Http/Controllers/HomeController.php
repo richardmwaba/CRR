@@ -28,12 +28,4 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function about(){
-        if(Auth::guest()){
-            return view('about');
-        }else{
-            return view('about_logged_in');
-        }
-    }
-
 }
