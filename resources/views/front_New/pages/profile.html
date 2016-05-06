@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Staff | Add New User</title>
+    <title> Profile</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="hod_home.html"><span><img src="../img/unza.png" alt="Unza logo" height="35" width="35" style="padding-bottom:5px"></span> Contract Renewal Reminder</a>
+                <a class="navbar-brand" href="employee_home.html"><span><img src="../img/unza.png" alt="Unza logo" height="35" width="35" style="padding-bottom:5px"></span> Contract Renewal Reminder</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -136,33 +136,18 @@
                             
                         </li>
                         <li>
-                            <a href="hod_home.html"><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a href="employee_home.html"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Staff<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="hod_staff.html"> View Staff</a>
-                                </li>
-                                <li>
-                                    <a href="hod_add_new.html"> Add New Staff</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="hod_contract_info.blade.php"><i class="fa fa-edit fa-fw"></i> Contract Information</a>
-                        </li>
-                        <li>
-                            <a href="hod_calendar.html"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
+                            <a href="employee_calendar.html"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
                         </li>
                         <li class="divider" role="presentation"> </li>
                         <li class="divider" role="presentation"> </li>
                         <li>
-                            <a href="hod_help.html"><i class="fa fa-question fa-fw"></i> Help</a>
+                            <a href="employee_help.html"><i class="fa fa-question fa-fw"></i> Help</a>
                         </li>
                         <li>
-                            <a href="hod_about.html"><i class="fa fa-files-o fa-fw"></i> About</a>
+                            <a href="employee_about.html"><i class="fa fa-files-o fa-fw"></i> About</a>
                         </li>
                     </ul>
                 </div>
@@ -182,42 +167,88 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading"> Add New User</div>
+                        <div class="panel-heading"> Profile</div>
                         
                         <div class="panel-body">
-                            <div class="col-md-6">
-                                <form role="form">
-                                    
-                                    <div class="form-group">
-                                        <label>Man Number</label>
-                                        <input class="form-control" placeholder="man number">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Position</label>
-                                        <select class="form-control">
-                                            <option value="">-- select one --</option>
-                                            <option> Contracts Officer</option>
-                                            <option> Dean of School/option>
-                                            <option> Academic Staff</option>
-                                            <option> Support Staff</option>
-                                        </select>
-                                    </div>
+                             <form class="form-horizontal" role="form" style="margin-left: 20px;margin-top: 20px">
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="first-name"> First Name:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="first_name_value"> Tomson</label>
+                                  </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label>E-mail Address</label>
-                                        <input class="form-control" placeholder="e-mail">
-                                    </div>
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="middle-name"> Middle Name:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="middle_name_value"> Andrea</label>
+                                  </div>
+                                </div>
 
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
-                                        <button type="reset" class="btn btn-default">Cancel</button>
-                                    </div>
-                                    
-                                </form>
-                            </div>
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="last-name"> Last Name:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                        <label class="text-primary" for="last_name_value"> Musonda</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="e-mail"> Email Address:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="e-mail_value"> tomsmsonda@unza.zm</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="man-number"> Man Number:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="man-number_value"> 112345678</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="NRC"> NRC Number:</label>
+                                  <div class="col-sm-8 col-md- col-xs-6">
+                                    <label class="text-primary" for="NRC_value"> 1224/5545/4555</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="nationality"> Nationality:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="nationality_value"> Zambian</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="residential-address"> Residential Address:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="residential_address_value"> 37HC, Ibex Hill, off Twin Palm road, Lusaka</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="phone-number"> Phone Number:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="phone_number_value"> +260 1234567890</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="contract-expiry-date"> Contract Expiry Date:</label>
+                                  <div class="col-sm-8 col-md-10 col-xs-6">
+                                    <label class="text-primary" for="contract_expiry_date_value"> March 23, 2016</label>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="col-sm-8 col-md-9 col-xs-6">
+                                    <a href="edit_profile.html" class="btn btn-info btn-sm" role="button">Edit profile</a>
+                                  </div>
+                                </div>
                             
+                            </form>
+                            <!-- /.form -->
                         </div>
                         <!-- /.panel-body -->
                     </div>
