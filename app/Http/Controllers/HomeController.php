@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,4 +27,13 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function about(){
+        if(Auth::guest()){
+            return view('about');
+        }else{
+            return view('about_logged_in');
+        }
+    }
+
 }

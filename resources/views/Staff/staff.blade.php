@@ -14,10 +14,23 @@
                             @foreach($user as $staff)
 
                                 <li><a href="{{ url('/contract/'.$staff->man_number) }}">{{$staff->first_name}}
-                                        {{$staff->other_names}} {{$staff->last_name}}</a></li>
+                                        {{$staff->other_names}} {{$staff->last_name}}
+
+                                        <!-- finds the contract status of the current current iteration-->
+
+                                        <?php $contract = App\Contract::firstOrNew(array('man_number' =>$staff->man_number));
+                                        $diff = \Carbon\Carbon::parse($contract->expires_on)->diffInMonths(Carbon\Carbon::now()); ?>
+
+                                        @if($diff<=0)
+                                            contract is expired
+                                            @else
+                                            contract is valid
+                                            @endif
+
+                                    </a></li>
 
                                 @endforeach
-                                <li><a href="{{ url('/register') }}">Register</a></li>
+                                <li><a href="{{ url('/add_new') }}">Add new</a></li>
                         </div>
             </div>
         </div>

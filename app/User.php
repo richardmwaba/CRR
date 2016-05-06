@@ -27,18 +27,4 @@ class User extends Authenticatable
         'password', 'remember_token',
 
     ];
-
-    //user has one tuple of information
-
-  /* public function staff_info(){
-
-        return $this->hasOne('App\Staff_info');
-
-    }
-
-    /*public function update($new){
-
-        $this->save($new);
-
-    }*/
 }

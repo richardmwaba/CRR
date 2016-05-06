@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Contract Information</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{URL::asset('../bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -18,10 +18,11 @@
     <link href="{{URL::asset('../bower_components/metisMenu/dist/metisMenu.min.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{URL::asset('../dist/css/sb-admin-2.css" rel="stylesheet')}}">
+    <link href="{{URL::asset('../dist/css/sb-admin-2.css')}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{URL::asset('../bower_components/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,7 +32,6 @@
     <![endif]-->
 
 </head>
-
 <body>
 
 <div id="wrapper">
@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="hod_home.html"><span><img src="{{URL::asset('../img/unza.png')}}" alt="Unza logo" height="35" width="35" style="padding-bottom:5px"></span> Contract Renewal Reminder</a>
+            <a class="navbar-brand" href="{{URL::asset('hod_home.html')}}"><span><img src="{{URL::asset('../img/unza.png')}}" alt="Unza logo" height="35" width="35" style="padding-bottom:5px"></span> Contract Renewal Reminder</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -120,7 +120,7 @@
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -136,16 +136,16 @@
 
                     </li>
                     <li>
-                        <a href="hod_home.html"><i class="fa fa-home fa-fw"></i> Home</a>
+                        <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i> Home</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-table fa-fw"></i> Staff<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="hod_staff.html"> View Staff</a>
+                                <a href="{{URL::asset('staff_view')}}"> View Staff</a>
                             </li>
                             <li>
-                                <a href="hod_add_new.html"> Add New Staff</a>
+                                <a href="{{URL::asset('add_new')}}"> Add New Staff</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -159,10 +159,10 @@
                     <li class="divider" role="presentation"> </li>
                     <li class="divider" role="presentation"> </li>
                     <li>
-                        <a href="hod_help.html"><i class="fa fa-question fa-fw"></i> Help</a>
+                        <a href="{{URL::asset('help')}}"><i class="fa fa-question fa-fw"></i> Help</a>
                     </li>
                     <li>
-                        <a href="hod_about.html"><i class="fa fa-files-o fa-fw"></i> About</a>
+                        <a href="{{URL::asset('/about')}}"><i class="fa fa-files-o fa-fw"></i> About</a>
                     </li>
                 </ul>
             </div>
@@ -171,6 +171,7 @@
         <!-- /.navbar-static-side -->
     </nav>
 
+    @section('content')
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -179,29 +180,16 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="row">
-            <div class="col-lg-12">
-
-                        <div class="form-group">
-                            <div class="col-sm-8 col-md-8 col-xs-6">
-                            </div>
-                        </div>
-
-                    <div class="panel-body">
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
+        <!-- content injected here -->
     </div>
-    <!-- /#page-wrapper -->
+        <!-- /#page-wrapper -->
+        @show
+
 
 </div>
 <!-- /#wrapper -->
+ @section('scripts')
+
 
 <!-- jQuery -->
 <script src="{{URL::asset('../bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -214,6 +202,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{URL::asset('../dist/js/sb-admin-2.js')}}"></script>
+
+<!-- Datatables JavaScript -->
+<script src="{{URL::asset('../dist/js/bootstrap-table.js')}}"></script>
 
 </body>
 

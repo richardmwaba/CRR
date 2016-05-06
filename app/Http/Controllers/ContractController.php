@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,7 +22,7 @@ class ContractController extends Controller
             'expires_on' => $request->expires_on, 'last_modified_by' => $modified_by->first_name]);
         $contract->save();
 
-        return Redirect::action('Staff@viewStaff');
+        return Redirect::action('Staff@staff_view');
 
     }
 
