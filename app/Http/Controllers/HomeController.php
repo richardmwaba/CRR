@@ -28,4 +28,19 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function help()
+    {
+        return view('help');
+    }
+
+    public function calendar()
+    {
+        return view('calendar');
+    }
+
+    public function contract_info()
+    {
+        return view('contract_info');
+    }
+
 }

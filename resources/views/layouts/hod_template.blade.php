@@ -23,6 +23,12 @@
     <!-- Custom Fonts -->
     <link href="{{URL::asset('../bower_components/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
+    <!-- Datatables CSS -->
+    <link href="{{URL::asset('../dist/css/bootstrap-table.css')}}" rel="stylesheet">
+
+     <!-- Calendar CSS -->
+    <link href="{{URL::asset('../dist/css/calendar/fullcalendar.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('../dist/css/calendar/fullcalendar.print.css')}}" rel="stylesheet" media="print">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -185,10 +191,10 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="hod_contract_info.blade.php"><i class="fa fa-edit fa-fw"></i> Contract Information</a>
+                        <a href="{{URL::asset('contract_info')}}"><i class="fa fa-edit fa-fw"></i> Contract Information</a>
                     </li>
                     <li>
-                        <a href="hod_calendar.html"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
+                        <a href="{{URL::asset('calendar')}}"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
                     </li>
                     <li class="divider" role="presentation"> </li>
                     <li class="divider" role="presentation"> </li>
@@ -224,7 +230,17 @@
 </div>
 <!-- /#wrapper -->
 
+<<<<<<< Updated upstream
 
+=======
+<!-- Footer -->
+<footer class="footer footer-fixed-bottom">
+      <div class="container" style="text-align:center">
+        <p class="text-muted"> <span class="glyphicon glyphicon-copyright-mark"></span> - 2016 The University of Zambia <br> All rights reserved.</p>
+      </div>
+</footer>
+<!-- ./footer -->
+>>>>>>> Stashed changes
  @section('scripts')
 
 
@@ -242,6 +258,126 @@
 
 <!-- Datatables JavaScript -->
 <script src="{{URL::asset('../dist/js/bootstrap-table.js')}}"></script>
+
+<!-- Custom Table JavaScript -->
+<script>
+        !function ($) {
+            $(document).on("click","ul.nav li.parent > a > span.icon", function(){        
+                $(this).find('em:first').toggleClass("glyphicon-minus");      
+            }); 
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+        }(window.jQuery);
+
+        $(window).on('resize', function () {
+          if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+        })
+        $(window).on('resize', function () {
+          if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+        })
+</script>
+     <!-- /.Custom Table JavaScript -->
+
+<!-- Calendar JavaScript -->
+<script src="{{URL::asset('../dist/js/calendar/moment.min.js')}}"></script>
+<script src="../dist/js/calendar/fullcalendar.min.js"></script>
+<script src="../dist/js/calendar/pace.min.js"></script>
+
+<!-- Custom Calendar JavaScript -->
+<script>
+    $(window).load(function() {
+
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+      var started;
+      var categoryClass;
+
+      var calendar = $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end, allDay) {
+          $('#fc_create').click();
+
+          started = start;
+          ended = end
+
+          $(".antosubmit").on("click", function() {
+            var title = $("#title").val();
+            if (end) {
+              ended = end
+            }
+            categoryClass = $("#event_type").val();
+
+            if (title) {
+              calendar.fullCalendar('renderEvent', {
+                  title: title,
+                  start: started,
+                  end: end,
+                  allDay: allDay
+                },
+                true // make the event "stick"
+              );
+            }
+            $('#title').val('');
+            calendar.fullCalendar('unselect');
+
+            $('.antoclose').click();
+
+            return false;
+          });
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+          //alert(calEvent.title, jsEvent, view);
+
+          $('#fc_edit').click();
+          $('#title2').val(calEvent.title);
+          categoryClass = $("#event_type").val();
+
+          $(".antosubmit2").on("click", function() {
+            calEvent.title = $("#title2").val();
+
+            calendar.fullCalendar('updateEvent', calEvent);
+            $('.antoclose2').click();
+          });
+          calendar.fullCalendar('unselect');
+        },
+        editable: true,
+        events: [/*{
+          title: 'All Day Event',
+          start: new Date(y, m, 1)
+        }, {
+          title: 'Long Event',
+          start: new Date(y, m, d - 5),
+          end: new Date(y, m, d - 2)
+        }, {
+          title: 'Meeting',
+          start: new Date(y, m, d, 10, 30),
+          allDay: false
+        }, {
+          title: 'Lunch',
+          start: new Date(y, m, d + 14, 12, 0),
+          end: new Date(y, m, d, 14, 0),
+          allDay: false
+        }, {
+          title: 'Birthday Party',
+          start: new Date(y, m, d + 1, 19, 0),
+          end: new Date(y, m, d + 1, 22, 30),
+          allDay: false
+        }, {
+          title: 'Click for Google',
+          start: new Date(y, m, 28),
+          end: new Date(y, m, 29),
+          url: 'http://google.com/'
+        }*/]
+      });
+     });
+</script>
 
 </body>
 
