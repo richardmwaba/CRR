@@ -60,7 +60,7 @@ class UserController extends Controller
                 'department'=>$request->department]);
 
             $user1->save();
-            if(Auth::user()->position!='HOD')
+            if(Auth::user()->position!='Hod')
             return Redirect('/home');
             else
                 Return Redirect::action('UserController@staff_view');
@@ -77,19 +77,25 @@ class UserController extends Controller
     public function store_new_user(Request $data){
 
         $this->validate($data, [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
+            'man_number'=> 'required|min:8|max:8',
+            'position'=>'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
-            'man_number'=> 'required|min:8|max:8',
-            'position'=>'required'
+            
         ]);
 
-        User::create(['first_name' => $data->first_name, 'last_name'=> $data->last_name,
-            'email'=>$data->email, 'password' => bcrypt($data->password), 'man_number'=>$data->man_number, 'position'=> $data->position]);
+        User::create(['man_number'=>$data->man_number, 'email'=>$data->email, 'position'=> $data->position, 'password' => bcrypt($data->password)]);
 
+        //Send mail to new user
+        Mail::send('Mails.new_user', ['data' => $data], function ($m) use ($data) {
+
+            $m->to($data->email, 'Me')->subject('Complete registration');
+        });
+        
+        //trigger flash message
         session()->flash('flash_message', 'New user has successfully been added');
-
+        
+        //load redirect page
         return Redirect::action('UserController@staff_view');
 
     }

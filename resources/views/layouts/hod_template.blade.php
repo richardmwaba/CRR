@@ -174,7 +174,15 @@
                             <a href="{{URL::asset('/about')}}"><i class="fa fa-files-o fa-fw"></i> About</a>
                         </li>
 
-                        @else
+                    @else
+
+                    @if( Auth()->user()->position=='Academic Staff' OR Auth()->user()->position=='Support Staff' )
+                      <li>
+                        <a href="{{URL::asset('contract_info')}}"><i class="fa fa-home fa-fw"></i>Home</a>
+                    </li>
+                     @endif
+
+                     @if(Auth()->user()->position=='HoD')
                     <li>
                         <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i> Home</a>
                     </li>
@@ -193,6 +201,8 @@
                     <li>
                         <a href="{{URL::asset('contract_info')}}"><i class="fa fa-edit fa-fw"></i> Contract Information</a>
                     </li>
+                    @endif
+
                     <li>
                         <a href="{{URL::asset('calendar')}}"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
                     </li>
@@ -230,9 +240,6 @@
 </div>
 <!-- /#wrapper -->
 
-<<<<<<< Updated upstream
-
-=======
 <!-- Footer -->
 <footer class="footer footer-fixed-bottom">
       <div class="container" style="text-align:center">
@@ -240,7 +247,6 @@
       </div>
 </footer>
 <!-- ./footer -->
->>>>>>> Stashed changes
  @section('scripts')
 
 

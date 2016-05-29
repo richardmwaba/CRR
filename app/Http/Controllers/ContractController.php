@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Redirect;
 
 class ContractController extends Controller
 {
+
+    //show contract information
+    public function contract_info()
+    {
+        $contract = Contract::firstOrNew(array('man_number' => Auth()->user()->man_number));
+        $today = \Carbon\Carbon::today();
+        $expires = \Carbon\Carbon::parse($contract->expires_on);
+        $diff = $today->diffInMonths($expires, false);
+        return view('Contracts.contract_info')->with(array('diff'=> $diff, 'contract' => $contract));
+    }
     //
 
     public function store(Request $request){

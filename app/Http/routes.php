@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/store', 'UserController@store');
         Route::get('help', 'HomeController@help');
          Route::get('calendar', 'HomeController@calendar');
-         Route::get('contract_info', 'HomeController@contract_info');
+         Route::get('contract_info', 'ContractController@contract_info');
 
     //these pages can only be accessed by the HOD
     Route::group(['middleware' => 'userAccess'], function() {

@@ -1,4 +1,5 @@
 @extends('layouts.hod_template')
+@section('title', 'Contract_Info')
 @section('content')
 
         <div id="page-wrapper">
@@ -17,14 +18,14 @@
                                 <div class="form-group">
                                   <label class="col-sm-4 col-md-2 col-xs-6" for="status">Contract Status:</label>
                                   <div class="col-sm-8 col-md-10 col-xs-6">
-                                    <label class="text-danger" for="status">Expired</label>
+                                    <label class="text-danger" for="status">@if($diff>=6)<p style="color:green" >Valid</p>@elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</label>
                                   </div>
                                 </div>
 
                                 <div class="form-group">
                                   <label class="col-sm-4 col-md-2 col-xs-6" for="status">Contract Exp Date:</label>
                                   <div class="col-sm-8 col-md-10 col-xs-6">
-                                    <label class="text-primary" for="status">29.03.2016</label>
+                                    <label class="text-primary" for="status">{{$contract->expires_on}}</label>
                                   </div>
                                 </div>
 
