@@ -11,7 +11,9 @@ use App\User;
 use Auth;
 use Hash;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 class UserController extends Controller
 {
@@ -86,7 +88,30 @@ class UserController extends Controller
         User::create(['first_name' => $data->first_name, 'last_name'=> $data->last_name,
             'email'=>$data->email, 'password' => bcrypt($data->password), 'man_number'=>$data->man_number, 'position'=> $data->position]);
 
+        session()->flash('flash_message', 'New user has successfully been added');
+
         return Redirect::action('UserController@staff_view');
 
     }
+
+    public function sendEmailReminder(){
+
+        $user = User::findOrFail(1);
+
+        Mail::send('Mails.reminder', ['user' => $user], function ($m) use ($user) {
+
+            $m->to($user->email, $user->name)->subject('Your contract will expire soon');
+        });
+
+        //session()->flash('flash_message', 'Your mail has been sent');
+
+        return back()->with([
+
+            'flash_message' => 'email has been sent',
+            'flash_message_important' => false
+
+        ]);
+
+    }
+
 }

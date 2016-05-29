@@ -29,12 +29,27 @@
     <!--[if lt IE 9]>
     <script src="{{URL::asset('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')}}"></script>
     <script src="{{URL::asset('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')}}"></script>
+    <script>$('div.alert').not('.alert_important').(300).slideUp(300)</script>
     <![endif]-->
 
 </head>
 <body>
 
 <div id="wrapper">
+
+    @if(session()->has('flash_message'))
+
+            <div class="alert alert-success{{session()->has('flash_message_important')? session('flash_message') : ''}}">
+                {{session()->get('flash_message')}}
+
+                @if(session()->has('flash_message_important'))
+
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    @endif
+
+            </div>
+
+            @endif
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -208,6 +223,8 @@
 
 </div>
 <!-- /#wrapper -->
+
+
  @section('scripts')
 
 

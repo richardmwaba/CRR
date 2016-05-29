@@ -15,9 +15,11 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
+    Route::get('/mail', 'UserController@sendEmailReminder');
     Route::get('/about', function(){
         return view ('about');
     });
+    
     Route::get('/', function () {
         return view('welcome');
     });
