@@ -41,7 +41,7 @@
                                 <td>{{$staff->first_name}} {{$staff->last_name}}</td>
                                 <td>{{$staff->man_number}}</td>
                                 <td>{{$staff->position}}</td>
-                                <td>{{$expires->subMonths(6)}}</td>
+                                <td>{{$expires->subSeconds(2419200)}}</td>
                                 <td class="text-success">@if($diff>=6)Valid @elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</td>
                                 <td class="text-success">not available</td>
                                 <td>
@@ -104,9 +104,9 @@
     <!-- Custom Table JavaScript -->
     <script>
         !function ($) {
-            $(document).on("click","ul.nav li.parent > a > span.icon", function(){        
-                $(this).find('em:first').toggleClass("glyphicon-minus");      
-            }); 
+            $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
             $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
         }(window.jQuery);
 

@@ -26,7 +26,6 @@ class UserController extends Controller
 
             $currentUser = Auth::user();
             $user = User::where('department', '=', $currentUser->department)->get();
-            #return view('Staff.staff')->with(array('user' => $user));
             return view('Staff.staff_view')->with(array('user' => $user));
 
     }

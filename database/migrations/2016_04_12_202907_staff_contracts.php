@@ -15,8 +15,8 @@ class StaffContracts extends Migration
         Schema::create('contracts', function (Blueprint $table) {
 
             $table->string('last_modified_by');
-            $table->date('renewed_on');
-            $table->date('expires_on');
+            $table->dateTime('renewed_on');
+            $table->dateTime('expires_on');
             $table->text('applicationStage')->nullable();
             $table->increments('id');
             $table->timestamps();

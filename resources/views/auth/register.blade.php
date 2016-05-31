@@ -61,9 +61,9 @@
                                             <label>Position</label>
                                             <select class="form-control" name="position">
                                                <option value="">-- select one --</option>
-                                                    <option value="CO"> Contracts Officer</option>
-                                                    <option value="DoS"> Dean of School</option>
-                                                    <option value="HoD"> Head of Department</option>
+                                                    <option value="Contracts Officer"> Contracts Officer</option>
+                                                    <option value="Dean of School"> Dean of School</option>
+                                                    <option value="Head of Department"> Head of Department</option>
                                             </select>
 
                                             @if ($errors->has('position'))

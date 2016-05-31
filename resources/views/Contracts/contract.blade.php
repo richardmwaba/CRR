@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Renewed on</label>
                                     <div class="col-md-6">
-                                <input type="date" name="renewed_on"  value="{{old('renewed_on' , $contract->renewed_on)}}">
+                                <input type="datetime-local" name="renewed_on"  value="{{old('renewed_on' , $contract->renewed_on)}}">
 
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
 
                                     <div class="col-md-6">
 
-                                        <input type="date" name="expires_on" value="{{old('expires_on' , $contract->expires_on)}}">
+                                        <input type="datetime" name="expires_on" value="{{old('expires_on' , $contract->expires_on)}}">
 
                                     </div>
                                 </div>

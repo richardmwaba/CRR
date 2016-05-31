@@ -1,4 +1,5 @@
 @extends('layouts.hod_template')
+@section('title', 'Home')
 @section('content')
 
         <div id="page-wrapper">
@@ -17,6 +18,7 @@
                         <div class="panel-body">
                             <table class="table-striped responsive-utilities" data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                             <thead>
+
                             <tr>
                                 <th data-field="state" data-checkbox="true" >Item ID</th>
                                 <th data-field="id" data-sortable="true">Man #</th>
@@ -27,78 +29,24 @@
                             </tr>
                             </thead>
 
-                            <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>George Owens</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                              <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Gregory Kanyanta</td>
-                                <td>Academic staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                              <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Peter Zulu</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                              <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Gregory Banda</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                              <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>isabel Ezra</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                              <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Philip Tembo</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                              <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Khuzwayo Lastone</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                             <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Costine Chembo</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
-                             <tr>
-                                <td data-field="state" data-checkbox="true" >Item ID</td>
-                                <td>1111201</td> 
-                                <td>Owen Dizomba</td>
-                                <td>Academic Staff</td>
-                                <td>12.04.17</td>
-                                
-                             </tr>
+                                <tr>
+
+                                    @foreach($user as $staff)
+                                        <?php $contract = App\Contract::firstOrNew(array('man_number' =>$staff->man_number));
+                                        $today = \Carbon\Carbon::today();
+                                        $expires = \Carbon\Carbon::parse($contract->expires_on);
+                                        $diff = $today->diffInMonths($expires, false);
+                                        ?>
+
+                                        @if($diff<6 AND $diff>0)
+                                            <td data-field="state" data-checkbox="true" >{{$staff->id}}</td>
+                                            <td>{{$staff->man_number}}</td>
+                                            <td>{{$staff->first_name}} {{$staff->last_name}}</td>
+                                            <td>{{$staff->position}}</td>
+                                            <td>{{$expires->subMonths(6)}}</td>
+                                        @endif
+                                </tr>
+                                    @endforeach
                             </table>
                             
                         </div>
@@ -110,31 +58,16 @@
                         
                         <div class="panel-body">
                             <ol>
-                                <li>Richard Mwaba</li>
-                                <li>JUstine Kazembe</li>
-                                <li>John Bwalya</li>
-                                <li>Joseph Mulenga</li>
-                                <li>Joseph Manyati</li>
-                                <li>Emmanuel Chibutu</li>
-                                <li>Kezya Saboi</li>
-                                <li>Rogers Iradikunda</li>
-                                <li>Joshua Mwansa</li>
-                                <li>Hantobolo Hantobolo</li>
-                                <li>Henry Peters</li>
-                                <li>Quentin George</li>
-                                <li>Hubert martins</li>
-                                <li>Jerry Mwamba</li>
-                                <li>Mwango Mwaba</li>
-                                <li>Richard Mwanza</li>
-                                <li>Richard Kaonga</li>
-                                <li>Nathan Kaonga</li>
-                                <li>Tetefwe Ntalasha</li>
-                                <li>Mulenga Musonda</li>
-                                <li>Evaristo Katebe</li>
-                                <li>Mwansa Chibeti</li>
-                                <li>Kasonde NKole</li>
-                                <li>Kelvin Hansingo</li>
-                                <li>Richwell Banda</li>
+                                @foreach($user as $staff)
+                                    <?php $contract = App\Contract::firstOrNew(array('man_number' =>$staff->man_number));
+                                    $today = \Carbon\Carbon::today();
+                                    $expires = \Carbon\Carbon::parse($contract->expires_on);
+                                    $diff = $today->diffInMonths($expires, false);
+                                    ?>
+
+                                        @if($diff<=0)<li>{{$staff->first_name}} {{$staff->last_name}}</li> @endif
+
+                                    @endforeach
                             </ol>
                         </div>
                         <!-- /.panel-body -->

@@ -18,7 +18,7 @@ class UserAccessiblePages
     {
         $user = Auth::user();
         $position = $user->position;
-        if ($position!='HoD') {
+        if ($position!='Head of Department') {
             return redirect('home');
         }
         return $next($request);
