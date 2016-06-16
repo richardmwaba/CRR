@@ -43,6 +43,8 @@ class UserController extends Controller
         return view('auth.add_new');
     }
 
+    //stores profile changes to database
+    
     public function store(EditRequest $request){
 
 
@@ -76,14 +78,17 @@ class UserController extends Controller
     public function store_new_user(Request $data){
 
         $this->validate($data, [
-            'man_number'=> 'required|min:8|max:8',
+            'man_number'=> 'required|unique:users|integer',
             'position'=>'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             
         ]);
 
-        User::create(['man_number'=>$data->man_number, 'email'=>$data->email, 'position'=> $data->position, 'password' => bcrypt($data->password)]);
+        User::create(['man_number'=>$data->man_number, 'email'=>$data->email,
+            'position'=> $data->position, 'password' => bcrypt($data->password),
+            'expires_on' => Carbon::now()
+        ]);
 
         //Send mail to new user
         Mail::send('Mails.new_user', ['data' => $data], function ($m) use ($data) {

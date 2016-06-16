@@ -19,7 +19,7 @@ class Staff extends Model
     protected $fillable = [
 
         'first_name', 'password','last_name', 'man_number', 'email', 'password',
-        'position','other_names', 'nationality', 'department','man_number'
+        'position','other_names', 'nationality', 'department','man_number', 'last_modified_by', 'expires_on',
     ];
 
     /**

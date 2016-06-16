@@ -15,25 +15,17 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Contract</div>
+                        <div class="panel-heading">Update Contract</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/updateContract')}}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/update_contract')}}">
                                 {!! csrf_field() !!}
 
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Renewed on</label>
-                                    <div class="col-md-6">
-                                <input type="datetime-local" name="renewed_on"  value="{{old('renewed_on' , $contract->renewed_on)}}">
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Expires on</label>
+                                    <label class="col-md-4 control-label">Length </label>
 
                                     <div class="col-md-6">
 
-                                        <input type="datetime" name="expires_on" value="{{old('expires_on' , $contract->expires_on)}}">
+                                        <input type="number" name="contract_length" value="{{old('contract_length' , $contract->contract_length)}}"> Days
 
                                     </div>
                                 </div>

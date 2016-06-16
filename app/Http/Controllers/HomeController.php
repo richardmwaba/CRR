@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-use App\Contract;
 use App\User;
 
 class HomeController extends Controller
@@ -31,25 +30,37 @@ class HomeController extends Controller
     {
        
         //check position of logged in user
-        if(Auth()->user()->position=='Academic Staff' OR Auth()->user()->position=='Support Staff' )
-            {
-                //fetch logged in user's contract information from database and pass it to contract information page
+        switch (Auth()->user()->position){
 
-                $contract = Contract::firstOrNew(array('man_number' => Auth()->user()->man_number));
-                $today = \Carbon\Carbon::today();
-                $expires = \Carbon\Carbon::parse($contract->expires_on);
-                $diff = $today->diffInMonths($expires, false);
+            case 'Head of Department':
+
+                //fetch records from database and pass to the home page
+                $currentUser = Auth()->user();
+                $user = User::where('department', '=', $currentUser->department)->get();
+                return view('home')->with(array('user' => $user));
+                break;
+
+            case 'Contracts Officer':
+
+                //fetch records from database and pass to the home page
+                $user = User::all();
+                return view('HumanResource.home')->with(array('user' => $user));
+                break;
+
+            case 'Dean of School':
+                break;
+
+            default :
+
+                //fetch records from database and pass to the home page
+                $contract = User::firstOrNew(array('man_number' => Auth()->user()->man_number));
+                $today = Carbon::today();
+                $diff = $today->diffInMonths(Carbon::parse($contract->expires_on), false);
                 return view('Contracts.contract_info')->with(array('diff'=> $diff, 'contract' => $contract));
+                break;
 
-            }else{
+        }
 
-            //fetch records from database and pass to the home page
-
-            $currentUser = Auth()->user();
-            $user = User::where('department', '=', $currentUser->department)->get();
-            return view('home')->with(array('user' => $user));
-
-            }
     }
 
     public function help()

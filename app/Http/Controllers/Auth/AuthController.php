@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Carbon\Carbon;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -54,7 +56,7 @@ class AuthController extends Controller
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
-            'man_number'=> 'required|min:8|max:8',
+            'man_number'=> 'required|unique:users|integer',
            'position'=>'required'
         ]);
     }
@@ -74,6 +76,18 @@ class AuthController extends Controller
             'position' => $data['position'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'expires_on' => Carbon::now(),
+            'man_number' =>$data['man_number'],
+
+            /*
+            //Send mail to new user
+            Mail::send('Mails.new_user', ['data' => $data], function ($m) use ($data) {
+
+                $m->to($data['email'], 'Me')->subject('Complete registration');
+            })
+            */
+
         ]);
+
     }
 }

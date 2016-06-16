@@ -30,23 +30,21 @@
                             </thead>
 
                             @foreach($user as $staff)
-                                <?php $contract = App\Contract::firstOrNew(array('man_number' =>$staff->man_number));
-                                $today = \Carbon\Carbon::today();
-                                $expires = \Carbon\Carbon::parse($contract->expires_on);
-                                    $diff = $today->diffInMonths($expires, false);
-                                ?>
+
+                                <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
+
                             <tr>
 
                                 <td data-field="state" data-checkbox="true" >{{$staff->id}}</td>
                                 <td>{{$staff->first_name}} {{$staff->last_name}}</td>
                                 <td>{{$staff->man_number}}</td>
                                 <td>{{$staff->position}}</td>
-                                <td>{{$expires->subSeconds(2419200)}}</td>
+                                <td>{{\Carbon\Carbon::parse($staff->expires_on)->toFormattedDateString()}}</td>
                                 <td class="text-success">@if($diff>=6)Valid @elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</td>
                                 <td class="text-success">not available</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{url('/contract/'.$staff->man_number)}}" class="btn btn-link">Edit</a>
+                                        <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-link">Edit</a>
                                         <a href="{{url('/delete_user')}}" class="btn btn-link">Delete</a>
 
                                     </div>

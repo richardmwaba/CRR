@@ -33,12 +33,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('help', 'HomeController@help');
          Route::get('calendar', 'HomeController@calendar');
          Route::get('contract_info', 'ContractController@contract_info');
+        Route::get('/contract/{id}', 'ContractController@showContract');
+        Route::get('/full_profile/{id}', 'ContractController@full_profile');
+        Route::post('/update_contract', 'ContractController@store');
+        
 
     //these pages can only be accessed by the HOD
     Route::group(['middleware' => 'userAccess'], function() {
-
-        Route::get('/contract/{id}', 'ContractController@showContract');
-        Route::post('/updateContract', 'ContractController@store');
+        
         Route::delete('/delete', 'UserController@destroy');
         Route::get('/staff_view', 'UserController@staff_view');
         Route::get('/add_new', 'UserController@add_new_form');

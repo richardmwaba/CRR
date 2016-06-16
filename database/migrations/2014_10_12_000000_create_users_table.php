@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
                 $table->string('nationality')->nulluable();
                 $table->string('department')->nulluable();
                 $table->string('password');
+                //contracts information
+                $table->string('last_modified_by')->nullable();
+                $table->date('expires_on')->nullable();
+                $table->text('applicationStage')->nullable();
                 $table->rememberToken();
                 $table->timestamps();
 

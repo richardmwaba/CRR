@@ -175,44 +175,54 @@
                         </li>
 
                     @else
+                            @if(Auth()->user()->position=='Dean of School')
 
-                    @if( Auth()->user()->position=='Academic Staff' OR Auth()->user()->position=='Support Staff' )
-                      <li>
-                        <a href="{{URL::asset('contract_info')}}"><i class="fa fa-home fa-fw"></i>Home</a>
-                    </li>
-                     @endif
+                            @elseif(Auth()->user()->position=='Head of Department')
 
-                     @if(Auth()->user()->position=='Head of Department')
-                    <li>
-                        <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i>Home</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Staff<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
+                                <li>
+                                <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i>Home</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-table fa-fw"></i> Staff<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="{{URL::asset('staff_view')}}">Staff View</a>
+                                            <a href="{{URL::asset('add_new')}}"> Add New Staff</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+
+                            @elseif(Auth()->user()->position=='Contracts Officer')
+
+                                <li>
+                                    <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i>Home</a>
+                                </li>
+
+                            @else
+
+                                <!--future menus for other users can be included here-->
+
+                            @endif
+
                             <li>
-                                <a href="{{URL::asset('add_new')}}"> Add New Staff</a>
-                                <a href="{{URL::asset('staff_view')}}">Staff View</a>
+                                <a href="{{URL::asset('contract_info')}}"><i class="fa fa-info fa-fw"></i>My Contract Information</a>
                             </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="{{URL::asset('contract_info')}}"><i class="fa fa-edit fa-fw"></i> Contract Information</a>
-                    </li>
+
+                            <li>
+                                <a href="{{URL::asset('calendar')}}"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
+                            </li>
+                            <li class="divider" role="presentation"> </li>
+                            <li class="divider" role="presentation"> </li>
+                            <li>
+                                <a href="{{URL::asset('help')}}"><i class="fa fa-question fa-fw"></i> Help</a>
+                            </li>
+                            <li>
+                                <a href="{{URL::asset('/about')}}"><i class="fa fa-files-o fa-fw"></i> About</a>
+                            </li>
+
                     @endif
 
-                    <li>
-                        <a href="{{URL::asset('calendar')}}"><i class="fa fa-calendar fa-fw"></i> Calendar</a>
-                    </li>
-                    <li class="divider" role="presentation"> </li>
-                    <li class="divider" role="presentation"> </li>
-                    <li>
-                        <a href="{{URL::asset('help')}}"><i class="fa fa-question fa-fw"></i> Help</a>
-                    </li>
-                    <li>
-                        <a href="{{URL::asset('/about')}}"><i class="fa fa-files-o fa-fw"></i> About</a>
-                    </li>
-                        @endif
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
