@@ -22,30 +22,57 @@ class UserController extends Controller
     protected $redirectTo = "/";
 
 
-    public function staff_view(){
+    public function my_profile(){
 
-            $currentUser = Auth::user();
+        $user = Auth::User();
+        return view('profile.my_profile')->with('user', $user);
+
+    }
+    
+    public function edit_profile()
+    {
+        $user = Auth::user();
+        return view('profile.edit_profile')->with('user', $user);
+
+
+    }
+
+    public function edit_user($man_number)
+    {
+        $user = User::firstOrNew(array('man_number' => $man_number));
+        return view('profile.edit_user')->with('user', $user);
+
+
+    }
+
+    public function staff_view()
+
+    {
+
+        $currentUser = Auth::user();
+        if ($currentUser->position != "Contracts Officer") {
+
             $user = User::where('department', '=', $currentUser->department)->get();
             return view('Staff.staff_view')->with(array('user' => $user));
 
+        } else {
+            $user = User::all();
+            return view('Staff.staff_view')->with(array('user' => $user));
+
+        }
+
     }
 
-
-    public function edit()
+    public function add_new_form()
     {
         $user = Auth::user();
-        return view('profile.edit')->with('user', $user);
-
-
-    }
-
-    public function add_new_form(){
-        return view('auth.add_new');
+        return view('auth.add_new')->with('user', $user);
     }
 
     //stores profile changes to database
-    
-    public function store(EditRequest $request){
+
+    public function store(EditRequest $request)
+    {
 
 
         $user = Auth::user();
@@ -53,20 +80,20 @@ class UserController extends Controller
 
         //check if user has correct old password
 
-        if(Hash::check($request->password_old, $user->password)){
+        if (Hash::check($request->password_old, $user->password)) {
 
-            $user1->fill(['email'=>$request->email, 'password'=>bcrypt($request->password),
-                'first_name'=>$request->first_name, 'last_name'=>$request->last_name,
-                'other_names'=>$request->other_names, 'nationality'=>$request->nationality,
-                'department'=>$request->department]);
+            $user1->fill(['email' => $request->email, 'password' => bcrypt($request->password),
+                'first_name' => $request->first_name, 'last_name' => $request->last_name,
+                'other_names' => $request->other_names, 'nationality' => $request->nationality
+            ]);
 
             $user1->save();
-            if(Auth::user()->position!='Hod')
-            return Redirect('/home');
+            if ($user()->position != 'Head of Department')
+                return Redirect('/home');
             else
                 Return Redirect::action('UserController@staff_view');
 
-        }else {
+        } else {
 
             return view('profile.edit')->with('user', $user);
             #$user1->department = $request->department;
@@ -75,18 +102,19 @@ class UserController extends Controller
     }
 
     //creates a new user record
-    public function store_new_user(Request $data){
+    public function store_new_user(Request $data)
+    {
 
         $this->validate($data, [
-            'man_number'=> 'required|unique:users|integer',
-            'position'=>'required',
+            'man_number' => 'required|unique:users|integer',
+            'position' => 'required',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-            
+            'department' => 'required',
+
         ]);
 
-        User::create(['man_number'=>$data->man_number, 'email'=>$data->email,
-            'position'=> $data->position, 'password' => bcrypt($data->password),
+        User::create(['man_number' => $data->man_number, 'department' => $data->department, 'email' => $data->email,
+            'position' => $data->position, 'password' => bcrypt($data->password),
             'expires_on' => Carbon::now()
         ]);
 
@@ -95,32 +123,90 @@ class UserController extends Controller
 
             $m->to($data->email, 'Me')->subject('Complete registration');
         });
-        
+
         //trigger flash message
         session()->flash('flash_message', 'New user has successfully been added');
-        
+
         //load redirect page
         return Redirect::action('UserController@staff_view');
 
     }
 
-    public function sendEmailReminder(){
+    public function store_edited_user(Request $request, $man_number)
+    {
 
-        $user = User::findOrFail(1);
 
-        Mail::send('Mails.reminder', ['user' => $user], function ($m) use ($user) {
+        if ($request->has('man_number') AND $request->has('position') AND $request->has('email')) {
+            $this->validate($request, [
+                'man_number' => 'required|unique:users|integer',
+                'position' => 'required',
+                'email' => 'required|email|max:255|unique:users',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
+            $user->man_number = $request->man_number;
+            $user->email = $request->email;
+            $user->position = $request->position;
+            $user->save();
 
-            $m->to($user->email, $user->name)->subject('Your contract will expire soon');
-        });
-
-        //session()->flash('flash_message', 'Your mail has been sent');
-
-        return back()->with([
-
-            'flash_message' => 'email has been sent',
-            'flash_message_important' => false
-
+        } elseif ($request->has('position') AND $request->has('email')) {
+            $this->validate($request, [
+                'position' => 'required',
+                'email' => 'required|email|max:255|unique:users',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
+            $user->email = $request->email;
+            $user->position = $request->position;
+            $user->save();
+        }elseif
+        ($request->has('position') AND $request->has('man_number')){
+        $this->validate($request, [
+            'position' => 'required',
+            'man_number' => 'required|unique:users|integer',
         ]);
+        $user = User::firstOrNew(array('man_number' => $man_number));
+        $user->man_number = $request->man_number;
+        $user->position = $request->position;
+        $user->save();
+
+    }elseif ($request->has('email') AND $request->has('man_number')){
+        $this->validate($request, [
+            'man_number' => 'required|unique:users|integer',
+            'email' => 'required|email|max:255|unique:users',
+        ]);
+        $user = User::firstOrNew(array('man_number' => $man_number));
+        $user->man_number = $request->man_number;
+        $user->email = $request->email;
+        $user->save();
+
+    }elseif ($request->has('email')){
+        $this->validate($request, [
+            'email' => 'required|email|max:255|unique:users',
+        ]);
+        $user = User::firstOrNew(array('man_number' => $man_number));
+
+        $user->email = $request->email;
+
+        $user->save();
+
+    }elseif ($request->has('position')){
+        $this->validate($request, [
+            'position' => 'required',
+        ]);
+        $user = User::firstOrNew(array('man_number' => $man_number));
+        $user->position = $request->position;
+        $user->save();
+
+    }elseif($request->has('man_number')){
+        $this->validate($request, [
+            'man_number' => 'required|unique:users|integer',
+        ]);
+        $user = User::firstOrNew(array('man_number' => $man_number));
+        $user->man_number = $request->man_number;
+        $user->save();
+    }
+
+        return Redirect::action('UserController@staff_view');
+
 
     }
 

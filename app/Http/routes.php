@@ -15,38 +15,43 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
-    Route::get('/about', function(){
-        return view ('about');
+    Route::get('/about', function () {
+        return view('about');
     });
-    
+
     Route::get('/', function () {
-        return view('welcome');
+        return view('auth.login');
     });
 
     //these pages are accessible only to authenticated users
 
     Route::group(['middleware' => 'auth'], function () {
 
-         Route::get('/home', 'HomeController@index');
-         Route::get('/edit', 'UserController@edit');
+        Route::get('/home', 'HomeController@index');
+        Route::get('/edit', 'UserController@edit');
         Route::post('/store', 'UserController@store');
         Route::get('help', 'HomeController@help');
-         Route::get('calendar', 'HomeController@calendar');
-         Route::get('contract_info', 'ContractController@contract_info');
+        Route::get('calendar', 'HomeController@calendar');
+        Route::get('contract_info', 'ContractController@contract_info');
         Route::get('/contract/{id}', 'ContractController@showContract');
         Route::get('/full_profile/{id}', 'ContractController@full_profile');
         Route::post('/update_contract', 'ContractController@store');
-        
-
-    //these pages can only be accessed by the HOD
-    Route::group(['middleware' => 'userAccess'], function() {
-        
-        Route::delete('/delete', 'UserController@destroy');
-        Route::get('/staff_view', 'UserController@staff_view');
         Route::get('/add_new', 'UserController@add_new_form');
+        Route::delete('/delete/{id}', 'UserController@destroy');
+        Route::get('/staff_view', 'UserController@staff_view');
         Route::post('/store_new_user', 'UserController@store_new_user');
-    });
+        Route::post('/store_edited_user/{id}', 'UserController@store_edited_user');
+        Route::get('/edit_user/{id}', 'UserController@edit_user');
+        Route::get('/edit_profile', 'UserController@edit_profile');
+        Route::get('my_profile', 'UserController@my_profile');
 
-});
+
+        //these pages can only be accessed by the HOD
+        Route::group(['middleware' => 'userAccess'], function () {
+
+
+        });
+
+    });
 
 });

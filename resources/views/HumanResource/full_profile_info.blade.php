@@ -52,22 +52,23 @@
                             <label class="col-sm-4 col-md-2 col-xs-6" for="check">Received for renewal?:</label>
                             <div class="col-sm-8 col-md-10 col-xs-6">
                                 <label id="demo">
-                                    <input type="checkbox" value="" onchange="myFunction()">
+                                    <input type="checkbox" value="" onchange="contractUpdate()">
                                     <!--Include modal here to show after the check box is checked-->
-                                </label>
+                                    <script>
+                                        function contractUpdate() {
+                                            //var x;
+                                            if (confirm("Are you sure you want to continue?") == true) {
+                                                //Some code
+                                                <?php event(new \App\Events\ContractReceived($user)) ?>
 
-                                <script>
-                                    function myFunction() {
-                                        //var x;
-                                        if (confirm("Are you sure you want to save this?") == true) {
-                                            //Some code
-                                        } else {
-                                            //Some other code
+                                            } else {
+                                                //Some other code
+                                            }
+                                            //confirm("Are you sure?");
                                         }
-                                        //confirm("Are you sure?");
-                                    }
 
-                                </script>
+                                    </script>
+                                </label>
                             </div>
                         </div>
 

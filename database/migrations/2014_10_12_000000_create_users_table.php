@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
                 $table->string('nationality')->nulluable();
                 $table->string('department')->nulluable();
                 $table->string('password');
+                $table->string('contract_tracking');
+                $table->string('new_user_auth_token');
                 //contracts information
                 $table->string('last_modified_by')->nullable();
                 $table->date('expires_on')->nullable();

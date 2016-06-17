@@ -15,7 +15,7 @@
                     <div class="panel-heading"> Staff Details</div>
 
                     <div class="panel-body">
-                        <table class="table-striped responsive-utilities" data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                        <table class="table-striped responsive-utilities" data-toggle="table" data-show-refresh="false" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                             <thead>
                             <tr>
                                 <th data-field="state" data-checkbox="true" >Count</th>

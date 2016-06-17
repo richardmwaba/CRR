@@ -22,8 +22,9 @@ class ContractController extends Controller
         $diff = $today->diffInMonths($expires, false);
         return view('Contracts.contract_info')->with(array('diff'=> $diff, 'contract' => $contract));
     }
-    //
 
+
+    //update and store new contract validity
     public function store(Request $request){
 
         $contract = User::firstOrNew(array('man_number' =>$request->man_number));
@@ -32,9 +33,16 @@ class ContractController extends Controller
         $today = Carbon::today();
         $today->addDays($request->contract_length);
 
+        //set modified by
         $modified_by = Auth::user();
         $contract->fill(['man_number'=>$request->man_number, 'expires_on' => $today, 'last_modified_by' => $modified_by->first_name]);
         $contract->save();
+
+        //Send mail to new user
+        Mail::send('Mails.contract_updated', ['contract' => $contract], function ($m) use ($contract) {
+
+            $m->to($contract->email, 'Me')->subject('Contract update');
+        });
 
         return Redirect::action('HomeController@index');
 
