@@ -39,9 +39,9 @@
                                 <td>{{$staff->first_name}} {{$staff->last_name}}</td>
                                 <td>{{$staff->man_number}}</td>
                                 <td>{{$staff->position}}</td>
-                                <td>{{\Carbon\Carbon::parse($staff->expires_on)->toFormattedDateString()}}</td>
-                                <td class="text-success">@if($diff>=6)Valid @elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</td>
-                                <td class="text-success">not available</td>
+                                <td>{{\Carbon\Carbon::parse($staff->expires_on)->subMonths(6)->toFormattedDateString()}}</td>
+                                <td class="text-success">@if($diff>6)Valid @elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</td>
+                                <td class="text-success">{{$staff->contract_tracking}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-link">Edit</a>

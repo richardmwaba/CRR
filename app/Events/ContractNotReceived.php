@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use App\User;
 
-class hasContract extends Event
+class ContractNotReceived extends Event
 {
     use SerializesModels;
     

@@ -48,6 +48,8 @@ class HomeController extends Controller
                 break;
 
             case 'Dean of School':
+                $user = User::all();
+                return view('HumanResource.home')->with(array('user' => $user));
                 break;
 
             default :

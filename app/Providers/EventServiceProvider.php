@@ -17,9 +17,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\ContractReceivedConfirmation',
         ],
 
-        'App\Events\hasContract' => [
-            'App\Listeners\hasContractRequestSender',
+        'App\Events\ContractNotReceived' => [
+            'App\Listeners\ContractNotReceivedReminder',
         ],
+        
     ];
 
     /**

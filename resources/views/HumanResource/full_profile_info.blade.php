@@ -52,14 +52,52 @@
                             <label class="col-sm-4 col-md-2 col-xs-6" for="check">Received for renewal?:</label>
                             <div class="col-sm-8 col-md-10 col-xs-6">
                                 <label id="demo">
-                                    <input type="checkbox" value="" onchange="contractUpdate()">
-                                    <!--Include modal here to show after the check box is checked-->
+                                    <input type="checkbox" value="" onchange="contractUpdate(this)"
+                                    <?php
+                                            $position = Auth()->user()->position;
+                                            $tracking = $user->contract_tracking;
+                                            switch($position){
+
+                                                case "Contracts Officer":
+                                                    if($tracking == "Dean's Office" OR $tracking == "Contracts Office" OR $tracking=="Waiting for Dean's approval")
+                                                        echo 'checked';
+                                                    break;
+                                                case "Head of Department":
+                                                    if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval" OR $tracking == "Waiting for Contract's approval" )
+                                                        echo 'checked';
+                                                    break;
+                                                case "Dean of School":
+                                                    if($tracking=="Dean's Office")
+                                                        echo 'checked';
+                                                    break;
+                                                default :
+                                                    if($tracking != "Not available")
+                                                        echo 'checked';
+                                                    break;
+                                            }
+                                            ?> >
                                     <script>
-                                        function contractUpdate() {
+                                        function contractUpdate(cb) {
                                             //var x;
-                                            if (confirm("Are you sure you want to continue?") == true) {
-                                                //Some code
-                                                <?php event(new \App\Events\ContractReceived($user)) ?>
+                                             var xhttp;
+                                            if (window.XMLHttpRequest) {
+                                                xhttp = new XMLHttpRequest();
+                                            } else {
+                                                // code for IE6, IE5
+                                                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                            }
+
+                                            if(confirm("Are you sure you want to continue?")) {
+
+                                                if(cb.checked) {
+                                                    xhttp.open("GET", "{{url('/contract_received/'.$user->man_number)}}", true);
+                                                    xhttp.send();
+                                                    document.getElementById('contract_tracking').innerHTML = "In progress...";
+                                                }else {
+                                                    xhttp.open("GET", "{{url('/contract_not_received/'.$user->man_number)}}", true);
+                                                    xhttp.send();
+                                                    document.getElementById('contract_tracking').innerHTML = "In progress...";
+                                                }
 
                                             } else {
                                                 //Some other code
@@ -75,7 +113,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 col-md-2 col-xs-6" for="tracking">Contract Tracking:</label>
                             <div class="col-sm-8 col-md-10 col-xs-6">
-                                <label class="text-primary" for="progress">Contracts Office</label>
+                                <label id="contract_tracking" class="text-primary" for="progress">{{$user->contract_tracking}}</label>
                             </div>
 
                                 <a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-link">Update contract</a>

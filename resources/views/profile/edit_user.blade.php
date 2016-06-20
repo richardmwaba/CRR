@@ -68,7 +68,30 @@
                                     received:</label>
                                 <div class="col-sm-2 col-md-2 col-xs-6">
                                     <label id="demo">
-                                        <input type="checkbox" value="" onchange="contractUpdate()">
+                                        <input type="checkbox" value="" onchange="contractUpdate(this)"
+                                        <?php
+                                                $position = Auth()->user()->position;
+                                                $tracking = $user->contract_tracking;
+                                                switch($position){
+
+                                                    case "Contracts Officer":
+                                                        if($tracking == "Dean's Office" OR $tracking == "Contracts Office" OR $tracking=="Waiting for Dean's approval")
+                                                            echo 'checked';
+                                                        break;
+                                                    case "Head of Department":
+                                                        if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval" OR $tracking == "Waiting for Contract's approval" )
+                                                            echo 'checked';
+                                                        break;
+                                                    case "Dean of School":
+                                                        if($tracking=="Dean's Office")
+                                                            echo 'checked';
+                                                        break;
+                                                    default :
+                                                        if($tracking != "Not available")
+                                                            echo 'checked';
+                                                        break;
+                                                }
+                                                ?> >
                                         <!--Include modal here to show after the check box is checked-->
                                     </label>
                                 </div>
@@ -77,10 +100,33 @@
 
                             <div class="form-group">
                                 <label class="col-sm-4 col-md-5 col-xs-6" for="check">Select if application has been
-                                    submitted to DOS:</label>
+                                    submitted:</label>
                                 <div class="col-sm-2 col-md-2 col-xs-6">
                                     <label id="demo">
-                                        <input type="checkbox" value="" onchange="hasContract()">
+                                        <input type="checkbox" id="submitted" value="" onchange="contractUpdate(this)"
+                                        <?php
+                                                $position = Auth()->user()->position;
+                                                $tracking = $user->contract_tracking;
+                                                switch($position){
+
+                                                    case "Contracts Officer":
+                                                        if($tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval")
+                                                            echo 'checked';
+                                                        break;
+                                                    case "Head of Department":
+                                                        if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contract's approval" OR $tracking=="Waiting for Dean's approval")
+                                                            echo 'checked';
+                                                        break;
+                                                    case "Dean of School":
+                                                        //
+                                                        echo 'checked';
+                                                        break;
+                                                    default :
+                                                        if($tracking != "Not available")
+                                                            echo 'checked';
+                                                        break;
+
+                                                } ?> >
                                         <!--Include modal here to show after the check box is checked-->
                                     </label>
                                 </div>
@@ -119,29 +165,38 @@
     <!-- /#page-wrapper -->
 
     <script>
-        function contractUpdate() {
-            //var x;
-            if (confirm("Are you sure you want to continue?") == true) {
-                //Some code
-                <?php event(new \App\Events\ContractReceived($user)) ?>
+        function contractUpdate(cb) {
+            //check browser support for ajax
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
             } else {
-                //Some other code
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            //confirm("Are you sure?");
-        }
-    </script>
 
-    <script>
-        function hasContract() {
-            //var x;
-            if (confirm("Are you sure you want to continue?") == true) {
-                //Some code
-                <?php event(new \App\Events\hasContract($user)) ?>
+            if(confirm("Are you sure you want to continue?")) {
+
+                if(cb.checked) {
+                    if(cb.id == "submitted") {
+                        xhttp.open("GET", "{{url('/contract_submitted/'.$user->man_number)}}", true);
+                        xhttp.send();
+                    }else{
+                        xhttp.open("GET", "{{url('/contract_received/'.$user->man_number)}}", true);
+                        xhttp.send();
+                    }
+                }else {
+                    xhttp.open("GET", "{{url('/contract_not_received/'.$user->man_number)}}", true);
+                    xhttp.send();
+                    document.getElementById('contract_tracking').innerHTML = "In progress...";
+                }
+
             } else {
                 //Some other code
             }
             //confirm("Are you sure?");
         }
+
     </script>
 
 @endsection

@@ -31,24 +31,49 @@ class ContractReceivedConfirmation
     public function handle(ContractReceived $event)
     {
         //
-        $user = User::firstOrNew(array('man_number' => $event->user->man_number));
+        if ($event->user->contract_tracking == "Contracts Officer"){
+            switch (Auth()->user()->position) {
 
-        switch (Auth()->user()->position){
+                case "Contracts Officer":
+                    $event->user->contract_tracking = "Hod's Office";
+                    //add code to notify hod
+                    break;
+                case "Head of Department":
+                    $event->user->contract_tracking = "Not available";
+                    //
+                    break;
+                case "Dean of School":
+                    $event->user->contract_tracking = "Contracts Officer";
+                    //
+                    break;
+                default :
+                    $event->user->contract_tracking = "Not available";
+                    //
+                    break;
 
-            case "Contracts Officer":
-                $user->contract_tracking = "Contracts Office";
-                break;
-            case "Head of Department":
-                $user->contract_tracking = "HOD's Office";
-                break;
-            case "Dean of School":
-                $user->contract_tracking = "Dean's Office";
-                break;
-            default :
-                $user->contract_tracking = "Not available";
-                break;
+            }
+    }else {
 
+            switch (Auth()->user()->position) {
+
+                case "Contracts Officer":
+                    $event->user->contract_tracking = "Contracts Office";
+                    break;
+                case "Head of Department":
+                    $event->user->contract_tracking = "HOD's Office";
+                    break;
+                case "Dean of School":
+                    $event->user->contract_tracking = "Dean's Office";
+                    break;
+                default :
+                    $event->user->contract_tracking = "Not available";
+                    break;
+
+            }
         }
-        $user->save();
+
+        $event->user->save();
+        //add code to notify user
+        
     }
 }

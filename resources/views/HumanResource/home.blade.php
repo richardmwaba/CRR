@@ -37,7 +37,7 @@
 
                                 <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
 
-                                @if($diff<=6 AND $diff>0)
+                                @if($diff<6 AND $diff>0)
                                     <tr>
                                         <td>{{$staff->man_number}}</td>
                                         <td>{{$staff->first_name}} {{$staff->last_name}}</td>

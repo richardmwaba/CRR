@@ -44,6 +44,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/edit_user/{id}', 'UserController@edit_user');
         Route::get('/edit_profile', 'UserController@edit_profile');
         Route::get('my_profile', 'UserController@my_profile');
+        Route::get('contract_received/{id}', 'ContractController@contract_received');
+        Route::get('contract_not_received/{id}', 'ContractController@contract_not_received');
+        Route::get('contract_submitted/{id}','ContractController@contract_submitted');
 
 
         //these pages can only be accessed by the HOD
