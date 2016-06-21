@@ -22,13 +22,14 @@ class UserController extends Controller
     protected $redirectTo = "/";
 
 
-    public function my_profile(){
+    public function my_profile()
+    {
 
         $user = Auth::User();
         return view('profile.my_profile')->with('user', $user);
 
     }
-    
+
     public function edit_profile()
     {
         $user = Auth::user();
@@ -80,7 +81,7 @@ class UserController extends Controller
 
         //check if user has correct old password
 
-        if (Hash::check($request->password_old, $user->password)) {
+        if (Hash::check($request->password, $user->password)) {
 
             $user1->fill(['email' => $request->email, 'password' => bcrypt($request->password),
                 'first_name' => $request->first_name, 'last_name' => $request->last_name,
@@ -88,17 +89,13 @@ class UserController extends Controller
             ]);
 
             $user1->save();
-            if ($user()->position != 'Head of Department')
-                return Redirect('/home');
-            else
-                Return Redirect::action('UserController@staff_view');
+            session()->flash('flash_message', 'Profile updated');
+            Return Redirect::action('HomeController@index');
 
         } else {
-
-            return view('profile.edit')->with('user', $user);
-            #$user1->department = $request->department;
+            session()->flash('flash_message', 'You have entered an incorrect password');
+            Return redirect()->back()->withInput();
         }
-
     }
 
     //creates a new user record
@@ -157,57 +154,64 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->position = $request->position;
             $user->save();
-        }elseif
-        ($request->has('position') AND $request->has('man_number')){
-        $this->validate($request, [
-            'position' => 'required',
-            'man_number' => 'required|unique:users|integer',
-        ]);
-        $user = User::firstOrNew(array('man_number' => $man_number));
-        $user->man_number = $request->man_number;
-        $user->position = $request->position;
-        $user->save();
+        } elseif
+        ($request->has('position') AND $request->has('man_number')
+        ) {
+            $this->validate($request, [
+                'position' => 'required',
+                'man_number' => 'required|unique:users|integer',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
+            $user->man_number = $request->man_number;
+            $user->position = $request->position;
+            $user->save();
 
-    }elseif ($request->has('email') AND $request->has('man_number')){
-        $this->validate($request, [
-            'man_number' => 'required|unique:users|integer',
-            'email' => 'required|email|max:255|unique:users',
-        ]);
-        $user = User::firstOrNew(array('man_number' => $man_number));
-        $user->man_number = $request->man_number;
-        $user->email = $request->email;
-        $user->save();
+        } elseif ($request->has('email') AND $request->has('man_number')) {
+            $this->validate($request, [
+                'man_number' => 'required|unique:users|integer',
+                'email' => 'required|email|max:255|unique:users',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
+            $user->man_number = $request->man_number;
+            $user->email = $request->email;
+            $user->save();
 
-    }elseif ($request->has('email')){
-        $this->validate($request, [
-            'email' => 'required|email|max:255|unique:users',
-        ]);
-        $user = User::firstOrNew(array('man_number' => $man_number));
+        } elseif ($request->has('email')) {
+            $this->validate($request, [
+                'email' => 'required|email|max:255|unique:users',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
 
-        $user->email = $request->email;
+            $user->email = $request->email;
 
-        $user->save();
+            $user->save();
 
-    }elseif ($request->has('position')){
-        $this->validate($request, [
-            'position' => 'required',
-        ]);
-        $user = User::firstOrNew(array('man_number' => $man_number));
-        $user->position = $request->position;
-        $user->save();
+        } elseif ($request->has('position')) {
+            $this->validate($request, [
+                'position' => 'required',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
+            $user->position = $request->position;
+            $user->save();
 
-    }elseif($request->has('man_number')){
-        $this->validate($request, [
-            'man_number' => 'required|unique:users|integer',
-        ]);
-        $user = User::firstOrNew(array('man_number' => $man_number));
-        $user->man_number = $request->man_number;
-        $user->save();
-    }
-
+        } elseif ($request->has('man_number')) {
+            $this->validate($request, [
+                'man_number' => 'required|unique:users|integer',
+            ]);
+            $user = User::firstOrNew(array('man_number' => $man_number));
+            $user->man_number = $request->man_number;
+            $user->save();
+        }
+        session()->flash('flash_message', 'User credentials updated');
         return Redirect::action('UserController@staff_view');
 
 
     }
 
+    public function delete($man_number)
+    {
+        $user = User::firstOrNew(array('man_number' => $man_number));
+        $user()->delete();
+
+    }
 }

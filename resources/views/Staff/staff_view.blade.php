@@ -45,7 +45,26 @@
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-link">Edit</a>
-                                        <a href="{{url('/delete_user')}}" class="btn btn-link">Delete</a>
+                                        <a onclick="delete_user({{$staff->man_number}})" class="btn btn-link">Delete</a>
+                                        <script>
+                                            function delete_user() {
+                                                var xhttp;
+                                                if (window.XMLHttpRequest) {
+                                                    xhttp = new XMLHttpRequest();
+                                                } else {
+                                                    // code for IE6, IE5
+                                                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                                }
+                                                if(confirm("Are you sure you want to delete {{$staff->man_number}}?")) {
+                                                    xhttp.open("GET", "{{url('delete_user/'.$staff->man_number)}}", true);
+                                                    xhttp.send();
+                                                    alert({{$staff->first_name}} "has been deleted!");
+                                                }else{
+
+                                                }
+
+                                            }
+                                        </script>
 
                                     </div>
                                 </td>
@@ -83,6 +102,7 @@
                                 return {};
                             }
                         </script> <!--/. script-->
+
 
                     </div>
                     <!-- /.panel-body -->

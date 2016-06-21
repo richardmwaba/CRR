@@ -13,36 +13,57 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"> Tetsu (123456)</div>
+                    <div class="panel-heading">{{$user->first_name}} ({{$user->man_number}})</div>
 
                     <div class="panel-body">
                         <div class="col-md-6">
-                            <form role="form">
+                            <form class="form-horizontal" role="form" method="POST"
+                                  action="{{ url('/update_profile/'.$user->man_number) }}">
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                     <label>First Name</label>
-                                    <input class="form-control" name="first_name" placeholder="Kagami">
+                                    <input class="form-control" name="first_name" placeholder="{{$user->first_name}}" value="{{ old('first_name') }}">
+                                    @if ($errors->has('first_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('other_name') ? ' has-error' : '' }}">
                                     <label>Middle Name</label>
-                                    <input class="form-control" name="middle_name" placeholder="Tiger">
+                                    <input class="form-control" name="other_name" placeholder="{{$user->other_name}}" value="{{ old('other_name') }}">
+                                    @if ($errors->has('other_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('other_name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                     <label>Last Name</label>
-                                    <input class="form-control" name="last_name" placeholder="Akashi">
+                                    <input class="form-control" name="last_name" placeholder="{{$user->last_name}}" value="{{ old('last_name') }}">
+                                    @if ($errors->has('last_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                     <label>E-mail Address</label>
-                                    <input class="form-control" placeholder="ttobias@unza.zm">
+                                    <input class="form-control" placeholder="{{$user->email}}" value="{{ old('first_name') }}">
+                                    @if ($errors->has('last_name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                     <label>Nationality</label>
                                     <select name="nationality" class="form-control">
-                                        <option value="">-- select one --</option>
+                                        <option value="{{ old('nationality') }}">{{$user->nationality}}</option>
                                         <option value="afghan">Afghan</option>
                                         <option value="albanian">Albanian</option>
                                         <option value="algerian">Algerian</option>
@@ -233,8 +254,13 @@
                                         <option value="vietnamese">Vietnamese</option>
                                         <option value="welsh">Welsh</option>
                                         <option value="yemenite">Yemenite</option>
-                                        <option value="zambian">Zambian</option>
+                                        <option value="zambian" selected>Zambian</option>
                                         <option value="zimbabwean">Zimbabwean</option>
+                                        @if ($errors->has('nationality'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('nationality') }}</strong>
+                                    </span>
+                                        @endif
                                     </select>
                                 </div>
 
@@ -248,22 +274,32 @@
                                     <input class="form-control" placeholder="+260 0987654321">
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <a href="#" class="btn btn-link" role="button" id="button">Change password?</a>
                                 </div>
                                 <div id="demo" class="collapse">
                                     <div class="form-group">
                                         <label>Enter Old Password</label>
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" type="password">
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Enter New Password</label>
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password" type="password">
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                                         <label>Confirm New Password</label>
-                                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                        <input class="form-control" placeholder="Password" name="password_confirmation" type="password" value=""> @if ($errors->has('password_confirmation'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                        @endif
                                     </div>
                                 </div>
 

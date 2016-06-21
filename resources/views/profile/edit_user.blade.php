@@ -140,7 +140,7 @@
                                 </div>
 
                                 <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
-                                    <button type="submit" class="btn btn-success">Remind User</button>
+                                    <button onclick="remindUser()" class="btn btn-success">Remind User</button>
                                 </div>
 
                                 <div class="col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-2 col-lg-2">
@@ -197,6 +197,21 @@
             //confirm("Are you sure?");
         }
 
+    </script>
+    <script>
+        function remindUser() {
+            //check browser support for ajax
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhttp.open("GET", "{{url('remind_user'.$user->man_number)}}", true);
+            xhttp.send();
+            alert('Email reminder sent');
+        }
     </script>
 
 @endsection

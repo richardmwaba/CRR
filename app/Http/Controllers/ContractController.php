@@ -47,7 +47,7 @@ class ContractController extends Controller
 
             $m->to($contract->email, 'Me')->subject('Contract update');
         });
-
+        session()->flash('flash_message', $contract->fisrt_name.'\'s updated');
         return Redirect::action('HomeController@index');
 
     }
@@ -150,6 +150,16 @@ class ContractController extends Controller
         //code for reminder to hod
 
         $contract->save();
+    }
+    
+    public function remind_user($man_number){
+        $contract = User::firstOrNew(array('man_number' => $man_number));
+        //Send mail to new user
+        Mail::send('Mails.user_reminder', ['contract' => $contract], function ($m) use ($contract) {
+
+            $m->to($contract->email, 'Me')->subject('Have you submitted your contract for renewal?');
+        });
+        
     }
 
 }

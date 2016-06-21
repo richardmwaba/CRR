@@ -31,7 +31,6 @@ class EditRequest extends Request
                 'password_old' => 'required',
                 'password' => 'required|min:6|confirmed',
                 'nationality'=>'required',
-                'department'=>'required'
 
         ];
     }
