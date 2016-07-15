@@ -34,10 +34,7 @@
 
 
                             @foreach($user as $staff)
-
-                                <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
-
-                                @if($diff<6 AND $diff>0)
+                                @if($staff->contract_status!=null AND $staff->contract_status=="Expires soon")
                                     <tr>
                                         <td>{{$staff->man_number}}</td>
                                         <td>{{$staff->first_name}} {{$staff->last_name}}</td>
@@ -45,7 +42,7 @@
                                         <td>{{\Carbon\Carbon::parse($staff->expires_on)->subMonths(6)->toFormattedDateString()}}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{url('/contract/'.$staff->man_number)}}" class="btn btn-link">Edit</a>
+                                                <a href="{{url('/expiring_contract_dialog/'.$staff->man_number)}}" class="btn btn-link">Edit</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -64,8 +61,7 @@
                     <div class="panel-body">
                         <ol>
                             @foreach($user as $staff)
-                                <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
-                                @if($diff<=0)
+                                @if($staff->contract_status!=null AND $staff->contract_status=="Expired")
                                     <li>
                                         <div class="btn-group">
                                             <a href="{{url('/full_profile/'.$staff->man_number)}}"

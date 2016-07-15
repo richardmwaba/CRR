@@ -57,10 +57,9 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             'man_number'=> 'required|unique:users|integer',
-           'position'=>'required'
+           'position' => 'required',
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *

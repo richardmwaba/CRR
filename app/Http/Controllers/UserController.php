@@ -41,7 +41,11 @@ class UserController extends Controller
     public function edit_user($man_number)
     {
         $user = User::firstOrNew(array('man_number' => $man_number));
-        return view('profile.edit_user')->with('user', $user);
+        if(Auth::user()->position == "Contracts Officer") {
+            return view('profile.edit_user')->with('user', $user);
+        }else{
+            return view('profile.edit')->with('user', $user);
+        }
 
 
     }
@@ -51,12 +55,17 @@ class UserController extends Controller
     {
 
         $currentUser = Auth::user();
-        if ($currentUser->position != "Contracts Officer") {
+        if ($currentUser->position == "Head of Department") {
 
-            $user = User::where('department', '=', $currentUser->department)->get();
+            $user = User::where('department', '=', $currentUser->department)->paginate(10);;
+            return view('Staff.staff_view')->with(array('user' => $user));
+
+        } elseif ($currentUser->position == "Dean of School") {
+            $user = User::where('school', '=', $currentUser->school)->paginate(10);;
             return view('Staff.staff_view')->with(array('user' => $user));
 
         } else {
+
             $user = User::all();
             return view('Staff.staff_view')->with(array('user' => $user));
 
@@ -71,52 +80,89 @@ class UserController extends Controller
     }
 
     //stores profile changes to database
-
-    public function store(EditRequest $request)
+    public function store(Request $request)
     {
-
-
         $user = Auth::user();
-        $user1 = Staff::findOrFail($user->id);
 
-        //check if user has correct old password
-
-        if (Hash::check($request->password, $user->password)) {
-
-            $user1->fill(['email' => $request->email, 'password' => bcrypt($request->password),
-                'first_name' => $request->first_name, 'last_name' => $request->last_name,
-                'other_names' => $request->other_names, 'nationality' => $request->nationality
+        //
+        if ($user->first_name == null AND !$request->has('first_name')) {
+            $this->validate($request, [
+                'password' => 'required|min:8',
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'email' => 'required|email|max:255',
             ]);
 
-            $user1->save();
-            session()->flash('flash_message', 'Profile updated');
-            Return Redirect::action('HomeController@index');
+            $user->fill(['email' => $request->email,
+                'password' => bcrypt($request->password),
+                'first_name' => $request->first_name, 'last_name' => $request->last_name,
+                'other_names' => $request->other_names, 'nationality' => $request->nationality,
+            ]);
 
+        } elseif ($request->has('password')) {
+            //
+            $this->validate($request, [
+                'password' => 'confirmed|min:8',
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'email' => 'required|email|max:255',
+
+            ]);
+
+            $user->fill(['email' => $request->email,
+                'password' => bcrypt($request->password),
+                'first_name' => $request->first_name, 'last_name' => $request->last_name,
+                'other_names' => $request->other_names, 'nationality' => $request->nationality,
+            ]);
         } else {
-            session()->flash('flash_message', 'You have entered an incorrect password');
-            Return redirect()->back()->withInput();
+            $this->validate($request, [
+                'first_name' => 'required|max:255',
+                'last_name' => 'required|max:255',
+                'email' => 'required|email|max:255',
+            ]);
+
+            $user->fill(['email' => $request->email,
+                'first_name' => $request->first_name, 'last_name' => $request->last_name,
+                'other_names' => $request->other_names, 'nationality' => $request->nationality,
+            ]);
         }
+
+
+        $user->save();
+        session()->flash('flash_message', 'Profile updated');
+        Return Redirect::action('HomeController@index');
+
     }
 
     //creates a new user record
     public function store_new_user(Request $data)
     {
+        if (Auth::user())
+            $this->validate($data, [
+                'man_number' => 'required|unique:users|integer',
+                'position' => 'required',
+                'email' => 'required|email|max:255|unique:users',
+                'department' => 'required',
+                'school' => 'required',
 
-        $this->validate($data, [
-            'man_number' => 'required|unique:users|integer',
-            'position' => 'required',
-            'email' => 'required|email|max:255|unique:users',
-            'department' => 'required',
+            ]);
 
-        ]);
+        //generate new random password
+        $password = str_random(8);
 
+        //set default department for Dean
+        if ($data->position == "Dean of School" OR $data->position == "Contracts Officer") {
+            $data->department = "Not applicable";
+        }
+
+        //create user orm
         User::create(['man_number' => $data->man_number, 'department' => $data->department, 'email' => $data->email,
-            'position' => $data->position, 'password' => bcrypt($data->password),
-            'expires_on' => Carbon::now()
+            'position' => $data->position, 'password' => bcrypt($password),
+            'school' => $data->school
         ]);
 
         //Send mail to new user
-        Mail::send('Mails.new_user', ['data' => $data], function ($m) use ($data) {
+        Mail::send('Mails.new_user', ['password' => $password], function ($m) use ($data) {
 
             $m->to($data->email, 'Me')->subject('Complete registration');
         });
@@ -132,7 +178,7 @@ class UserController extends Controller
     public function store_edited_user(Request $request, $man_number)
     {
 
-
+        //choose what to validate
         if ($request->has('man_number') AND $request->has('position') AND $request->has('email')) {
             $this->validate($request, [
                 'man_number' => 'required|unique:users|integer',
@@ -208,10 +254,13 @@ class UserController extends Controller
 
     }
 
+
+    //function to delete a user from the database
     public function delete($man_number)
     {
         $user = User::firstOrNew(array('man_number' => $man_number));
-        $user()->delete();
+        $user->delete();
+        return Redirect::action('UserController@staff_view');
 
     }
 }

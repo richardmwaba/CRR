@@ -18,14 +18,16 @@
                                 <div class="form-group">
                                   <label class="col-sm-4 col-md-2 col-xs-6" for="status">Contract Status:</label>
                                   <div class="col-sm-8 col-md-10 col-xs-6">
-                                    <label class="text-danger" for="status">@if($diff>6)<p style="color:green" >Valid</p>@elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</label>
+                                    <label class="text-danger" for="status">@if($contract->contract_status=="Valid"){{$contract->contract_status}}@elseif($contract->contract_status=="Expired")
+                                            <p style="color:red">{{$contract->contract_status}}</p> @else<p
+                                                    style="color:orange">{{$contract->contract_status}}</p>@endif</label>
                                   </div>
                                 </div>
 
                                 <div class="form-group">
-                                  <label class="col-sm-4 col-md-2 col-xs-6" for="status">Contract Exp Date:</label>
+                                  <label class="col-sm-4 col-md-2 col-xs-6" for="status">Expiration date:</label>
                                   <div class="col-sm-8 col-md-10 col-xs-6">
-                                    <label class="text-primary" for="status">{{$contract->expires_on}}</label>
+                                    <label class="text-primary" for="status">{{\Carbon\Carbon::parse($contract->expires_on)->toFormattedDateString()}}</label>
                                   </div>
                                 </div>
 
@@ -40,20 +42,17 @@
                                                 switch($position){
 
                                                     case "Contracts Officer":
-                                                        if($tracking = "Contracts Office" OR $tracking == "Dean's Office")
                                                         echo 'checked';
                                                         break;
                                                     case "Head of Department":
-                                                        if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "In progress...")
+                                                        if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement")
                                                             echo 'checked';
                                                             break;
                                                     case "Dean of School":
-                                                        if($tracking == "Contracts Office"OR $tracking == "In progress...")
+                                                        if($tracking == "Contracts Office"OR $tracking == "Waiting for Contracts Officer's acknowledgement")
                                                             echo 'checked';
                                                         break;
                                                     default :
-                                                        if($tracking != "Not available")
-                                                            echo 'checked';
                                                         break;
 
                                                 } ?> >

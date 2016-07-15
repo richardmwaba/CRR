@@ -1,156 +1,214 @@
-@extends('layouts.app')
+@extends('layouts.hod_template')
+@section('title', 'HoD Edit')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/store') }}">
-                        {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">First Name</label>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"> Edit User</div>
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="first_name"  value="{{old('first_name', $user->first_name) }}">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <form class="form-horizontal" role="form" method="POST"
+                                  action="{{ url('/store_edited_user/'.$user->man_number) }}">
+                                {!! csrf_field() !!}
 
-                                @if ($errors->has('first_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                <div class="row">
+                                    <div class="form-group col-md-6{{ $errors->has('man_number') ? ' has-error' : '' }}">
+                                        <label>Man Number</label>
+                                        <input class="form-control" placeholder="{{$user->man_number}}" name="man_number" value="">
+                                        @if ($errors->has('man_number'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('man_number') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Last Name</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="last_name" value="{{ old('last_name', $user->last_name) }}" >
-
-                                @if ($errors->has('last_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6{{ $errors->has('position') ? ' has-error' : '' }}">
+                                        <label>Position</label>
+                                        <select class="form-control" name="position">
+                                            <option value="">{{$user->position}}</option>
+                                            <option> Contracts Officer</option>
+                                            <option> Dean of School</option>
+                                            <option> Academic Staff</option>
+                                            <option> Support Staff</option>
+                                        </select>
+                                        @if ($errors->has('position'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('position') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('other_names') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Last Name</label>
-
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="other_names" value="{{ old('other_names', $user->other_names) }}">
-
-                                @if ($errors->has('other_names'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('other_names') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ old('email' , $user->email)}}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <label>E-mail Address</label>
+                                        <input class="form-control" placeholder="{{$user->email}}" name="email" value="">
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-md-5 col-xs-6" for="check">Select if application has been
+                                            received:</label>
+                                        <div class="col-sm-2 col-md-2 col-xs-6">
+                                            <label id="demo">
+                                                <input type="checkbox" value="" onchange="contractUpdate(this)"
+                                                <?php
+                                                        $position = Auth()->user()->position;
+                                                        $tracking = $user->contract_tracking;
+                                                        switch($position){
+
+                                                            case "Contracts Officer":
+                                                                if($tracking == "Dean's Office" OR $tracking == "Contracts Office" OR $tracking=="Waiting for Dean's approval")
+                                                                    echo 'checked';
+                                                                break;
+                                                            case "Head of Department":
+                                                                if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval" OR $tracking == "Waiting for Contract's approval" )
+                                                                    echo 'checked';
+                                                                break;
+                                                            case "Dean of School":
+                                                                if($tracking=="Dean's Office")
+                                                                    echo 'checked';
+                                                                break;
+                                                            default :
+                                                                if($tracking != "Not available")
+                                                                    echo 'checked';
+                                                                break;
+                                                        }
+                                                        ?> >
+                                                <!--Include modal here to show after the check box is checked-->
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 col-md-5 col-xs-6" for="check">Select if application has been
+                                            submitted:</label>
+                                        <div class="col-sm-2 col-md-2 col-xs-6">
+                                            <label id="demo">
+                                                <input type="checkbox" id="submitted" value="" onchange="contractUpdate(this)"
+                                                <?php
+                                                        $position = Auth()->user()->position;
+                                                        $tracking = $user->contract_tracking;
+                                                        switch($position){
+
+                                                            case "Contracts Officer":
+                                                                if($tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval")
+                                                                    echo 'checked';
+                                                                break;
+                                                            case "Head of Department":
+                                                                if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contract's approval" OR $tracking=="Waiting for Dean's approval")
+                                                                    echo 'checked';
+                                                                break;
+                                                            case "Dean of School":
+                                                                //
+                                                                echo 'checked';
+                                                                break;
+                                                            default :
+                                                                if($tracking != "Not available")
+                                                                    echo 'checked';
+                                                                break;
+
+                                                        } ?> >
+                                                <!--Include modal here to show after the check box is checked-->
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+
+                                        <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                                            <button onclick="remindUser()" class="btn btn-default">Request contract</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+
+
                         </div>
-
-                        <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Nationality</label>
-
-                            <div class="col-md-6">
-                                <input type="radio" name="nationality" value="Zambia"> Zambia
-                        <input type="radio" name="nationality" value="Namibia"> Namibia
-                        <input type="radio" name="nationality" value="Botswana">Botswana<br>
-
-                                @if ($errors->has('nationality'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nationality') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Department</label>
-
-                            <div class="col-md-6">
-                                <input type="radio" name="department" value="Computer Science"> Computer Science
-                                <input type="radio" name="department" value="Biology"> Biology
-                                <input type="radio" name="department" value="Chemistry"> Chemistry
-                                <input type="radio" name="department" value="Physics">Physics<br>
-
-                                @if ($errors->has('department'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('department') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            </div>
-
-                        <div class="form-group{{ $errors->has('password_old') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Old Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password_old">
-
-                                @if ($errors->has('password_old'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_old') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-user"></i>update
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+                <!-- /.panel-body -->
             </div>
+            <!-- /.panel -->
         </div>
+        <!-- /.col-lg-12 -->
     </div>
-</div>
+    <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+    <script>
+        function contractUpdate(cb) {
+            //check browser support for ajax
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            if(confirm("Are you sure you want to continue?")) {
+
+                if(cb.checked) {
+                    if(cb.id == "submitted") {
+                        xhttp.open("GET", "{{url('/contract_submitted/'.$user->man_number)}}", true);
+                        xhttp.send();
+                    }else{
+                        xhttp.open("GET", "{{url('/contract_received/'.$user->man_number)}}", true);
+                        xhttp.send();
+                    }
+                }else {
+                    xhttp.open("GET", "{{url('/contract_not_received/'.$user->man_number)}}", true);
+                    xhttp.send();
+                    document.getElementById('contract_tracking').innerHTML = "In progress...";
+                }
+
+            } else {
+                //Some other code
+            }
+            //confirm("Are you sure?");
+        }
+
+    </script>
+    <script>
+        function remindUser() {
+            //check browser support for ajax
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhttp.open("GET", "{{url('remind_user/'.$user->man_number)}}", true);
+            xhttp.send();
+            alert('Email reminder sent');
+        }
+    </script>
+
 @endsection

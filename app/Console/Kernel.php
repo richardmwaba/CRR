@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Http\Controllers\ContractController;
+use Psy\Command\Command;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,9 +15,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
+        Commands\Inspire::class,
+        Commands\Check_contracts::class
     ];
-
     /**
      * Define the application's command schedule.
      *
@@ -26,5 +28,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('contracts:check'
+
+        // Runs once a month on Monday at 0:00...
+
+        )->monthly()->sendOutputTo('scheduler_output.txt');
     }
 }

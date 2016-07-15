@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf_token" content="{!! csrf_field() !!}">
+
 
     <title>@yield('title')</title>
 
@@ -60,6 +60,7 @@
         @endif
 
                 <!-- Navigation -->
+    @if(Auth::user())
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -139,17 +140,6 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    @if (Auth::guest())
-                        <ul class="dropdown-menu dropdown-user">
-
-                            <li><a href="{{url('/register')}}"><i class="fa fa-user fa-fw"></i>Register</a>
-                            </li>
-                            <li><a href="{{url('/login')}}"><i class="fa fa-user-md fa-fw"></i>Login</a>
-                            </li>
-                            <li class="divider"></li>
-
-                        </ul>
-                    @else
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="{{url('my_profile')}}"><i class="fa fa-user fa-fw"></i> My Profile</a>
                             </li>
@@ -159,7 +149,6 @@
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
                         </ul>
-                        @endif
                                 <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
@@ -259,6 +248,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+        @endif
 
     @section('content')
         <div id="page-wrapper">
@@ -275,6 +265,7 @@
     @show
 
 
+@if(Auth::user())
 </div>
 <!-- /#wrapper -->
 
@@ -286,6 +277,7 @@
     </div>
 </footer>
 <!-- ./footer -->
+@endif
 @section('scripts')
 
 

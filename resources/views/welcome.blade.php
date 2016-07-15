@@ -16,4 +16,20 @@
         </div>
     </div>
 </div>
+
+    <script src="{{URL::asset('//js.pusher.com/3.0/pusher.min.js')}}"></script>
+    <script>
+        var pusher = new Pusher("{{env("PUSHER_KEY")}}")
+        var channel = pusher.subscribe('test-channel');
+        channel.bind('test-event', function(data) {
+            alert(data.text);
+
+            //client side debug console config
+            Pusher.log = function(msg) {
+                console.log(msg);
+            };
+
+            var pusher = new Pusher("{{env("PUSHER_KEY")}}")
+        });
+    </script>
 @endsection

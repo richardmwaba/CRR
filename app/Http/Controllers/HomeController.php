@@ -30,13 +30,13 @@ class HomeController extends Controller
     {
        
         //check position of logged in user
-        switch (Auth()->user()->position){
+        $currentUser = Auth()->user();
+        switch ($currentUser->position){
 
             case 'Head of Department':
 
                 //fetch records from database and pass to the home page
-                $currentUser = Auth()->user();
-                $user = User::where('department', '=', $currentUser->department)->get();
+                $user = User::where('department', $currentUser->department)->paginate(10);
                 return view('home')->with(array('user' => $user));
                 break;
 
@@ -48,7 +48,7 @@ class HomeController extends Controller
                 break;
 
             case 'Dean of School':
-                $user = User::all();
+                $user = User::where('school', '=', $currentUser->school)->paginate(10);
                 return view('HumanResource.home')->with(array('user' => $user));
                 break;
 

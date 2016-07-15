@@ -28,8 +28,6 @@ class EditRequest extends Request
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
                 'email' => 'required|email|max:255',
-                'password_old' => 'required',
-                'password' => 'required|min:6|confirmed',
                 'nationality'=>'required',
 
         ];

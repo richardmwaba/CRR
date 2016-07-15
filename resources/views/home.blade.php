@@ -32,9 +32,8 @@
                             </thead>
 
                             @foreach($user as $staff)
-                                <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
 
-                                @if($diff<=6 AND $diff>0)
+                                @if($staff->contract_status!=null AND $staff->contract_status=="Expires soon")
                                     <tr>
                                         <td>{{$staff->man_number}}</td>
                                         <td>{{$staff->first_name}} {{$staff->last_name}}</td>
@@ -56,9 +55,7 @@
                     <div class="panel-body">
                         <ol>
                             @foreach($user as $staff)
-                                <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
-
-                                @if($diff<=0)
+                                @if($staff->contract_status!=null AND $staff->contract_status=="Expired")
                                     <li>{{$staff->first_name}} {{$staff->last_name}}</li> @endif
 
                             @endforeach

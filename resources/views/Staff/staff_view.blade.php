@@ -15,15 +15,20 @@
                     <div class="panel-heading"> Staff Details</div>
 
                     <div class="panel-body">
-                        <table class="table-striped responsive-utilities" data-toggle="table" data-show-refresh="false" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                        <table class="table-striped responsive-utilities" data-toggle="table" data-show-refresh="false"
+                               data-show-toggle="true" data-show-columns="true" data-search="true"
+                               data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                               data-sort-order="desc" style="font-size: small">
                             <thead>
                             <tr>
-                                <th data-field="state" data-checkbox="true" >Count</th>
-                                <th data-field="name"  data-sortable="true">Name</th>
+                                <th data-field="state" data-checkbox="true">Count</th>
+                                <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="id" data-sortable="true">Man #</th>
                                 <th data-field="position" data-sortable="true">Position</th>
+                                <th data-field="department" data-sortable="true">Department</th>
+                                <th data-field="school" data-sortable="true">School</th>
                                 <th data-field="renew by" data-sortable="true">Renew By</th>
-                                <th data-field="contract status"  data-sortable="true">Contract Status</th>
+                                <th data-field="contract status" data-sortable="true">Contract Status</th>
                                 <th data-field="application stage" data-sortable="true">Application Stage</th>
                                 <th data-field="add/delete" data-sortable="true">Edit | Delete</th>
                             </tr>
@@ -31,45 +36,29 @@
 
                             @foreach($user as $staff)
 
-                                <?php $diff = \Carbon\Carbon::now()->diffInMonths(\Carbon\Carbon::parse($staff->expires_on), false) ?>
+                                <tr>
 
-                            <tr>
+                                    <td data-field="state" data-checkbox="true">{{$staff->id}}</td>
+                                    <td>{{$staff->first_name}} {{$staff->last_name}}</td>
+                                    <td>{{$staff->man_number}}</td>
+                                    <td>{{$staff->position}}</td>
+                                    <td>{{$staff->department}}</td>
+                                    <td>{{$staff->school}}</td>
+                                    <td>{{\Carbon\Carbon::parse($staff->expires_on)->subMonths(6)->toFormattedDateString()}}</td>
+                                    <td class="text-success">@if($staff->contract_status=="Valid"){{$staff->contract_status}}@elseif($staff->contract_status=="Expired")
+                                            <p style="color:red">{{$staff->contract_status}}</p> @else<p
+                                                    style="color:orange">{{$staff->contract_status}}</p>@endif</td>
+                                    <td class="text-success">{{$staff->contract_tracking}}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-sm btn-link">Edit</a>
+                                            <a onclick="delete_user('{{$staff->first_name}}', '{{$staff->man_number}}')"
+                                               class="btn btn-sm btn-link">Delete</a>
 
-                                <td data-field="state" data-checkbox="true" >{{$staff->id}}</td>
-                                <td>{{$staff->first_name}} {{$staff->last_name}}</td>
-                                <td>{{$staff->man_number}}</td>
-                                <td>{{$staff->position}}</td>
-                                <td>{{\Carbon\Carbon::parse($staff->expires_on)->subMonths(6)->toFormattedDateString()}}</td>
-                                <td class="text-success">@if($diff>6)Valid @elseif($diff<=0)<p style="color:red" >Expired</p> @else<p style="color:orange"> Expires Soon </p>@endif</td>
-                                <td class="text-success">{{$staff->contract_tracking}}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-link">Edit</a>
-                                        <a onclick="delete_user({{$staff->man_number}})" class="btn btn-link">Delete</a>
-                                        <script>
-                                            function delete_user() {
-                                                var xhttp;
-                                                if (window.XMLHttpRequest) {
-                                                    xhttp = new XMLHttpRequest();
-                                                } else {
-                                                    // code for IE6, IE5
-                                                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                                                }
-                                                if(confirm("Are you sure you want to delete {{$staff->man_number}}?")) {
-                                                    xhttp.open("GET", "{{url('delete_user/'.$staff->man_number)}}", true);
-                                                    xhttp.send();
-                                                    alert({{$staff->first_name}} "has been deleted!");
-                                                }else{
-
-                                                }
-
-                                            }
-                                        </script>
-
-                                    </div>
-                                </td>
-                            </tr>
-                                @endforeach
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
 
                         <script>
@@ -103,6 +92,25 @@
                             }
                         </script> <!--/. script-->
 
+                        <script>
+                            function delete_user(user, man) {
+                                var xhttp;
+                                if (window.XMLHttpRequest) {
+                                    xhttp = new XMLHttpRequest();
+                                } else {
+                                    // code for IE6, IE5
+                                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                }
+                                if (confirm("Are you sure you want to delete " + user + "?")) {
+                                    xhttp.open("GET", "{{url('delete_user')}}/" + man, false);
+                                    xhttp.send();
+                                    alert(user + " has been deleted!");
+                                    location.reload();
+                                }
+
+                            }
+                        </script>
+
 
                     </div>
                     <!-- /.panel-body -->
@@ -119,21 +127,21 @@
 
     @parent
 
-    <!-- Custom Table JavaScript -->
+            <!-- Custom Table JavaScript -->
     <script>
         !function ($) {
-            $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+            $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
                 $(this).find('em:first').toggleClass("glyphicon-minus");
             });
             $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
         }(window.jQuery);
 
         $(window).on('resize', function () {
-          if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
         })
         $(window).on('resize', function () {
-          if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
         })
     </script>
-     <!-- /.Custom Table JavaScript -->
-    @endsection
+    <!-- /.Custom Table JavaScript -->
+@endsection

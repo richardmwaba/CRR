@@ -75,15 +75,15 @@
                                                 switch($position){
 
                                                     case "Contracts Officer":
-                                                        if($tracking == "Dean's Office" OR $tracking == "Contracts Office" OR $tracking=="Waiting for Dean's approval")
+                                                        if($tracking == "Contracts Office")
                                                             echo 'checked';
                                                         break;
                                                     case "Head of Department":
-                                                        if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval" OR $tracking == "Waiting for Contract's approval" )
+                                                        if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
                                                             echo 'checked';
                                                         break;
                                                     case "Dean of School":
-                                                        if($tracking=="Dean's Office")
+                                                        if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
                                                             echo 'checked';
                                                         break;
                                                     default :
@@ -110,15 +110,14 @@
                                                 switch($position){
 
                                                     case "Contracts Officer":
-                                                        if($tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval")
                                                             echo 'checked';
                                                         break;
                                                     case "Head of Department":
-                                                        if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contract's approval" OR $tracking=="Waiting for Dean's approval")
+                                                        if($tracking == "Waiting for Dean's acknowledgement" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contracts Officer's acknowledgement" OR $tracking=="Contracts Office")
                                                             echo 'checked';
                                                         break;
                                                     case "Dean of School":
-                                                        //
+                                                        if($tracking == "Dean's Office" OR $tracking == "Waiting for Contracts Officer's acknowledgement" OR $tracking=="Contracts Office")
                                                         echo 'checked';
                                                         break;
                                                     default :
@@ -140,11 +139,11 @@
                                 </div>
 
                                 <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
-                                    <button onclick="remindUser()" class="btn btn-success">Remind User</button>
+                                    <button onclick="remindUser()" class="btn btn-default">Request contract</button>
                                 </div>
 
                                 <div class="col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-2 col-lg-2">
-                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                    <a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract </a>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +207,7 @@
                 // code for IE6, IE5
                 xhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xhttp.open("GET", "{{url('remind_user'.$user->man_number)}}", true);
+            xhttp.open("GET", "{{url('remind_user/'.$user->man_number)}}", true);
             xhttp.send();
             alert('Email reminder sent');
         }
