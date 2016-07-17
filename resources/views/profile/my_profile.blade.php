@@ -28,7 +28,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-md-3 col-xs-4" for="middle-name">Other Name:</label>
                                     <div class="col-sm-6 col-md-6 col-xs-5">
-                                        <label class="text-primary" for="middle_name_value">{{$user->other_name}}</label>
+                                        <label class="text-primary" for="middle_name_value">{{$user->other_names}}</label>
                                     </div>
                                 </div>
 

@@ -44,9 +44,9 @@ class check_contracts extends Command
         User::chunk(10, function ($users) {
 
             //iterate over all users
+            $today = \Carbon\Carbon::today();
             foreach ($users as $user) {
                 //
-                $today = \Carbon\Carbon::today();
                 $expires = \Carbon\Carbon::parse($user->expires_on);
                 $diff = $today->diffInMonths($expires, false);
 
@@ -87,26 +87,61 @@ class check_contracts extends Command
             }
         });
 
-        //code to send monthly reminder of all expiring contracts to contracts office
+        //Send a monthly email reminder of all expiring contracts to corresponding offices
+        //get all users with expiring contracts
         $users = User::where('contract_status', '=', 'Expires soon')->get();
 
-        //get contracts officer email address
-        $user = User::firstOrNew(array('position' => 'Contracts Officer'));
+        //get email address to send reminders to
+        $heads = User::whereIn('position', ['Dean of School', 'Head of Department', 'Contracts Officer'])->get();
 
-        //send monthly email to dean
+        if($users->isEmpty()){
+            //do nothing
+        }else {
 
-        /*send monthly email to HOD
-        $hods = User::firstOrNew(array('position' => 'Head of Department'));
-        foreach($users as $user){
-            foreach($hods as $)
-            if($user->department == );
+            //send mail to contracts officer email
+            $c_officer = $heads->where('position', 'Contracts Officer')->first();
+            Mail::send('Mails.contracts_to_be_renewed', ['users' => $users], function ($m) use ($c_officer) {
+
+                $m->to($c_officer->email, 'Me')->subject('Contracts need renewal!');
+            });
         }
-         */
 
-        //send the mail
-        Mail::send('Mails.contracts_to_be_renewed', ['users' => $users], function ($m) use ($user) {
+       //get all Dean's
+        $deans = $heads->where('position', 'Dean of School');
 
-            $m->to($user->email, 'Me')->subject('Contracts need renewal!');
-        });
+        //send them emails containing list of contracts under their department
+        // which are waiting for their approval or submission to the contracts officer
+        foreach ($deans as $dean){
+            $under_this_dean = $users->where('school', $dean->school);
+            if($under_this_dean->isEmpty()){
+                //do nothing
+            }
+                else {
+                    Mail::send('Mails.contracts_to_be_renewed', ['users' => $under_this_dean], function ($m) use ($dean) {
+
+                        $m->to($dean->email, 'Me')->subject('Contracts need renewal!');
+                    });
+                }
+        }
+
+
+        //get all head's of department
+        $hods = $heads->where('position', 'Head of Department');
+
+        //send them emails containing list of contracts under their department
+        // which are waiting for their approval or submission to the contracts officer
+        foreach ($hods as $hod){
+            $under_this_department = $users->where('department', $hod->department);
+            if($under_this_department->isEmpty()){
+                //do nothing
+            }
+            else {
+                Mail::send('Mails.contracts_to_be_renewed', ['users' => $under_this_department], function ($m) use ($hod) {
+
+                    $m->to($hod->email, 'Me')->subject('Contracts need renewal!');
+                });
+            }
+        }
+
     }
 }
