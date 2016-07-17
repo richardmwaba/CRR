@@ -23,7 +23,7 @@
 
                                 <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                     <label>First Name</label>
-                                    <input class="form-control" name="first_name" placeholder="{{$user->first_name}}" value="{{ old('first_name') }}">
+                                    <input class="form-control" name="first_name" placeholder="{{$user->first_name}}" value="{{$user->first_name}}">
                                     @if ($errors->has('first_name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -31,19 +31,19 @@
                                     @endif
                                 </div>
 
-                                <div class="form-group{{ $errors->has('other_name') ? ' has-error' : '' }}">
+                                <div class="form-group{{ $errors->has('other_names') ? ' has-error' : '' }}">
                                     <label>Middle Name</label>
-                                    <input class="form-control" name="other_name" placeholder="{{$user->other_name}}" value="{{ old('other_name') }}">
-                                    @if ($errors->has('other_name'))
+                                    <input class="form-control" name="other_names" placeholder="{{$user->other_names}}" value="{{$user->other_names}}">
+                                    @if ($errors->has('other_names'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('other_name') }}</strong>
+                                        <strong>{{ $errors->first('other_names') }}</strong>
                                     </span>
                                     @endif
                                 </div>
 
                                 <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                     <label>Last Name</label>
-                                    <input class="form-control" name="last_name" placeholder="{{$user->last_name}}" value="{{ old('last_name') }}">
+                                    <input class="form-control" name="last_name" placeholder="{{$user->last_name}}" value="{{$user->last_name}}">
                                     @if ($errors->has('last_name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -53,7 +53,7 @@
 
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label>E-mail Address</label>
-                                    <input class="form-control" placeholder="{{$user->email}}" value="{{ old('email') }}" name="email" type="email">
+                                    <input class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}" name="email" type="email">
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -65,7 +65,7 @@
                                     <label>Nationality</label>
 
                                     <select name="nationality" class="form-control">
-                                        <option value="{{ old('nationality') }}">{{$user->nationality}}</option>
+                                        <option value="{{$user->nationality}}">{{$user->nationality}}</option>
                                         <option value="afghan">Afghan</option>
                                         <option value="albanian">Albanian</option>
                                         <option value="algerian">Algerian</option>
@@ -269,12 +269,12 @@
 
                                 <div class="form-group">
                                     <label>Residential Address</label>
-                                    <input class="form-control" placeholder="37HC, Ibex Hill, off Twin Palm road, Lusaka">
+                                    <input class="form-control" placeholder="address" name="address" value="{{$user->address}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input class="form-control" placeholder="+260 0987654321">
+                                    <input class="form-control" placeholder="+260" name="phone_number" value="{{$user->phone_number}}">
                                 </div>
 
                                 <div class="form-group">
@@ -292,12 +292,12 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                                            <label>Enter Old Password</label>
-                                                            <input class="form-control" placeholder="Password" name="password" type="password">
-                                                            @if ($errors->has('password'))
+                                                        <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
+                                                            <label>Current Password</label>
+                                                            <input class="form-control" placeholder="Password" name="current_password" type="password">
+                                                            @if ($errors->has('current_password'))
                                                                 <span class="help-block">
-                                                                <strong>{{ $errors->first('password') }}</strong>
+                                                                <strong>{{ $errors->first('current_password') }}</strong>
                                                             </span>
                                                             @endif
                                                         </div>
@@ -326,7 +326,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="col-md- ">
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <button name="changePassword" id="changePassword" class="btn btn-primary">Save</button>
                                                     <!--</div>
                                                     <div class="">-->
                                                     <button type="reset" class="btn btn-default">Cancel</button>

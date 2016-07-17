@@ -9,13 +9,13 @@
                         {!! csrf_field() !!}
 
                         <fieldset>
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('man_number') ? ' has-error' : '' }}">
 
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+                                <input class="form-control" placeholder="Man number" name="man_number" type="number" autofocus="">
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('man_number'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('man_number') }}</strong>
                                     </span>
                                 @endif
 

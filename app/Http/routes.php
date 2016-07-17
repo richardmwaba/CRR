@@ -87,6 +87,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('update_profile/{id}','UserController@store');
         Route::get('remind_user/{id}','ContractController@remind_user');
         Route::get('/expiring_contract_dialog/{id}', 'ContractController@expiring_contract_dialog');
+        Route::resource('photo/store', 'PhotoController@store');
 
 
         //these pages can only be accessed by the HOD

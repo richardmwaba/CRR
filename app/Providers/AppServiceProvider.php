@@ -4,6 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class LaravelLoggerProxy {
     public function log( $msg ) {
