@@ -2,7 +2,6 @@
 @section('title', 'Add New')
 
 @section('content')
-    e
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -17,7 +16,7 @@
                     <div class="panel-heading"> Add New User</div>
 
                     <div class="panel-body">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-6">
                             <form class="form-horizontal" role="form" method="POST"
                                   action="{{ url('/store_new_user') }}">
                                 {!! csrf_field() !!}
@@ -44,8 +43,8 @@
                                             <option value="Dean of School"> Dean of School</option>
                                             <option value="Head of Department"> Head of Department</option>
                                             <option value="Academic Staff"> Academic Staff</option>
-                                            <option value="Support Staff"> Support Staff
-                                            <option>
+                                            <option value="Support Staff"> Support Staff</option>
+
                                         @else
                                             <option value="Academic Staff"> Academic Staff</option>
                                             <option value="Support Staff"> Support Staff</option>
@@ -117,13 +116,15 @@
                                         </div>
 
                                 @else
-                                    <input type="hidden" value="{{$user->department}}" name="department">
+                                        <div class="form-group">
+                                            <input type="hidden" value="{{$user->department}}" name="department">
+                                        </div>
                                     @endif
 
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <button type="reset" class="btn btn-default">Cancel</button>
                                     </div>
 
