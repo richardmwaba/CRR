@@ -17,12 +17,14 @@
 
                     <div class="panel-body">
                         <div class="col-md-6">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/edit_profile') }}">
+                            <form class="form-horizontal" role="form" method="POST"
+                                  action="{{ url('update_profile') }}">
                                 {!! csrf_field() !!}
 
                                 <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                     <label>First Name</label>
-                                    <input class="form-control" name="first_name" placeholder="{{$user->first_name}}" value="{{$user->first_name}}">
+                                    <input class="form-control" name="first_name" placeholder="{{$user->first_name}}"
+                                           value="{{$user->first_name}}">
                                     @if ($errors->has('first_name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -32,7 +34,8 @@
 
                                 <div class="form-group{{ $errors->has('other_names') ? ' has-error' : '' }}">
                                     <label>Middle Name</label>
-                                    <input class="form-control" name="other_names" placeholder="{{$user->other_names}}" value="{{$user->other_names}}">
+                                    <input class="form-control" name="other_names" placeholder="{{$user->other_names}}"
+                                           value="{{$user->other_names}}">
                                     @if ($errors->has('other_names'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('other_names') }}</strong>
@@ -42,7 +45,8 @@
 
                                 <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                     <label>Last Name</label>
-                                    <input class="form-control" name="last_name" placeholder="{{$user->last_name}}" value="{{$user->last_name}}">
+                                    <input class="form-control" name="last_name" placeholder="{{$user->last_name}}"
+                                           value="{{$user->last_name}}">
                                     @if ($errors->has('last_name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -52,7 +56,8 @@
 
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label>E-mail Address</label>
-                                    <input class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}" name="email" type="email">
+                                    <input class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}"
+                                           name="email" type="email">
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -268,15 +273,18 @@
 
                                 <div class="form-group">
                                     <label>Residential Address</label>
-                                    <input class="form-control" placeholder="address" name="address" value="{{$user->address}}">
+                                    <input class="form-control" placeholder="address" name="address"
+                                           value="{{$user->address}}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input class="form-control" placeholder="+260" name="phone_number" value="{{$user->phone_number}}">
+                                    <input class="form-control" placeholder="+260" name="phone_number"
+                                           value="{{$user->phone_number}}">
                                 </div>
                                 <div class="form-group">
-                                    <a href="#" class="btn btn-link" role="button" data-toggle="modal" data-target="#changePass" onclick="" id="">Change password?</a>
+                                    <a href="#" class="btn btn-link" role="button" data-toggle="modal"
+                                       data-target="#changePass" onclick="" id="">Change password?</a>
                                 </div>
                                 <div id="demo" class="collapse">
 
@@ -300,7 +308,8 @@
                                     <div class="modal-dialog modal-md">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <button id="close" type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
                                                 <h4 class="modal-title text-primary"> Change Password</h4>
                                             </div>
                                             <div class="modal-body">
@@ -309,24 +318,28 @@
 
                                                         <div id="current_password-group" class="form-group">
                                                             <label>Current Password</label>
-                                                            <input class="form-control" placeholder="Password" name="current_password" type="password">
+                                                            <input class="form-control" placeholder="Password"
+                                                                   name="current_password" type="password">
                                                         </div>
 
                                                         <div id="password-group" class="form-group">
                                                             <label>Enter New Password</label>
-                                                            <input class="form-control" placeholder="Password" name="password" type="password">
+                                                            <input class="form-control" placeholder="Password"
+                                                                   name="password" type="password">
                                                         </div>
 
                                                         <div id="password_confirmation-group" class="form-group">
                                                             <label>Confirm New Password</label>
-                                                            <input class="form-control" placeholder="Password" name="password_confirmation" type="password" >
+                                                            <input class="form-control" placeholder="Password"
+                                                                   name="password_confirmation" type="password">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="col-md- ">
-                                                    <button onclick="changePassword()"  class="btn btn-default">save</button>
+                                                    <button onclick="changePassword()" class="btn btn-default">save
+                                                    </button>
                                                     <!--</div>
                                                     <div class="">-->
                                                     <button type="reset" class="btn btn-default">Cancel</button>
@@ -356,72 +369,72 @@
     <script>
         function changePassword() {
 
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 $("#button").click(function () {
                     $("#demo").toggle();
                 });
-            // process the form
-            $('#changePassword').submit(function (event) {
-                event.preventDefault();
-
-
-
-                var formData = {
-                    'current_password': $('input[name=current_password]').val(),
-                    'password': $('input[name=password]').val(),
-                    'password_confirmation': $('input[name=password_confirmation]').val(),
-                    '_token': $('input[name=_token]').val()
-                };
                 // process the form
+                $('#changePassword').submit(function (event) {
+                    event.preventDefault();
 
-                $.ajax({
-                            type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                            url: '{{ url('change_password')}}', // the url where we want to POST
-                            data: formData, // our data object
-                            dataType: 'json', // what type of data do we expect back from the server
-                            encode: true
-                        })
-                        // using the done promise callback
-                        .done(function (data) {
 
-                            // log data to the console so we can see
-                            console.log(data);
-                            // here we will handle errors and validation messages
-                            // here we will handle errors and validation messages
-                            if (! data.success) {
+                    var formData = {
+                        'current_password': $('input[name=current_password]').val(),
+                        'password': $('input[name=password]').val(),
+                        'password_confirmation': $('input[name=password_confirmation]').val(),
+                        '_token': $('input[name=_token]').val()
+                    };
+                    // process the form
 
-                                // handle errors for name ---------------
-                                if (data.errors.current_password) {
-                                    $('#current_password-group').addClass('has-error'); // add the error class to show red input
-                                    $('#current_password-group').append('<div class="help-block">' + data.errors.current_password + '</div>'); // add the actual error message under our input
+                    $.ajax({
+                                type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                                url: '{{ url('change_password')}}', // the url where we want to POST
+                                data: formData, // our data object
+                                dataType: 'json', // what type of data do we expect back from the server
+                                encode: true
+                            })
+                            // using the done promise callback
+                            .done(function (data) {
+
+                                // log data to the console so we can see
+                                console.log(data);
+                                // here we will handle errors and validation messages
+                                // here we will handle errors and validation messages
+                                if (!data.success) {
+
+                                    // handle errors for name ---------------
+                                    if (data.errors.current_password) {
+                                        $('#current_password-group').addClass('has-error'); // add the error class to show red input
+                                        $('#current_password-group').append('<div class="help-block">' + data.errors.current_password + '</div>'); // add the actual error message under our input
+                                    }
+
+                                    // handle errors for email ---------------
+                                    if (data.errors.password) {
+                                        $('#password-group').addClass('has-error'); // add the error class to show red input
+                                        $('#password-group').append('<div class="help-block">' + data.errors.password + '</div>'); // add the actual error message under our input
+                                    }
+
+                                    // handle errors for superhero alias ---------------
+                                    if (data.errors.password_confirmation) {
+                                        $('#password_confirmation-group').addClass('has-error'); // add the error class to show red input
+                                        $('#password_confirmation-group').append('<div class="help-block">' + data.errors.password_confirmation + '</div>'); // add the actual error message under our input
+                                    }
+
+                                } else {
+
+                                    // ALL GOOD! just show the success message!
+                                    //$('div.alert').append('<div class="alert alert-success">' + data.message + '</div>');
+                                    $("#close").trigger('click');
+                                    alert(data.message);
+                                    // usually after form submission, you'll want to redirect
+                                    // window.location = '/thank-you'; // redirect a user to another page
+                                    // for now we'll just alert the user
+
                                 }
+                            });
 
-                                // handle errors for email ---------------
-                                if (data.errors.password) {
-                                    $('#password-group').addClass('has-error'); // add the error class to show red input
-                                    $('#password-group').append('<div class="help-block">' + data.errors.password + '</div>'); // add the actual error message under our input
-                                }
-
-                                // handle errors for superhero alias ---------------
-                                if (data.errors.password_confirmation) {
-                                    $('#password_confirmation-group').addClass('has-error'); // add the error class to show red input
-                                    $('#password_confirmation-group').append('<div class="help-block">' + data.errors.password_confirmation + '</div>'); // add the actual error message under our input
-                                }
-
-                            } else {
-
-                                // ALL GOOD! just show the success message!
-                                $('div.alert').append('<div class="alert alert-success">' + data.message + '</div>');
-
-                                // usually after form submission, you'll want to redirect
-                                // window.location = '/thank-you'; // redirect a user to another page
-                                // for now we'll just alert the user
-
-                            }
-                        });
-
-            });
+                });
             });
 
         }
