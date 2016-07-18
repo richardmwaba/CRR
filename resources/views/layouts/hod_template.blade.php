@@ -37,6 +37,7 @@
     <!--[if lt IE 9]>
     <script src="{{URL::asset('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')}}"></script>
     <script src="{{URL::asset('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')}}"></script>
+    <script src="{{URL::asset('../dist/js/jquery-3.1.0 .js')}}"></script>
     <script>$('div.alert').not('.alert_important').(300).slideUp(300)</script>
     <![endif]-->
 

@@ -83,10 +83,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-
-        if($request->has('password')) {
+        
             $this->validate($request, [
-                'password' => 'required|min:8|confirmed',
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
                 'email' => 'required|email|max:255',
@@ -99,20 +97,6 @@ class UserController extends Controller
                 'other_names' => $request->other_names, 'nationality' => $request->nationality,
                 'address' => $request->address, 'phone_number' => $request->phone_number,
             ]);
-        }else{
-            $this->validate($request, [
-                'first_name' => 'required|max:255',
-                'last_name' => 'required|max:255',
-                'email' => 'required|email|max:255',
-                'nationality' => 'required'
-            ]);
-
-            $user->fill(['email' => $request->email,
-                'first_name' => $request->first_name, 'last_name' => $request->last_name,
-                'other_names' => $request->other_names, 'nationality' => $request->nationality,
-                'address' => $request->address, 'phone_number' => $request->phone_number,
-            ]);
-        }
 
 
         $user->save();

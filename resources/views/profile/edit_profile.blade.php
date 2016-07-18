@@ -307,34 +307,19 @@
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 
-                                                        <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
+                                                        <div id="current_password-group" class="form-group">
                                                             <label>Current Password</label>
                                                             <input class="form-control" placeholder="Password" name="current_password" type="password">
-                                                            @if ($errors->has('current_password'))
-                                                                <span class="help-block">
-                                                                <strong>{{ $errors->first('current_password') }}</strong>
-                                                            </span>
-                                                            @endif
                                                         </div>
 
-                                                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                        <div id="password-group" class="form-group">
                                                             <label>Enter New Password</label>
                                                             <input class="form-control" placeholder="Password" name="password" type="password">
-                                                            @if ($errors->has('password'))
-                                                                <span class="help-block">
-                                                                <strong>{{ $errors->first('password') }}</strong>
-                                                            </span>
-                                                            @endif
                                                         </div>
 
-                                                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                                        <div id="password_confirmation-group" class="form-group">
                                                             <label>Confirm New Password</label>
                                                             <input class="form-control" placeholder="Password" name="password_confirmation" type="password" >
-                                                            @if ($errors->has('password_confirmation'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                                                </span>
-                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -376,22 +361,23 @@
                 $("#button").click(function () {
                     $("#demo").toggle();
                 });
-            });
-
             // process the form
-            $('form').submit(function (event) {
+            $('#changePassword').submit(function (event) {
+                event.preventDefault();
+
 
 
                 var formData = {
                     'current_password': $('input[name=current_password]').val(),
                     'password': $('input[name=password]').val(),
-                    'password_confirmation': $('input[name=password_confirmation]').val()
+                    'password_confirmation': $('input[name=password_confirmation]').val(),
+                    '_token': $('input[name=_token]').val()
                 };
                 // process the form
 
                 $.ajax({
                             type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                            url: '', // the url where we want to POST
+                            url: '{{ url('change_password')}}', // the url where we want to POST
                             data: formData, // our data object
                             dataType: 'json', // what type of data do we expect back from the server
                             encode: true
@@ -403,7 +389,7 @@
                             console.log(data);
                             // here we will handle errors and validation messages
                             // here we will handle errors and validation messages
-                            if (!data.success) {
+                            if (! data.success) {
 
                                 // handle errors for name ---------------
                                 if (data.errors.current_password) {
@@ -426,15 +412,16 @@
                             } else {
 
                                 // ALL GOOD! just show the success message!
-                                $("#changePassword").append('<div class="alert alert-success">' + data.message + '</div>');
+                                $('div.alert').append('<div class="alert alert-success">' + data.message + '</div>');
 
                                 // usually after form submission, you'll want to redirect
                                 // window.location = '/thank-you'; // redirect a user to another page
-                                alert('success'); // for now we'll just alert the user
+                                // for now we'll just alert the user
 
                             }
                         });
 
+            });
             });
 
         }
