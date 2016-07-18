@@ -43,7 +43,6 @@
                                             <option value="Dean of School"> Dean of School</option>
                                             <option value="Head of Department"> Head of Department</option>
                                             <option value="Academic Staff"> Academic Staff</option>
-                                            <option value="Support Staff"> Support Staff</option>
 
                                         @else
                                             <option value="Academic Staff"> Academic Staff</option>
@@ -115,17 +114,19 @@
 
                                         </div>
 
-                                @else
+                                    @else
                                         <div class="form-group">
                                             <input type="hidden" value="{{$user->department}}" name="department">
                                         </div>
                                     @endif
 
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <button type="reset" class="btn btn-default">Cancel</button>
+                                    <div class="form-group">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <button type="reset" class="btn btn-default">Cancel</button>
+                                        </div>
                                     </div>
 
                             </form>
