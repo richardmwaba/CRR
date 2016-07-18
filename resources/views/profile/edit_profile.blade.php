@@ -17,8 +17,7 @@
 
                     <div class="panel-body">
                         <div class="col-md-6">
-                            <form class="form-horizontal" role="form" method="POST"
-                                  action="{{ url('/update_profile/'.$user->man_number) }}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/edit_profile') }}">
                                 {!! csrf_field() !!}
 
                                 <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
@@ -276,12 +275,27 @@
                                     <label>Phone Number</label>
                                     <input class="form-control" placeholder="+260" name="phone_number" value="{{$user->phone_number}}">
                                 </div>
-
                                 <div class="form-group">
                                     <a href="#" class="btn btn-link" role="button" data-toggle="modal" data-target="#changePass" onclick="" id="">Change password?</a>
                                 </div>
+                                <div id="demo" class="collapse">
 
-                                <!-- Change password modal -->
+                                </div>
+
+                                <!--Research on how to compare passwords entered in these fields-->
+
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
+                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                </div>
+
+                            </form>
+
+                            <!-- Change password modal -->
+                            <form id="changePassword" class="form-horizontal" role="form">
+                                {!! csrf_field() !!}
                                 <div class="modal fade" id="changePass" role="dialog">
                                     <div class="modal-dialog modal-md">
                                         <div class="modal-content">
@@ -292,6 +306,7 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+
                                                         <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
                                                             <label>Current Password</label>
                                                             <input class="form-control" placeholder="Password" name="current_password" type="password">
@@ -326,7 +341,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="col-md- ">
-                                                    <button name="changePassword" id="changePassword" class="btn btn-primary">Save</button>
+                                                    <button onclick="changePassword()"  class="btn btn-default">save</button>
                                                     <!--</div>
                                                     <div class="">-->
                                                     <button type="reset" class="btn btn-default">Cancel</button>
@@ -338,20 +353,6 @@
                                     </div>
                                 </div>
                                 <!-- /.Change password modal-->
-
-                                <div id="demo" class="collapse">
-
-                                </div>
-
-                                <!--Research on how to compare passwords entered in these fields-->
-
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-4">
-                                    <button type="reset" class="btn btn-default">Cancel</button>
-                                </div>
-
                             </form>
                         </div>
                         <!-- /.col-md-6-->
@@ -368,12 +369,77 @@
     <!-- /#page-wrapper -->
 
     <script>
-        $(document).ready(function(){
-            $("#button").click(function(){
-                $("#demo").toggle();
+        function changePassword() {
+
+            $(document).ready(function() {
+
+                $("#button").click(function () {
+                    $("#demo").toggle();
+                });
             });
-        });
+
+            // process the form
+            $('form').submit(function (event) {
+
+
+                var formData = {
+                    'current_password': $('input[name=current_password]').val(),
+                    'password': $('input[name=password]').val(),
+                    'password_confirmation': $('input[name=password_confirmation]').val()
+                };
+                // process the form
+
+                $.ajax({
+                            type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                            url: '', // the url where we want to POST
+                            data: formData, // our data object
+                            dataType: 'json', // what type of data do we expect back from the server
+                            encode: true
+                        })
+                        // using the done promise callback
+                        .done(function (data) {
+
+                            // log data to the console so we can see
+                            console.log(data);
+                            // here we will handle errors and validation messages
+                            // here we will handle errors and validation messages
+                            if (!data.success) {
+
+                                // handle errors for name ---------------
+                                if (data.errors.current_password) {
+                                    $('#current_password-group').addClass('has-error'); // add the error class to show red input
+                                    $('#current_password-group').append('<div class="help-block">' + data.errors.current_password + '</div>'); // add the actual error message under our input
+                                }
+
+                                // handle errors for email ---------------
+                                if (data.errors.password) {
+                                    $('#password-group').addClass('has-error'); // add the error class to show red input
+                                    $('#password-group').append('<div class="help-block">' + data.errors.password + '</div>'); // add the actual error message under our input
+                                }
+
+                                // handle errors for superhero alias ---------------
+                                if (data.errors.password_confirmation) {
+                                    $('#password_confirmation-group').addClass('has-error'); // add the error class to show red input
+                                    $('#password_confirmation-group').append('<div class="help-block">' + data.errors.password_confirmation + '</div>'); // add the actual error message under our input
+                                }
+
+                            } else {
+
+                                // ALL GOOD! just show the success message!
+                                $("#changePassword").append('<div class="alert alert-success">' + data.message + '</div>');
+
+                                // usually after form submission, you'll want to redirect
+                                // window.location = '/thank-you'; // redirect a user to another page
+                                alert('success'); // for now we'll just alert the user
+
+                            }
+                        });
+
+            });
+
+        }
     </script>
+
 
 
 
