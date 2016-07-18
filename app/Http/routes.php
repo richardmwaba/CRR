@@ -60,7 +60,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('auth.login');
     });
 
-    
+
     //these pages are accessible only to authenticated users
     Route::group(['middleware' => 'auth'], function () {
 
@@ -87,7 +87,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('update_profile/{id}','UserController@store');
         Route::get('remind_user/{id}','ContractController@remind_user');
         Route::get('/expiring_contract_dialog/{id}', 'ContractController@expiring_contract_dialog');
-        Route::resource('photo/store', 'PhotoController@store');
+        //Route::resource('photo/store', 'PhotoController@store');
+        Route::post('change_password', 'PasswordController@change_password');
 
 
         //these pages can only be accessed by the HOD
