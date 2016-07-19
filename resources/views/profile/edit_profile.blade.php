@@ -406,8 +406,9 @@
                                     // handle errors for name ---------------
                                     if (data.errors.current_password) {
                                         $('#current_password-group').addClass('has-error'); // add the error class to show red input
-                                        $('#current_password-group').append('<div class="help-block">' + data.errors.current_password + '</div>'); // add the actual error message under our input
+                                        $('#current_password-group').append('<div id="error" class="help-block">' + data.errors.current_password + '</div>'); // add the actual error message under our input
                                     }
+
 
                                     // handle errors for email ---------------
                                     if (data.errors.password) {
@@ -436,6 +437,7 @@
 
                 });
             });
+
 
         }
     </script>
