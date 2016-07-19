@@ -21,7 +21,7 @@
                                data-sort-order="desc" style="font-size: small">
                             <thead>
                             <tr>
-                                <th data-field="state" data-checkbox="true">Count</th>
+                                <!--<th data-field="state" data-checkbox="true">Count</th>-->
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="id" data-sortable="true">Man #</th>
                                 <th data-field="position" data-sortable="true">Position</th>
@@ -38,7 +38,7 @@
 
                                 <tr>
 
-                                    <td data-field="state" data-checkbox="true">{{$staff->id}}</td>
+                                    <!--<td data-field="state" data-checkbox="true">{{$staff->id}}</td>-->
                                     <td>{{$staff->first_name}} {{$staff->last_name}}</td>
                                     <td>{{$staff->man_number}}</td>
                                     <td>{{$staff->position}}</td>
@@ -51,9 +51,15 @@
                                     <td class="text-success">{{$staff->contract_tracking}}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-sm btn-link">Edit</a>
+                                            <!--<a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-sm btn-link">Edit</a>
                                             <a onclick="delete_user('{{$staff->first_name}}', '{{$staff->man_number}}')"
-                                               class="btn btn-sm btn-link">Delete</a>
+                                               class="btn btn-sm btn-link">Delete</a>-->
+                                            <button class="btn btn-default btn-xs" id="" onclick="{{url('/edit_user/'.$staff->man_number)}}" type="button" name="toggle" title="edit">
+                                                <i class="glyphicon glyphicon glyphicon-edit"></i>
+                                            </button>
+                                            <button class="btn btn-default btn-xs" onclick="delete_user('{{$staff->first_name}}', '{{$staff->man_number}}')" type="button" name="toggle" title="delete">
+                                                <i class="glyphicon glyphicon glyphicon-trash"></i>
+                                            </button>
 
                                         </div>
                                     </td>

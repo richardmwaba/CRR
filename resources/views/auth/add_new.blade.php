@@ -35,28 +35,32 @@
 
                                 <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
                                     <label>Position</label>
-                                    <select class="form-control" name="position">
-                                        <option value="">-- select position --</option>
-
                                         @if($user->position=='Contracts Officer')
-                                            <option value="Contracts Officer"> Contracts Officer</option>
-                                            <option value="Dean of School"> Dean of School</option>
-                                            <option value="Head of Department"> Head of Department</option>
-                                            <option value="Academic Staff"> Academic Staff</option>
-                                            <option value="Support Staff"> Support Staff</option>
 
+                                            <select id="Positions" class="form-control" name="position">
+                                                <option value="">-- select position --</option>
+                                            </select>
+                                        @elseif($user->position=='Dean of School')
+                                            <select id="selectNumber" class="form-control" name="position">
+                                                <option value="">-- select position --</option>
+                                                <option value="Head of Department"> Head of Department</option>
+                                                <option value="Academic Staff"> Academic Staff</option>
+                                                <option value="Support Staff"> Support Staff</option>
+                                            </select>
                                         @else
+                                        <select id="selectNumber" class="form-control" name="position">
+                                            <option value="">-- select position --</option>
                                             <option value="Academic Staff"> Academic Staff</option>
                                             <option value="Support Staff"> Support Staff</option>
+                                        </select>
+
                                         @endif
-                                    </select>
 
                                     @if ($errors->has('position'))
                                         <span class="help-block">
                                                 <strong>{{ $errors->first('position') }}</strong>
                                             </span>
                                     @endif
-
                                 </div>
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label>E-mail Address</label>
@@ -71,15 +75,17 @@
 
                                     <div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
                                         <label>School</label>
-                                        <select onchange="department(selected)" class="form-control" name="school">
+                                        <select id="ddl" onchange="dropdowns(this,document.getElementById('ddl2'))" class="form-control" name="school">
                                             <option value="">-- select school --</option>
-                                            <option value="Natural Sciences">Natural Sciences</option>
-                                            <option value="Education">Education</option>
-                                            <option value="Engineering">Engineering</option>
-                                            <option value="Mines">Mines</option>
-                                            <option value="Veterinary Medicine">Veterinary Medicine</option>
-                                            <option value="Humanities">Humanities</option>
-                                            <option value="Agriculture">Agriculture</option>
+                                            <option value="Agriculture"> Agriculture</option>
+                                            <option value="Education"> Education</option>
+                                            <option value="Engineering"> Engineering</option>
+                                            <option value="Humanities"> Humanities & Social Sciences</option>
+                                            <option value="Law"> Law</option>
+                                            <option value="Medicine"> Medicine</option>
+                                            <option value="Mines"> Mines</option>
+                                            <option value="NS"> Natural Sciences</option>
+                                            <option value="Veterinary Medicine"> Veterinary Medicine</option>
                                         </select>
 
                                         @if ($errors->has('school'))
@@ -87,22 +93,19 @@
                                                 <strong>{{ $errors->first('school') }}</strong>
                                             </span>
                                         @endif
+                                    </div>
                                         @else
-                                            <input type="hidden" value="{{$user->school}}" name="school">
+                                            <input class="form-control" type="hidden" value="{{$user->school}}" name="school">
 
                                         @endif
 
-                                    </div>
+
                                     @if($user->position=='Contracts Officer' OR $user->position=='Dean of School')
                                         <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
 
                                             <label>Department</label>
 
-                                            <select id="department" class="form-control" name="department">
-                                                <option value="">-- select department --</option>
-                                                <option value="Computer Science">Computer Science</option>
-                                                <option value="Physics">Physics</option>
-                                                <option value="Chemistry">Chemistry</option>
+                                            <select id="ddl2" class="form-control" name="department">
 
                                             </select>
 
@@ -115,17 +118,19 @@
 
                                         </div>
 
-                                @else
+                                    @else
                                         <div class="form-group">
-                                            <input type="hidden" value="{{$user->department}}" name="department">
+                                            <input class="form-control" type="hidden" value="{{$user->department}}" name="department">
                                         </div>
                                     @endif
 
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <button type="reset" class="btn btn-default">Cancel</button>
+                                    <div class="form-group">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <button type="reset" class="btn btn-default">Cancel</button>
+                                        </div>
                                     </div>
 
                             </form>
@@ -141,16 +146,7 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
-    <script>
-        function department(value) {
-            alert("Power");
-            //if (value.equals("Natural Sciences")){
 
-            //document.getElementById("department").innerHTML = "Trial";
-
-
-        }
-    </script>
 
 
 @endsection

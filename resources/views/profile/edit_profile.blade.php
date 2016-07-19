@@ -1,5 +1,5 @@
 @extends('layouts.hod_template')
-@section('title', 'Edit_Profile')
+@section('title', 'Edit Profile')
 
 @section('content')
     <div id="page-wrapper">
@@ -23,8 +23,12 @@
 
                                 <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                                     <label>First Name</label>
+<<<<<<< HEAD
                                     <input class="form-control" name="first_name" placeholder="{{$user->first_name}}"
                                            value="{{$user->first_name}}">
+=======
+                                    <input class="form-control" name="first_name" placeholder="{{$user->first_name}}" value="{{$user->first_name}}">
+>>>>>>> in3rtia
                                     @if ($errors->has('first_name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -34,8 +38,12 @@
 
                                 <div class="form-group{{ $errors->has('other_names') ? ' has-error' : '' }}">
                                     <label>Middle Name</label>
+<<<<<<< HEAD
                                     <input class="form-control" name="other_names" placeholder="{{$user->other_names}}"
                                            value="{{$user->other_names}}">
+=======
+                                    <input class="form-control" name="other_names" placeholder="{{$user->other_names}}" value="{{$user->other_names}}">
+>>>>>>> in3rtia
                                     @if ($errors->has('other_names'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('other_names') }}</strong>
@@ -45,8 +53,12 @@
 
                                 <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                     <label>Last Name</label>
+<<<<<<< HEAD
                                     <input class="form-control" name="last_name" placeholder="{{$user->last_name}}"
                                            value="{{$user->last_name}}">
+=======
+                                    <input class="form-control" name="last_name" placeholder="{{$user->last_name}}" value="{{$user->last_name}}">
+>>>>>>> in3rtia
                                     @if ($errors->has('last_name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -56,8 +68,12 @@
 
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label>E-mail Address</label>
+<<<<<<< HEAD
                                     <input class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}"
                                            name="email" type="email">
+=======
+                                    <input class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}" name="email" type="email">
+>>>>>>> in3rtia
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -271,16 +287,34 @@
 
                                 </div>
 
+                                <div class="form-group{{ $errors->has('NRC') ? ' has-error' : '' }}">
+                                    <label>NRC Number</label>
+                                    <input class="form-control" placeholder="{{$user->NRC}}" value="{{$user->NRC}}" name="nrc_number" type="">
+                                    @if ($errors->has('NRC'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('NRC') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+
                                 <div class="form-group">
                                     <label>Residential Address</label>
+<<<<<<< HEAD
                                     <input class="form-control" placeholder="address" name="address"
                                            value="{{$user->address}}">
+=======
+                                    <input class="form-control" placeholder="address" name="address" value="{{$user->address}}">
+>>>>>>> in3rtia
                                 </div>
 
                                 <div class="form-group">
                                     <label>Phone Number</label>
+<<<<<<< HEAD
                                     <input class="form-control" placeholder="+260" name="phone_number"
                                            value="{{$user->phone_number}}">
+=======
+                                    <input class="form-control" placeholder="+260" name="phone_number" value="{{$user->phone_number}}">
+>>>>>>> in3rtia
                                 </div>
                                 <div class="form-group">
                                     <a href="#" class="btn btn-link" role="button" data-toggle="modal"
@@ -315,11 +349,22 @@
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+<<<<<<< HEAD
 
                                                         <div id="current_password-group" class="form-group">
                                                             <label>Current Password</label>
                                                             <input class="form-control" placeholder="Password"
                                                                    name="current_password" type="password">
+=======
+                                                        <div class="form-group{{ $errors->has('current_password') ? ' has-error' : '' }}">
+                                                            <label>Current Password</label>
+                                                            <input class="form-control" placeholder="Password" name="current_password" type="password">
+                                                            @if ($errors->has('current_password'))
+                                                                <span class="help-block">
+                                                                <strong>{{ $errors->first('current_password') }}</strong>
+                                                            </span>
+                                                            @endif
+>>>>>>> in3rtia
                                                         </div>
 
                                                         <div id="password-group" class="form-group">
@@ -338,8 +383,12 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="col-md- ">
+<<<<<<< HEAD
                                                     <button onclick="changePassword()" class="btn btn-default">save
                                                     </button>
+=======
+                                                    <button name="changePassword" id="changePassword" class="btn btn-primary">Save</button>
+>>>>>>> in3rtia
                                                     <!--</div>
                                                     <div class="">-->
                                                     <button type="reset" class="btn btn-default">Cancel</button>
