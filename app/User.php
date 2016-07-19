@@ -19,7 +19,7 @@ class User extends Authenticatable
 
         'first_name', 'last_name', 'man_number', 'email', 'password', 'position','other_names', 'nationality',
         'department','man_number', 'last_modified_by', 'expires_on', 'school','department', 'contract_tracking',
-        'contract_status'
+        'contract_status', 'NRC', 'address', 'phone_number'
     ];
 
     /**

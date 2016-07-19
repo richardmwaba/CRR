@@ -92,9 +92,10 @@ class UserController extends Controller
             ]);
 
             $user->fill(['email' => $request->email,
+                'password' => bcrypt($request->password),
                 'first_name' => $request->first_name, 'last_name' => $request->last_name,
                 'other_names' => $request->other_names, 'nationality' => $request->nationality,
-                'address' => $request->address, 'phone_number' => $request->phone_number, 'NRC' => $request->nrc_number,
+                'address' => $request->address, 'phone_number' => $request->phone_number,
             ]);
 
 
