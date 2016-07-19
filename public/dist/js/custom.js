@@ -81,7 +81,7 @@ function dropdowns(ddl1, ddl2){
             ddl.options.add(opt);
         }
 
-        var positions = ["Contracts Officer","Head of Department","Dean Of School" ,"Academic Staff","Support Staff"];     
+        var positions = ["Head of Department","Dean Of School" ,"Academic Staff","Support Staff"];
 
         var sel = document.getElementById('Positions');
         var fragment = document.createDocumentFragment();
