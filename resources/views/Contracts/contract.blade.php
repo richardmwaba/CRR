@@ -17,7 +17,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Update Contract</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/update_contract')}}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/update_contract/'.$contract->man_number)}}">
                                 {!! csrf_field() !!}
 
                                 <div class="form-group">
@@ -25,10 +25,11 @@
 
                                     <div class="col-md-6">
 
-                                        <input type="number" name="contract_length" value="{{old('contract_length' , $contract->contract_length)}}"> Days
+                                        <input type="number" name="contract_length"> Days
 
                                     </div>
                                 </div>
+                                <input name="man_number" type="hidden" value="{{$contract->man_number}}">
 
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
@@ -37,7 +38,6 @@
                                         </button>
                                     </div>
                                 </div>
-                                <input name="man_number" type="hidden" value="{{$man_number}}">
                             </form>
                         </div>
                     </div>

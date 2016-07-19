@@ -68,7 +68,7 @@
                                     received:</label>
                                 <div class="col-sm-2 col-md-2 col-xs-6">
                                     <label id="demo">
-                                        <input type="checkbox" value="" onchange="contractUpdate(this)"
+                                        <input id="received" type="checkbox" value="" onchange="contractUpdate(this)"
                                         <?php
                                                 $position = Auth()->user()->position;
                                                 $tracking = $user->contract_tracking;

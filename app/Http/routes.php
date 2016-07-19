@@ -72,7 +72,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('contract_info', 'ContractController@contract_info');
         Route::get('/contract/{id}', 'ContractController@showContract');
         Route::get('/full_profile/{id}', 'ContractController@full_profile');
-        Route::post('/update_contract', 'ContractController@store');
+        Route::post('update_contract/{id}', 'ContractController@store');
         Route::get('/add_new', 'UserController@add_new_form');
         Route::get('delete_user/{id}', 'UserController@delete');
         Route::get('/staff_view', 'UserController@staff_view');

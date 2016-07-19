@@ -8,8 +8,9 @@
     <p>Hi,</p>
 <p>
     You have been added to the UNZA contracts renewal reminder system.
-    Please follow the link below to complete your registration and create a new user password. Use <h3>{{$password}}</h3> as your temporal password:
-    <a href="{{url('/edit_profile')}}">Click here</a>
+    This <h3>{{$password}}</h3> is your temporal password:
+    Please <a href="{{url('/edit_profile')}}">complete your registration here</a>  and remember to create a new user password.
+
 </p>
 
 </body>

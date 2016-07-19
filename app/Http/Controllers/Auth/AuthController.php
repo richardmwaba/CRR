@@ -75,16 +75,14 @@ class AuthController extends Controller
             'position' => $data['position'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'expires_on' => Carbon::now(),
-            'man_number' =>$data['man_number'],
 
-            /*
+            
             //Send mail to new user
             Mail::send('Mails.new_user', ['data' => $data], function ($m) use ($data) {
 
                 $m->to($data['email'], 'Me')->subject('Complete registration');
             })
-            */
+            
 
         ]);
 

@@ -61,17 +61,17 @@ class check_contracts extends Command
                      *else keep sending monthly reminders until user submits contract for renewal
                      */
                     if ($user->contract_tracking != null AND $user->contract_tracking == "Renewed") {
-                        Mail::send('Mails.user_reminder', ['user' => $user], function ($m) use ($user) {
+                        Mail::send('Mails.reminder', ['user' => $user], function ($m) use ($user) {
 
-                            $m->to($user->email, 'Me')->subject('Renew your contract!');
+                            $m->to($user->email, 'Me')->subject($user->first_name.', Your contract Expires soon');
                         });
                         $user->contract_tracking = "Not available";
                         $user->contract_status = "Expires soon";
 
                     } elseif ($user->contract_tracking != null AND $user->contract_tracking == "Not available") {
-                        Mail::send('Mails.user_reminder', ['user' => $user], function ($m) use ($user) {
+                        Mail::send('Mails.reminder', ['user' => $user], function ($m) use ($user) {
 
-                            $m->to($user->email, 'Me')->subject('Renew your contract!');
+                            $m->to($user->email, 'Me')->subject($user->first_name.', Your contract Expires soon');
                         });
 
 
@@ -102,7 +102,7 @@ class check_contracts extends Command
             $c_officer = $heads->where('position', 'Contracts Officer')->first();
             Mail::send('Mails.contracts_to_be_renewed', ['users' => $users], function ($m) use ($c_officer) {
 
-                $m->to($c_officer->email, 'Me')->subject('Contracts need renewal!');
+                $m->to($c_officer->email, 'Me')->subject($c_officer->first_name.', These contracts need your attention this month!');
             });
         }
 
@@ -119,7 +119,7 @@ class check_contracts extends Command
                 else {
                     Mail::send('Mails.contracts_to_be_renewed', ['users' => $under_this_dean], function ($m) use ($dean) {
 
-                        $m->to($dean->email, 'Me')->subject('Contracts need renewal!');
+                        $m->to($dean->email, 'Me')->subject($dean->first_name.', These contracts need your attention this month!');
                     });
                 }
         }
@@ -138,7 +138,7 @@ class check_contracts extends Command
             else {
                 Mail::send('Mails.contracts_to_be_renewed', ['users' => $under_this_department], function ($m) use ($hod) {
 
-                    $m->to($hod->email, 'Me')->subject('Contracts need renewal!');
+                    $m->to($hod->email, 'Me')->subject($hod->first_name.', These contracts need your attention this month!');
                 });
             }
         }

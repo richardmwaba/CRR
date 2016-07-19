@@ -7,8 +7,9 @@
 <body>
 
 <p>
-    Please start the renewing process or follow the link if you have already submitted to the Head of department:
-    <a href="{{url('/contract_info')}}"> Confirm here</a>
+    Please start the renewing process if you have't or follow the link below if you have<br>
+    already submitted it for renewal.
+    <a href="{{url('/contract_info')}}">submitted?</a>
 </p>
 
 </body>

@@ -30,7 +30,7 @@
                                 <th data-field="renew by" data-sortable="true">Renew By</th>
                                 <th data-field="contract status" data-sortable="true">Contract Status</th>
                                 <th data-field="application stage" data-sortable="true">Application Stage</th>
-                                <th data-field="add/delete" data-sortable="true">Edit | Delete</th>
+                                <th data-field="edit/delete" data-sortable="true">Edit | Delete</th>
                             </tr>
                             </thead>
 
@@ -51,12 +51,12 @@
                                     <td class="text-success">{{$staff->contract_tracking}}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <!--<a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-sm btn-link">Edit</a>
-                                            <a onclick="delete_user('{{$staff->first_name}}', '{{$staff->man_number}}')"
+                                            <a href="{{url('/edit_user/'.$staff->man_number)}}" class="btn btn-sm btn-link">Edit</a>
+                                            <!--<a onclick="delete_user('$staff->first_name}}', '$staff->man_number}}')"
                                                class="btn btn-sm btn-link">Delete</a>-->
-                                            <button class="btn btn-default btn-xs" id="" onclick="{{url('/edit_user/'.$staff->man_number)}}" type="button" name="toggle" title="edit">
-                                                <i class="glyphicon glyphicon glyphicon-edit"></i>
-                                            </button>
+                                            <!--<a class="btn btn-default btn-xs" type="button" title="edit">
+                                                <i href="url('/edit_user/'.$staff->man_number)}}" class="glyphicon glyphicon glyphicon-edit"></i>
+                                            </a>-->
                                             <button class="btn btn-default btn-xs" onclick="delete_user('{{$staff->first_name}}', '{{$staff->man_number}}')" type="button" name="toggle" title="delete">
                                                 <i class="glyphicon glyphicon glyphicon-trash"></i>
                                             </button>
@@ -144,7 +144,7 @@
 
         $(window).on('resize', function () {
             if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-        })
+        });
         $(window).on('resize', function () {
             if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
         })

@@ -308,6 +308,7 @@
 <!-- IMage cropping-->
 <script src="{{URL::asset('../dist/js/cropping/cropper.min.js')}}"></script>
 <script src="{{URL::asset('../dist/js/cropping/main.js')}}"></script>
+@show
 
 
 

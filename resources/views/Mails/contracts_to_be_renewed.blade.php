@@ -14,8 +14,8 @@
     @endforeach
         </ol>
 </p>
-    Please follow the link below to view or update these contracts
-    <a href="{{url('HomeController@index')}}"> Confirm here</a>
+    Please follow the link below to view or update them.
+    <a href="{{url('HomeController@index')}}">View/Update</a>
 
 </body>
 </html>

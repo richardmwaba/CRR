@@ -7,8 +7,8 @@
 <body>
 
 <p>
-    Please follow up or follow the link below to verify if you have already submitted your contract for renewal
-    <a href="{{url('/contract_info')}}"> Confirm here</a>
+    Please see the {{Auth::user()->position}} and follow the link below to verify if you have already submitted it for renewal.
+    <a href="{{url('/contract_info')}}">verify</a>
 </p>
 
 </body>

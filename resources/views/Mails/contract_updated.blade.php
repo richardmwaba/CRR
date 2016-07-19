@@ -7,8 +7,8 @@
 <body>
 
 <p>
-    Your contract has been renewed. Please follow the link below if you wish to review it:
-    <a href="{{url('/contract_info')}}"> Confirm here</a>
+    Your contract has been renewed. Follow the link below to:
+    <a href="{{url('/contract_info')}}">View contract</a>
 </p>
 
 </body>
