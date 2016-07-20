@@ -93,18 +93,6 @@ function dropdowns(ddl1, ddl2){
         });
         sel.appendChild(fragment);
 
-       var positions2 = ["Academic Staff","Support Staff"];     
-
-        var select = document.getElementById('Positions2');
-        var frag = document.createDocumentFragment();
-        positions2.forEach(function(position, index) {
-            var opt = document.createElement('option');
-            opt.innerHTML = position;
-            opt.value = position;
-            fragment.appendChild(opt);
-        });
-        select.appendChild(frag); 
-
     /*Populating content in the drop downs for School and departments*/
     /* End */
 

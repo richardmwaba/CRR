@@ -142,7 +142,7 @@ class UserController extends Controller
             $data->department = "Not applicable";
         }
 
-        //create user orm
+        //create user form
         User::create(['man_number' => $data->man_number, 'department' => $data->department, 'email' => $data->email,
             'position' => $data->position, 'password' => bcrypt($password),
             'school' => $data->school

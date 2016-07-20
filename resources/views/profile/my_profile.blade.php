@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-md-3 col-xs-4" for="NRC"> NRC Number:</label>
                                     <div class="col-sm-6 col-md-6 col-xs-5">
-                                        <label class="text-primary" for="NRC_value"></label>
+                                        <label class="text-primary" for="NRC_value">{{$user->NRC}}</label>
                                     </div>
                                 </div>
 
@@ -70,14 +70,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 col-md-3 col-xs-4" for="residential-address"> Residential Address:</label>
                                     <div class="col-sm-6 col-md-6 col-xs-5">
-                                        <label class="text-primary" for="residential_address_value"></label>
+                                        <label class="text-primary" for="residential_address_value">{{$user->address}}</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 col-md-3 col-xs-4" for="phone-number"> Phone Number:</label>
                                     <div class="col-sm-6 col-md-6 col-xs-5">
-                                        <label class="text-primary" for="phone_number_value"></label>
+                                        <label class="text-primary" for="phone_number_value">{{$user->phone_number}}</label>
                                     </div>
                                 </div>
 

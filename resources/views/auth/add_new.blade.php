@@ -35,32 +35,32 @@
 
                                 <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
                                     <label>Position</label>
-
                                         @if($user->position=='Contracts Officer')
-                                        <select id="Positions" class="form-control" name="position">
+
+                                            <select id="Positions" class="form-control" name="position">
+                                                <option value="">-- select position --</option>
+                                            </select>
+                                        @elseif($user->position=='Dean of School')
+                                            <select id="selectNumber" class="form-control" name="position">
+                                                <option value="">-- select position --</option>
+                                                <option value="Head of Department"> Head of Department</option>
+                                                <option value="Academic Staff"> Academic Staff</option>
+                                                <option value="Support Staff"> Support Staff</option>
+                                            </select>
+                                        @else
+                                        <select id="selectNumber" class="form-control" name="position">
                                             <option value="">-- select position --</option>
-                                            <!--<option value="Contracts Officer"> Contracts Officer</option>
-                                            <option value="Dean of School"> Dean of School</option>
-                                            <option value="Head of Department"> Head of Department</option>
-                                            <option value="Academic Staff"> Academic Staff</option>-->
+                                            <option value="Academic Staff"> Academic Staff</option>
+                                            <option value="Support Staff"> Support Staff</option>
                                         </select>
 
-                                        @else
-                                                <select id="Positions2" class="form-control" name="position">
-                                                    <option value="">-- select position --</option>
-                                            <!--<option value="Academic Staff"> Academic Staff</option>
-                                            <option value="Support Staff"> Support Staff</option>-->
-
-                                                </select>
-                                            @endif
+                                        @endif
 
                                     @if ($errors->has('position'))
                                         <span class="help-block">
                                                 <strong>{{ $errors->first('position') }}</strong>
                                             </span>
                                     @endif
-
-
                                 </div>
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <label>E-mail Address</label>
@@ -93,12 +93,13 @@
                                                 <strong>{{ $errors->first('school') }}</strong>
                                             </span>
                                         @endif
+                                    </div>
                                         @else
-                                            <input type="hidden" value="{{$user->school}}" name="school">
+                                            <input class="form-control" type="hidden" value="{{$user->school}}" name="school">
 
                                         @endif
 
-                                    </div>
+
                                     @if($user->position=='Contracts Officer' OR $user->position=='Dean of School')
                                         <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
 
@@ -119,7 +120,7 @@
 
                                     @else
                                         <div class="form-group">
-                                            <input type="hidden" value="{{$user->department}}" name="department">
+                                            <input class="form-control" type="hidden" value="{{$user->department}}" name="department">
                                         </div>
                                     @endif
 

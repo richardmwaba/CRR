@@ -1,5 +1,5 @@
 @extends('layouts.hod_template')
-@section('title', 'Edit_Profile')
+@section('title', 'Edit Profile')
 
 @section('content')
     <div id="page-wrapper">
@@ -265,6 +265,16 @@
                                         @endif
                                     </select>
 
+                                </div>
+
+                                <div class="form-group{{ $errors->has('NRC') ? ' has-error' : '' }}">
+                                    <label>NRC Number</label>
+                                    <input class="form-control" placeholder="{{$user->NRC}}" value="{{$user->NRC}}" name="nrc_number" type="">
+                                    @if ($errors->has('NRC'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('NRC') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
