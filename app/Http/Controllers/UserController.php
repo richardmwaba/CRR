@@ -121,8 +121,9 @@ class UserController extends Controller
         $password = str_random(8);
 
         //set default department for Dean
-        if ($data->position == "Dean of School" OR $data->position == "Contracts Officer") {
+        if ($data->position == "Contracts Officer") {
             $data->department = "Not applicable";
+            $data->school = "Not applicable";
         }
 
         //create user orm

@@ -122,7 +122,7 @@
                                                         break;
                                                     default :
                                                         if($tracking != "Not available")
-                                                            echo 'checked';
+                                                            //echo 'checked';
                                                         break;
 
                                                 } ?> >

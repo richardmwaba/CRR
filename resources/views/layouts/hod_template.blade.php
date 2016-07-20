@@ -169,23 +169,7 @@
                             </li>
 
                         @else
-                            @if(Auth()->user()->position=='Dean of School')
-                                <li>
-                                    <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i>Home</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-table fa-fw"></i> Staff<span
-                                                class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="{{URL::asset('staff_view')}}">View All Staff</a>
-                                            <a href="{{URL::asset('add_new')}}"> Add New Staff</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-second-level -->
-                                </li>
-
-                            @elseif(Auth()->user()->position=='Head of Department')
+                            @if(Auth()->user()->position=='Head of Department' OR Auth()->user()->position=='Dean of School' OR Auth()->user()->position=='Contracts Officer')
 
                                 <li>
                                     <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i>Home</a>
@@ -196,23 +180,6 @@
                                     <ul class="nav nav-second-level">
                                         <li>
                                             <a href="{{URL::asset('staff_view')}}">Staff View</a>
-                                            <a href="{{URL::asset('add_new')}}"> Add New Staff</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-second-level -->
-                                </li>
-
-                            @elseif(Auth()->user()->position=='Contracts Officer')
-
-                                <li>
-                                    <a href="{{URL::asset('home')}}"><i class="fa fa-home fa-fw"></i>Home</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-table fa-fw"></i> Staff<span
-                                                class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="{{URL::asset('staff_view')}}">View All Staff</a>
                                             <a href="{{URL::asset('add_new')}}"> Add New Staff</a>
                                         </li>
                                     </ul>

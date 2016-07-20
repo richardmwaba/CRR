@@ -18,7 +18,7 @@
                                 <div class="form-group">
                                   <label class="col-sm-4 col-md-2 col-xs-6" for="status">Contract Status:</label>
                                   <div class="col-sm-8 col-md-10 col-xs-6">
-                                    <label class="text-danger" for="status">@if($contract->contract_status=="Valid"){{$contract->contract_status}}@elseif($contract->contract_status=="Expired")
+                                    <label class="text-danger" for="status">@if($contract->contract_status=="Valid")<p style="color:green">{{$contract->contract_status}}@elseif($contract->contract_status=="Expired")
                                             <p style="color:red">{{$contract->contract_status}}</p> @else<p
                                                     style="color:orange">{{$contract->contract_status}}</p>@endif</label>
                                   </div>

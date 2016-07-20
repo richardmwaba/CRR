@@ -114,7 +114,7 @@ class ContractController extends Controller
                 $contract->contract_tracking = "Dean's Office";
 
                 //code to send to notification
-                MMail::send('Mails.contract_tracking_change', ['contract' => $contract], function ($m) use ($contract) {
+                Mail::send('Mails.contract_tracking_change', ['contract' => $contract], function ($m) use ($contract) {
 
                     $m->to($contract->email, 'Me')->subject('You have an update on your contract');
                 });
