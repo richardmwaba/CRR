@@ -95,8 +95,7 @@
                                         <!--Include modal here to show after the check box is checked-->
                                     </label>
                                 </div>
-                            </div>
-
+                                </div>
 
                             <div class="form-group">
                                 <label class="col-sm-4 col-md-5 col-xs-6" for="check">Select if application has been
@@ -122,7 +121,7 @@
                                                         break;
                                                     default :
                                                         if($tracking != "Not available")
-                                                            //echo 'checked';
+                                                            echo 'checked';
                                                         break;
 
                                                 } ?> >

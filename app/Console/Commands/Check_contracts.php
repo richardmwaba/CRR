@@ -51,7 +51,7 @@ class check_contracts extends Command
                 $diff = $today->diffInMonths($expires, false);
 
                 /*check for expiring contracts*/
-                if ($diff <= 6) {
+                if ($diff < 6 AND $diff > 0) {
 
 
                     /*sends reminder if user has not submitted for renewal
@@ -78,7 +78,7 @@ class check_contracts extends Command
                     }
 
                     //else set the contract status to expired if it is
-                } elseif ($diff <= 0) {
+                } else{
                     $user->contract_status = "Expired";
                 }
 

@@ -75,15 +75,15 @@
                                                         switch($position){
 
                                                             case "Contracts Officer":
-                                                                if($tracking == "Dean's Office" OR $tracking == "Contracts Office" OR $tracking=="Waiting for Dean's approval")
+                                                                if($tracking == "Contracts Office")
                                                                     echo 'checked';
                                                                 break;
                                                             case "Head of Department":
-                                                                if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval" OR $tracking == "Waiting for Contract's approval" )
+                                                                if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
                                                                     echo 'checked';
                                                                 break;
                                                             case "Dean of School":
-                                                                if($tracking=="Dean's Office")
+                                                                if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
                                                                     echo 'checked';
                                                                 break;
                                                             default :
@@ -110,16 +110,15 @@
                                                         switch($position){
 
                                                             case "Contracts Officer":
-                                                                if($tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval")
-                                                                    echo 'checked';
+                                                                echo 'checked';
                                                                 break;
                                                             case "Head of Department":
-                                                                if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contract's approval" OR $tracking=="Waiting for Dean's approval")
+                                                                if($tracking == "Waiting for Dean's acknowledgement" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contracts Officer's acknowledgement" OR $tracking=="Contracts Office")
                                                                     echo 'checked';
                                                                 break;
                                                             case "Dean of School":
-                                                                //
-                                                                echo 'checked';
+                                                                if($tracking == "Dean's Office" OR $tracking == "Waiting for Contracts Officer's acknowledgement" OR $tracking=="Contracts Office")
+                                                                    echo 'checked';
                                                                 break;
                                                             default :
                                                                 if($tracking != "Not available")
@@ -158,7 +157,6 @@
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
-    </div>
     <!-- /#page-wrapper -->
 
     <script>
