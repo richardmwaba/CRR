@@ -53,7 +53,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
     Route::get('/about', function () {
-        return view('about');
+        return view('visitorabout');
     });
 
     Route::get('/', function () {
@@ -89,6 +89,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/expiring_contract_dialog/{id}', 'ContractController@expiring_contract_dialog');
         //Route::resource('photo/store', 'PhotoController@store');
         Route::post('change_password', 'PasswordController@change_password');
+        Route::get('/about', function () {
+            return view('about');
+        });
 
 
         //these pages can only be accessed by the HOD

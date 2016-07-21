@@ -54,7 +54,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><span><img
+                    <a class="navbar-brand" href="{{url('/login')}}"><span><img
                                     src="{{URL::asset('../img/unza.png')}}" alt="Unza logo" height="35" width="35"
                                     style="padding-bottom:5px"></span> Contract Renewal Reminder</a>
                 </div>
@@ -62,13 +62,13 @@
 
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" title="Login" href="#">
+                        <a class="dropdown-toggle"  title="Login" href="{{url('/login')}}">
                             <i class="fa fa-user fa-fw"></i>
                         </a>
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" title="About" href="#">
+                        <a class="dropdown-toggle"  title="About" href="{{url('/about')}}">
                             About
                         </a>
                     </li>
