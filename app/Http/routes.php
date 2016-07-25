@@ -52,7 +52,7 @@ Route::controller('notifications', 'NotificationController');
 Route::group(['middleware' => ['web']], function () {
 
     Route::auth();
-    Route::get('/about', function () {
+    Route::get('/About', function () {
         return view('visitorabout');
     });
 

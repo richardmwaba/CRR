@@ -35,26 +35,26 @@
 
                                 <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
                                     <label>Position</label>
-                                        @if($user->position=='Contracts Officer')
+                                    @if($user->position=='Contracts Officer')
 
-                                            <select id="Positions" class="form-control" name="position">
-                                                <option value="">-- select position --</option>
-                                            </select>
-                                        @elseif($user->position=='Dean of School')
-                                            <select id="selectNumber" class="form-control" name="position">
-                                                <option value="">-- select position --</option>
-                                                <option value="Head of Department"> Head of Department</option>
-                                                <option value="Academic Staff"> Academic Staff</option>
-                                                <option value="Support Staff"> Support Staff</option>
-                                            </select>
-                                        @else
+                                        <select id="Positions" class="form-control" name="position">
+                                            <option value="">-- select position --</option>
+                                        </select>
+                                    @elseif($user->position=='Dean of School')
+                                        <select id="selectNumber" class="form-control" name="position">
+                                            <option value="">-- select position --</option>
+                                            <option value="Head of Department"> Head of Department</option>
+                                            <option value="Academic Staff"> Academic Staff</option>
+                                            <option value="Support Staff"> Support Staff</option>
+                                        </select>
+                                    @else
                                         <select id="selectNumber" class="form-control" name="position">
                                             <option value="">-- select position --</option>
                                             <option value="Academic Staff"> Academic Staff</option>
                                             <option value="Support Staff"> Support Staff</option>
                                         </select>
 
-                                        @endif
+                                    @endif
 
                                     @if ($errors->has('position'))
                                         <span class="help-block">
@@ -75,7 +75,8 @@
 
                                     <div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
                                         <label>School</label>
-                                        <select id="ddl" onchange="dropdowns(this,document.getElementById('ddl2'))" class="form-control" name="school">
+                                        <select id="ddl" onchange="dropdowns(this,document.getElementById('ddl2'))"
+                                                class="form-control" name="school">
                                             <option value="">-- select school --</option>
                                             <option value="Agriculture"> Agriculture</option>
                                             <option value="Education"> Education</option>
@@ -94,44 +95,69 @@
                                             </span>
                                         @endif
                                     </div>
-                                        @else
-                                            <input class="form-control" type="hidden" value="{{$user->school}}" name="school">
+                                @else
+                                    <input class="form-control" type="hidden" value="{{$user->school}}" name="school">
 
-                                        @endif
+                                @endif
 
 
-                                    @if($user->position=='Contracts Officer' OR $user->position=='Dean of School')
-                                        <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                                @if($user->position=='Contracts Officer')
+                                    <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
 
-                                            <label>Department</label>
+                                        <label>Department</label>
 
-                                            <select id="ddl2" class="form-control" name="department">
+                                        <select id="ddl2" class="form-control" name="department">
 
-                                            </select>
+                                        </select>
 
 
                                             <span class="help-block">
                                                 @if ($errors->has('department'))
                                                     <strong>{{ $errors->first('department') }}</strong>
                                             </span>
-                                            @endif
+                                        @endif
 
-                                        </div>
-
-                                    @else
-                                        <div class="form-group">
-                                            <input class="form-control" type="hidden" value="{{$user->department}}" name="department">
-                                        </div>
-                                    @endif
-
-                                    <div class="form-group">
-                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
-                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                            <button type="reset" class="btn btn-default">Cancel</button>
-                                        </div>
                                     </div>
+                                @elseif($user->position=='Dean of School')
+
+                                    <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+
+                                        <label>Department</label>
+
+                                        <select id="ddl2" class="form-control" name="department">
+                                            <option value="">-- select school --</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Chemistry">Chemistry</option>
+                                            <option value="Computer Science">Computer Science</option>
+                                            <option value="Biology">Biology</option>
+                                            <option value="Mathematics">Mathematics</option>
+
+                                        </select>
+
+
+                                            <span class="help-block">
+                                                @if ($errors->has('department'))
+                                                    <strong>{{ $errors->first('department') }}</strong>
+                                            </span>
+                                        @endif
+
+                                    </div>
+
+                                @else
+                                    <div class="form-group">
+                                        <input class="form-control" type="hidden" value="{{$user->department}}"
+                                               name="department">
+                                    </div>
+                                @endif
+
+                                <div class="form-group">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <button type="reset" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
 
                             </form>
                         </div>

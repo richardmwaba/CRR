@@ -68,7 +68,7 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle"  title="About" href="{{url('/about')}}">
+                        <a class="dropdown-toggle"  title="About" href="{{url('/About')}}">
                             About
                         </a>
                     </li>

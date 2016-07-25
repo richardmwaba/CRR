@@ -48,8 +48,8 @@ class HomeController extends Controller
                 break;
 
             case 'Dean of School':
-                $user = User::where('school', '=', $currentUser->school)->paginate(10);
-                return view('HumanResource.home')->with(array('user' => $user));
+                $user = User::where('school', $currentUser->school)->paginate(10);
+                return view('home')->with(array('user' => $user));
                 break;
 
             default :

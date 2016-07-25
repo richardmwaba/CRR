@@ -19,7 +19,7 @@
                             <label class="col-sm-4 col-md-2 col-xs-6" for="status">State:</label>
                             <div class="col-sm-8 col-md-10 col-xs-6">
                                 <label class="text-danger" for="status">@if($user->contract_status!=null AND $user->contract_status=="Valid"){{$user->contract_status}}
-                                    @elseif($user->contract_status!=null AND $staff->contract_status=="Expired")
+                                    @elseif($user->contract_status!=null AND $user->contract_status=="Expired")
                                         <p style="color:red">{{$user->contract_status}}</p> @else<p
                                                 style="color:orange">{{$user->contract_status}}</p>@endif</label>
                             </div>
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 col-md-2 col-xs-6" for="check">Received for renewal?:</label>
+                            <label class="col-sm-4 col-md-2 col-xs-6" for="check">I have received this contract for renewal</label>
                             <div class="col-sm-4 col-md-2 col-xs-6">
                                 <label id="demo">
                                     <input type="checkbox" value="" onchange="contractUpdate(this)"
@@ -86,38 +86,6 @@
                                                     break;
                                             }
                                             ?> >
-                                    <!--Include modal here to show after the check box is checked-->
-                                </label>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-4 col-md-2 col-xs-6" for="check">Submitted to Dean?:</label>
-                            <div class="col-sm-4 col-md-2 col-xs-6">
-                                <label id="demo">
-                                    <input type="checkbox" id="submitted" value="" onchange="contractUpdate(this)"
-                                    <?php
-                                            $position = Auth()->user()->position;
-                                            $tracking = $user->contract_tracking;
-
-                                            switch($position){
-
-                                                case "Contracts Officer":
-                                                    echo 'checked';
-                                                    break;
-                                                case "Head of Department":
-                                                    if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement")
-                                                        echo 'checked';
-                                                    break;
-                                                case "Dean of School":
-                                                    if($tracking == "Contracts Office"OR $tracking == "Waiting for Contracts Officer's acknowledgement")
-                                                        echo 'checked';
-                                                    break;
-                                                default :
-                                                    break;
-
-                                            } ?> >
                                     <!--Include modal here to show after the check box is checked-->
                                 </label>
                             </div>
