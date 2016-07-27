@@ -61,10 +61,10 @@
                 <!-- /.navbar-header -->
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle"  title="Login" href="{{url('/login')}}">
+                    <!--<li class="dropdown">
+                        <a class="dropdown-toggle"  title="Login" href="">
                             <i class="fa fa-user fa-fw"></i>
-                        </a>
+                        </a>-->
                     </li>
 
                     <li class="dropdown">

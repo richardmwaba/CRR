@@ -10,7 +10,7 @@
 
                         <fieldset>
                             <div class="form-group{{ $errors->has('man_number') ? ' has-error' : '' }}">
-
+                                <label>Man Number:</label>
                                 <input class="form-control" placeholder="Man number" name="man_number" type="number" autofocus="">
 
                                 @if ($errors->has('man_number'))
@@ -22,7 +22,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-
+                                <label>Password:</label>
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="">
 
                                 @if ($errors->has('password'))
