@@ -77,7 +77,7 @@ class check_contracts extends Command
 
                     }
 
-                    //else set the contract status to expired if it is
+               +     //else set the contract status to expired if it is
                 } else{
                     $user->contract_status = "Expired";
                 }
