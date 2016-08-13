@@ -69,11 +69,11 @@
                                             switch ($position) {
 
                                                 case "Contracts Officer":
-                                                    if ($tracking == "Dean's Office" OR $tracking == "Contracts Office" OR $tracking == "Waiting for Dean's approval")
+                                                    if ($tracking == "Contracts Office")
                                                         echo 'checked';
                                                     break;
                                                 case "Head of Department":
-                                                    if ($tracking == "HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's approval" OR $tracking == "Waiting for Contract's approval")
+                                                    if ($tracking == "HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking == "Waiting for Contract Officer's acknowledgement")
                                                         echo 'checked';
                                                     break;
                                                 case "Dean of School":
@@ -88,6 +88,7 @@
                                             ?> >
                                     <!--Include modal here to show after the check box is checked-->
                                 </label>
+                                 </form>
                             </div>
                         </div>
 
@@ -119,7 +120,9 @@
 
                                         }
                                     </script>
+
                                 </div>
+
                                 <div class="panel-body">
 
                                 </div>
@@ -130,5 +133,30 @@
                         <!-- /.col-lg-12 -->
                         <!-- /.row -->
                         <!-- /#page-wrapper -->
+                        <script>
 
+                            function contractUpdate(cb) {
+                                //check browser support for ajax
+                                var xhttp;
+                                if (window.XMLHttpRequest) {
+                                    xhttp = new XMLHttpRequest();
+                                } else {
+                                    // code for IE6, IE5
+                                    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                }
+
+                                if(confirm("Are you sure you want to continue?")) {
+
+                                            xhttp.open("GET", "{{url('/contract_received/'.$user->man_number)}}", true);
+                                            xhttp.send();
+                                        } else {
+                                    //Some other code
+                                }
+                                //confirm("Are you sure?");
+                            }
+                            </script>
+          </div>  
+       </div>
+    </div>       
+                                
 @endsection

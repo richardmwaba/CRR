@@ -94,6 +94,7 @@ class ContractController extends Controller
 
             case "Contracts Officer":
                 $contract->contract_tracking = "Contracts Office";
+                $contract->save();
 
                 //code to send to notification to this user
                 Mail::send('Mails.contract_tracking_change', ['contract' => $contract], function ($m) use ($contract) {
@@ -103,6 +104,7 @@ class ContractController extends Controller
                 break;
             case "Head of Department":
                 $contract->contract_tracking = "HOD's Office";
+                $contract->save();
 
                 //code to send to notification
                 Mail::send('Mails.contract_tracking_change', ['contract' => $contract], function ($m) use ($contract) {
@@ -112,6 +114,7 @@ class ContractController extends Controller
                 break;
             case "Dean of School":
                 $contract->contract_tracking = "Dean's Office";
+                $contract->save();
 
                 //code to send to notification
                 Mail::send('Mails.contract_tracking_change', ['contract' => $contract], function ($m) use ($contract) {
@@ -121,6 +124,7 @@ class ContractController extends Controller
                 break;
             default :
                 $contract->contract_tracking = "Waiting for HOD's acknowledgement";
+                $contract->save();
                 break;
 
         }
@@ -145,6 +149,7 @@ class ContractController extends Controller
                 ///restore the tracking status to previous state
                 $contract->contract_tracking = "Dean's Office";
                 $contract->put('from','Contracts Officer');
+                $contract->save();
 
                 //remind the dean
                 Mail::send('Mails.contract_not_received', ['contract' => $contract], function ($m) use ($thisDean) {
@@ -158,6 +163,7 @@ class ContractController extends Controller
                 //restore the tracking status to previous state
                 $contract->contract_tracking = "Not available";
                 $contract->put('from', 'Head of Department');
+                $contract->save();
                 
                 //notify user that his contract has not been received
                 Mail::send('Mails.contract_not_received', ['contract' => $contract], function ($m) use ($contract) {
@@ -171,6 +177,7 @@ class ContractController extends Controller
                 //restore the tracking status to previous state
                 $contract->contract_tracking = "HOD's Office";
                 $contract->put('from', 'Dean of School');
+                $contract->save();
 
                 //fetch hod's email address
                 $match = ['position' => 'Head of Department', 'department' => $contract->department];
@@ -185,6 +192,7 @@ class ContractController extends Controller
                 break;
             default :
                 $contract->contract_tracking = "Not available";
+                $contract->save();
                 break;
 
         }
@@ -197,7 +205,6 @@ class ContractController extends Controller
     public function contract_submitted($man_number)
     {
         //send reminder to corresponding office
-
         $contract = User::firstOrNew(array('man_number' => $man_number));
         $position = Auth()->user()->position;
 
@@ -210,6 +217,7 @@ class ContractController extends Controller
 
             //change tracking status
             $contract->contract_tracking = "Waiting for Dean's acknowledgement";
+            $contract->save();
 
             //remind the dean
             Mail::send('Mails.contract_submitted', ['contract' => $contract], function ($m) use ($thisDean) {
@@ -224,6 +232,7 @@ class ContractController extends Controller
 
             //change tracking status
             $contract->contract_tracking = "Waiting for Contracts Officer's acknowledgement";
+            $contract->save();
             //remind the contracts officer
             Mail::send('Mails.contract_submitted', ['contract' => $contract], function ($m) use ($contractOff) {
 
@@ -237,7 +246,8 @@ class ContractController extends Controller
             $thisHod = User::where($match)->first();
 
             //change tracking status
-            $contract->contract_tracking = "Waiting for Contracts Officer's acknowledgement";
+            $contract->contract_tracking = "Waiting for HoD's acknowledgement";
+            $contract->save();
             
             //remind the hod
             Mail::send('Mails.contract_submitted', ['contract' => $contract], function ($m) use ($thisHod) {

@@ -80,7 +80,7 @@
                                                         break;
                                                     case "Head of Department":
                                                         if($tracking=="HOD's Office" OR $tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
-                                                            echo 'checked';
+                                                           echo 'checked';
                                                         break;
                                                     case "Dean of School":
                                                         if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
@@ -133,19 +133,30 @@
 
                         <div class="row">
                             <div class="col-md-10">
+                                <!--
                                 <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
 
-                                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
+                                <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
                                     <button onclick="remindUser()" class="btn btn-default">Request contract</button>
                                 </div>
 
-                                <div class="col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-2 col-lg-2">
+
+                                <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
                                     <a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract </a>
                                 </div>
+                                -->
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label type="submit" class="btn btn-primary">Save</label>
+
+                                    <label a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract</label>
+
+                                    <label onclick="remindUser()" class="btn btn-default">Request contract</label>
+                                </div>
                             </div>
-                        </div>
+                            </div>
+
                         </form>
 
 
