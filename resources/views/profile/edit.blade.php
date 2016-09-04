@@ -83,7 +83,7 @@
                                                                     echo 'checked';
                                                                 break;
                                                             case "Dean of School":
-                                                                if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Dean's acknowledgement" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
+                                                                if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking=="Waiting for Contracts Officer's acknowledgement")
                                                                     echo 'checked';
                                                                 break;
                                                             default :
@@ -117,7 +117,7 @@
                                                                     echo 'checked';
                                                                 break;
                                                             case "Dean of School":
-                                                                if($tracking == "Dean's Office" OR $tracking == "Waiting for Contracts Officer's acknowledgement" OR $tracking=="Contracts Office")
+                                                                if($tracking == "Waiting for Contracts Officer's acknowledgement" OR $tracking=="Contracts Office")
                                                                     echo 'checked';
                                                                 break;
                                                             default :

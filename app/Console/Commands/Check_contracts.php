@@ -67,6 +67,7 @@ class check_contracts extends Command
                         });
                         $user->contract_tracking = "Not available";
                         $user->contract_status = "Expires soon";
+                        $user->save();
 
                     } elseif ($user->contract_tracking != null AND $user->contract_tracking == "Not available") {
                         Mail::send('Mails.reminder', ['user' => $user], function ($m) use ($user) {
@@ -77,9 +78,10 @@ class check_contracts extends Command
 
                     }
 
-               +     //else set the contract status to expired if it is
-                } else{
+                    //else set the contract status to expired if it is
+                } else if($diff<=0){
                     $user->contract_status = "Expired";
+                    $user->save();
                 }
 
                 //save record back to database

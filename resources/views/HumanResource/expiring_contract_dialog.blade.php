@@ -89,40 +89,6 @@
                                     </div>
                                 </div>
 
-
-                                <div class="form-group">
-                                    <label class="col-sm-4 col-md-3 col-xs-6" for="check">Submitted to Dean?:</label>
-                                    <div class="col-sm-4 col-md-2 col-xs-6">
-                                        <label id="demo">
-                                            <input type="checkbox" id="submitted" value="" onchange="contractUpdate(this)"
-                                            <?php
-                                                    $position = Auth()->user()->position;
-                                                    $tracking = $user->contract_tracking;
-                                                    switch($position){
-
-                                                        case "Contracts Officer":
-                                                            if($tracking == "Dean's Office" OR $tracking=="Waiting for Dean's approval")
-                                                                echo 'checked';
-                                                            break;
-                                                        case "Head of Department":
-                                                            if($tracking == "Contracts Office" OR $tracking == "Dean's Office" OR $tracking == "Waiting for Contract's approval" OR $tracking=="Waiting for Dean's approval")
-                                                                echo 'checked';
-                                                            break;
-                                                        case "Dean of School":
-                                                            //
-                                                            echo 'checked';
-                                                            break;
-                                                        default :
-                                                            if($tracking != "Not available")
-                                                                echo 'checked';
-                                                            break;
-
-                                                    } ?> >
-                                            <!--Include modal here to show after the check box is checked-->
-                                        </label>
-                                    </div>
-                                </div>
-
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
@@ -162,5 +128,27 @@
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
+
+    <script>
+        function contractUpdate(cb) {
+            //check browser support for ajax
+            var xhttp;
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            if(confirm("Are you sure you want to continue?")) {
+
+                xhttp.open("GET", "{{url('/contract_received/'.$user->man_number)}}", true);
+                xhttp.send();
+            } else {
+                //Some other code
+            }
+            //confirm("Are you sure?");
+        }
+    </script>
 
 @endsection

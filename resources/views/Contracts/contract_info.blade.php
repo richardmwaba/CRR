@@ -39,6 +39,7 @@
                                         <?php
                                                $position = Auth()->user()->position;
                                                 $tracking = $contract->contract_tracking;
+                                                $status = $contract->contract_status;
                                                 switch($position){
 
                                                     case "Contracts Officer":
@@ -53,6 +54,8 @@
                                                             echo 'checked';
                                                         break;
                                                     default :
+                                                        if($tracking != "Not available"OR $status !="Expired" OR $status !="Expires soon")
+                                                        echo 'checked';
                                                         break;
 
                                                 } ?> >
@@ -74,7 +77,7 @@
                                                   if(cb.checked) {
                                                       xhttp.open("GET", "{{url('contract_submitted/'.$contract->man_number)}}", true);
                                                       xhttp.send();
-                                                      document.getElementById('contract_tracking').innerHTML = "Pending...";
+                                                      document.getElementById('contract_tracking').innerHTML = "Pending";
                                                   }else {
                                                   }
 
