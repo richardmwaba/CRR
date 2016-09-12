@@ -78,7 +78,8 @@ class AuthController extends Controller
 
             
             //Send mail to new user
-            Mail::send('Mails.new_user', ['data' => $data], function ($m) use ($data) {
+            $password = $data['password'],
+            Mail::send('Mails.new_user', ['password' => $password], function ($m) use ($data) {
 
                 $m->to($data['email'], 'Me')->subject('Complete registration');
             })

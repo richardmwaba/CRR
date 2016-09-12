@@ -144,18 +144,20 @@
 
 
                                 <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-                                    <a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract </a>
+                                    <a href="{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract </a>
                                 </div>
                                 -->
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label type="submit" class="btn btn-primary">Save</label>
 
-                                    <label><a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract </a></label>
+                                    <button type="submit" class="btn btn-primary">Save</button>
 
-                                    <label onclick="remindUser()" class="btn btn-default">Request contract</label>
-                                </div>
+                                    <label ><a href="{{url('/contract/'.$user->man_number)}}" class="btn btn-success">Update contract </a></label>
+
+
+                                    <label onclick="remindUser()" class="btn btn-info">Request contract</label>
+
                             </div>
                             </div>
+
 
                         </form>
 
