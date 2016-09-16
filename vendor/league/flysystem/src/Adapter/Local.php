@@ -71,7 +71,6 @@ class Local extends AbstractAdapter
      */
     public function __construct($root, $writeFlags = LOCK_EX, $linkHandling = self::DISALLOW_LINKS, array $permissions = [])
     {
-        $root = is_link($root) ? realpath($root) : $root;
         $this->permissionMap = array_replace_recursive(static::$permissions, $permissions);
         $realRoot = $this->ensureDirectory($root);
 
@@ -97,7 +96,7 @@ class Local extends AbstractAdapter
     {
         if ( ! is_dir($root)) {
             $umask = umask(0);
-            @mkdir($root, $this->permissionMap['dir']['public'], true);
+            mkdir($root, $this->permissionMap['dir']['public'], true);
             umask($umask);
 
             if ( ! is_dir($root)) {

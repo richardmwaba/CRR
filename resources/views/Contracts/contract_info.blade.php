@@ -54,8 +54,9 @@
                                                             echo 'checked';
                                                         break;
                                                     default :
-                                                        if($tracking != "Not available"OR $status !="Expired" OR $status !="Expires soon")
-                                                        echo 'checked';
+                                                        if($tracking != "Not available" OR $status != "Expired" OR $status != "Expires soon"){
+                                                         echo 'checked';
+                                                            }else{}
                                                         break;
 
                                                 } ?> >

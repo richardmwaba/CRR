@@ -373,7 +373,9 @@ class Route
     public function parameters()
     {
         if (isset($this->parameters)) {
-            return $this->parameters;
+            
+                return is_string($value) ? rawurldecode($value) : $value;
+            }, $this->parameters);
         }
 
         throw new LogicException('Route is not bound.');

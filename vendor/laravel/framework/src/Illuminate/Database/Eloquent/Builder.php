@@ -711,7 +711,7 @@ class Builder
      * @param  string  $relation
      * @return array
      */
-    protected function nestedRelations($relation)
+    public function nestedRelations($relation)
     {
         $nested = [];
 
@@ -1144,6 +1144,7 @@ class Builder
     }
 
     /**
+<<<<<<< HEAD
      * Add the given scopes to the current builder instance.
      *
      * @param  array  $scopes
@@ -1169,6 +1170,10 @@ class Builder
     /**
      * Apply the given scope on the current builder instance.
      *
+=======
+     * Apply the given scope on the current builder instance.
+     *
+>>>>>>> 16a96305a96f55c54ee7966384b0bee74c7d6336
      * @param  callable $scope
      * @param  array $parameters
      * @return mixed
